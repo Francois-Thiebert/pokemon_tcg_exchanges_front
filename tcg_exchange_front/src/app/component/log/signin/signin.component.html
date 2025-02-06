@@ -1,0 +1,63 @@
+<div class="container">
+  <h2>Inscription</h2>
+
+  <form (ngSubmit)="submit()" [formGroup]="form">
+
+  <ng-container formGroupName="compteGroup">
+    <div class="form-group">
+      <mat-form-field appearance="outline" >
+        <mat-label>Nom d'utilisateur</mat-label>
+        <input matInput placeholder="Nom d'utilisateur" id="login"
+      class="form-control" formControlName="login">
+      </mat-form-field>
+      <span *ngIf="
+      form.get('compteGroup.login')?.dirty &&
+      form.get('compteGroup.login')?.hasError('loginExist')">
+    Ce nom d'utilisateur est déjà pris.</span>
+
+    </div>
+
+    <ng-container formGroupName="passwordGroup">
+      <div class="form-group">
+        <mat-form-field appearance="outline" [style.width.px]=300
+        hintLabel="Minuscule, majuscule et chiffre obligatoires">
+          <mat-label>Mot de passe</mat-label>
+          <input matInput placeholder="Mot de passe" id="password"
+          class="form-control" formControlName="password"
+          [type]="hideA ? 'password' : 'text'">
+          <mat-icon matSuffix (click)="hideA = !hideA">{{hideA ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field appearance="outline" [style.width.px]=300
+        hintLabel="Veuillez confirmer votre mot de passe">
+          <mat-label>Confirmation</mat-label>
+          <input matInput id="confirm" class="form-control" formControlName="confirm"
+          [type]="hideB ? 'password' : 'text'">
+          <mat-icon matSuffix (click)="hideB = !hideB">{{hideB ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </mat-form-field>
+      </div>
+    </ng-container>
+  </ng-container>
+  <div class="form-group">
+    <mat-form-field appearance="outline" >
+      <mat-label>Code ami pokemon TCG</mat-label>
+      <input matInput placeholder="" id="friendCode"
+    class="form-control" formControlName="friendCode">
+    </mat-form-field>
+  </div>
+<br>
+  <div>
+    <a routerLink="/home" routerLinkActive="active" mat-button color="warn"
+      > <mat-icon>arrow_back</mat-icon> Retour</a>
+    <button mat-button color="primary"
+      type="submit"
+      [disabled]="form.invalid"
+    >
+    <mat-icon>done</mat-icon> Valider
+    </button>
+  </div>
+
+</form>
+
+</div>

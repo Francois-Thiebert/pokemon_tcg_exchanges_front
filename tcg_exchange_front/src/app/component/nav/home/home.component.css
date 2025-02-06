@@ -1,0 +1,23 @@
+#jecrois{
+  text-align: center;
+  font-size: 10px;
+  padding-top: 0px;
+}
+#meme_micromania{
+  width:200px;
+}
+
+h3{
+  padding-bottom: 0px;
+}
+
+.bouton1{
+  background-color: #f9e79f;
+}
+
+.button_container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30vh;
+}
