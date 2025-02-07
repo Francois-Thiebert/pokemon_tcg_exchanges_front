@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 
 export class AppComponent {
-  title = 'projetBibliothequeAngular';
+  title = 'pokemonTcgExchange';
   showFiller = false;
 
   constructor(private router: Router) {}

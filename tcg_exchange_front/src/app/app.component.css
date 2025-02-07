@@ -1,0 +1,14 @@
+#img_pika{
+  height: 25px;
+  object-fit: contain;
+}
+
+.link-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+}

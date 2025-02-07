@@ -5,12 +5,13 @@
 
   <ng-container formGroupName="compteGroup">
     <div class="form-group">
-      <mat-form-field appearance="outline" >
+      <mat-form-field appearance="outline" [style.width.px]=400
+      hintLabel="Tout en minuscule, sans accent ni caractère spécial">
         <mat-label>Nom d'utilisateur</mat-label>
         <input matInput placeholder="Nom d'utilisateur" id="login"
       class="form-control" formControlName="login">
       </mat-form-field>
-      <span *ngIf="
+      <span class="error" *ngIf="
       form.get('compteGroup.login')?.dirty &&
       form.get('compteGroup.login')?.hasError('loginExist')">
     Ce nom d'utilisateur est déjà pris.</span>
@@ -19,7 +20,7 @@
 
     <ng-container formGroupName="passwordGroup">
       <div class="form-group">
-        <mat-form-field appearance="outline" [style.width.px]=300
+        <mat-form-field appearance="outline" [style.width.px]=400
         hintLabel="Minuscule, majuscule et chiffre obligatoires">
           <mat-label>Mot de passe</mat-label>
           <input matInput placeholder="Mot de passe" id="password"
@@ -29,7 +30,7 @@
         </mat-form-field>
       </div>
       <div class="form-group">
-        <mat-form-field appearance="outline" [style.width.px]=300
+        <mat-form-field appearance="outline" [style.width.px]=400
         hintLabel="Veuillez confirmer votre mot de passe">
           <mat-label>Confirmation</mat-label>
           <input matInput id="confirm" class="form-control" formControlName="confirm"
@@ -40,7 +41,7 @@
     </ng-container>
   </ng-container>
   <div class="form-group">
-    <mat-form-field appearance="outline" >
+    <mat-form-field appearance="outline" [style.width.px]=400>
       <mat-label>Code ami pokemon TCG</mat-label>
       <input matInput placeholder="" id="friendCode"
     class="form-control" formControlName="friendCode">

@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { AbstractControl, AsyncValidatorFn, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
+import { WelcomeComponent } from '../../popup/welcome/welcome.component';
 
 @Component({
   selector: 'app-signin',
@@ -14,7 +16,8 @@ export class SigninComponent {
 
   constructor(
     private userSrv: UserService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog,
   ){}
 
   form!: FormGroup;
@@ -25,6 +28,7 @@ export class SigninComponent {
   password_check: string | undefined;
   hideA = true;
   hideB = true;
+  showError = false;
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -32,7 +36,7 @@ export class SigninComponent {
 
       compteGroup: new FormGroup({
         login: new FormControl(
-          '', Validators.required, this.loginFree(this.userSrv)
+          '', Validators.pattern(/^[a-z0-9]+$/), this.loginFree(this.userSrv)
         ),
         passwordGroup: new FormGroup({
           password: new FormControl(
@@ -91,7 +95,24 @@ export class SigninComponent {
     this.user.friendCode = this.friend_code;
     this.userSrv.create(this.user).subscribe((usr) => {
       this.user.id = usr.id; // Set the ID of the user
-            this.router.navigateByUrl('/connexion');
+            this.userSrv.login(this.login!, this.password!).subscribe({
+              next: (infos: User) => {
+                this.showError = false;
+                sessionStorage.setItem(
+                  'token',
+                  'Basic ' + window.btoa(this.login + ':' + this.password)
+                );
+                sessionStorage.setItem('user', JSON.stringify(infos));
+                this.router.navigateByUrl('/wish-cards');
+                this.dialog.open(WelcomeComponent, {
+                  width:'300px'
+                })
+              },
+              error: (error: any) => {
+                console.debug(error);
+                this.showError = true;
+              },
+            });
           });
   }
 

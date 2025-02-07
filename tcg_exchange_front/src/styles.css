@@ -1,10 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body {
+html, body {
+  height: 100%;
   margin: 0;
+ }
+
+body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: #a9cce3;
+  height: 100vh;
+  margin: 0;
 }
 h1{
   color:#4a235a ;
@@ -25,5 +29,18 @@ h3{
   justify-content: center;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.error{
+  color: #c0392b ;
+}
+
+.agree_button{
+  background-color: #27ae60;
+}
+
+.page-content {
+  margin: auto;
+  width: 100%;
+  padding: 10px;
+  min-height: 450px;
+
+}

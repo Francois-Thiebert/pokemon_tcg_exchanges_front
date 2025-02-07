@@ -22,14 +22,18 @@ import {MatCardModule} from '@angular/material/card';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatDialogModule,MatDialogRef} from '@angular/material/dialog';
 
 import { ConnectionComponent } from './component/log/connection/connection.component';
 import { SigninComponent } from './component/log/signin/signin.component';
+import { WishCardsComponent } from './component/cards/wish-cards/wish-cards.component';
+import { WelcomeComponent } from './component/popup/welcome/welcome.component';
+import { NavBarComponent } from './component/nav/nav-bar/nav-bar.component';
 
 
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, ConnectionComponent, SigninComponent,],
+  declarations: [AppComponent, HomeComponent, ConnectionComponent, SigninComponent, WishCardsComponent, WelcomeComponent, NavBarComponent,],
   imports: [
     AppRoutingModule,
     BrowserModule,
@@ -50,6 +54,7 @@ import { SigninComponent } from './component/log/signin/signin.component';
     MatChipsModule,
     FormsModule,
     ReactiveFormsModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

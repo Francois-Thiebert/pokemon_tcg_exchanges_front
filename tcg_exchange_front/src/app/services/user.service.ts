@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ObjectToJsonService } from './object-to-json.service';
 import { Observable } from 'rxjs';
 import { User } from '../model/user';
-import { userRest } from '../env';
+import { loginRest, userRest } from '../env';
 
 @Injectable({
   providedIn: 'root'
@@ -18,14 +18,6 @@ export class UserService {
 
   public getById(id: number): Observable<User> {
     return this.http.get<User>(`${userRest}/all/${id}`);
-  }
-
-  public getByMatchs(UserId: number): Observable<User[]> {
-    return this.http.get<User[]>(`${userRest}/matchs/${UserId}`);
-  }
-
-  public getIdsByMatchs(UserId: number): Observable<number[]> {
-    return this.http.get<number[]>(`${userRest}/idByMatchs/${UserId}`);
   }
 
   public delete(id: number): Observable<void> {
@@ -50,5 +42,12 @@ export class UserService {
     return this.http.get<boolean>(
       'http://localhost:8080/tcgexchanges/api/user/login/check/' + login
     );
+  }
+
+  public login(login: string, password: string): Observable<User> {
+    let headers: HttpHeaders = new HttpHeaders({
+      Authorization: 'Basic ' + window.btoa(login + ':' + password),
+    });
+    return this.http.get<User>(loginRest, { headers: headers });
   }
 }

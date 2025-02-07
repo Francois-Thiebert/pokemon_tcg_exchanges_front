@@ -1,1 +1,42 @@
-<p>connection works!</p>
+<div class="container">
+  <h2>Connexion</h2>
+
+  <form (ngSubmit)="submit()" [formGroup]="form">
+
+  <ng-container formGroupName="credentials">
+    <div class="form-group">
+      <mat-form-field appearance="outline" >
+        <mat-label>Nom d'utilisateur</mat-label>
+        <input matInput placeholder="Nom d'utilisateur" id="login"
+      class="form-control" formControlName="login">
+      </mat-form-field>
+    </div>
+  </ng-container>
+
+    <ng-container formGroupName="credentials">
+      <div class="form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Mot de passe</mat-label>
+          <input matInput placeholder="Mot de passe" id="password"
+          class="form-control" formControlName="password"
+          [type]="hideA ? 'password' : 'text'">
+          <mat-icon matSuffix (click)="hideA = !hideA">{{hideA ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </mat-form-field>
+      </div>
+    </ng-container>
+
+  <div>
+    <a routerLink="/home" routerLinkActive="active" mat-button color="warn"
+      > <mat-icon>arrow_back</mat-icon> Retour</a>
+    <button mat-button color="primary"
+      type="submit"
+      [disabled]="form.invalid"
+    >
+    Connexion
+    <mat-icon>arrow_forward</mat-icon>
+    </button>
+  </div>
+
+</form>
+
+</div>
