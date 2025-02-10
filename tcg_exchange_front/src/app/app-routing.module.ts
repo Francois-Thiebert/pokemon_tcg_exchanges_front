@@ -7,6 +7,8 @@ import { HomeComponent } from './component/nav/home/home.component';
 import { ConnectionComponent } from './component/log/connection/connection.component';
 import { WishCardsComponent } from './component/cards/wish-cards/wish-cards.component';
 import { WelcomeComponent } from './component/popup/welcome/welcome.component';
+import { ToGiveCardsComponent } from './component/cards/to-give-cards/to-give-cards.component';
+import { ExchangeComponent } from './component/cards/exchange/exchange.component';
 
 const routes: Routes = [
   {path: '',
@@ -19,6 +21,10 @@ const routes: Routes = [
     component: ConnectionComponent,},
   {path: 'wish-cards',
     component: WishCardsComponent,},
+  {path: 'to-give-cards',
+    component: ToGiveCardsComponent,},
+  {path: 'exchange',
+    component: ExchangeComponent,},
 ];
 
 @NgModule({

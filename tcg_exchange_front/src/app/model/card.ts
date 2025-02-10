@@ -1,6 +1,13 @@
+import { Type } from "./type";
 import { User } from "./user";
 
 export class Card {
+  public get type(): Type | undefined {
+    return this._type;
+  }
+  public set type(value: Type | undefined) {
+    this._type = value;
+  }
   public get giver(): User[] | undefined {
     return this._giver;
   }
@@ -47,6 +54,7 @@ export class Card {
         private _id?: number,
         private _name?: String,
         private _rarity?: number,
+        private _type?: Type,
         private _serialNumber?: String,
         private _picture?: String,
         private _wisher?: User[],

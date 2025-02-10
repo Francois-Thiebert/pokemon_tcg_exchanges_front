@@ -2,23 +2,28 @@
 <router-outlet></router-outlet>
 
 <mat-toolbar>
-  <button mat-mini-fab color="primary" (click)="drawer.toggle()">
-    <img id="img_pika" src="assets/images/pikachu.png">
-  </button>
+  <div class="pika_container">
+    <button id="pika_button" mat-mini-fab (click)="drawer.toggle()">
+      <img id="img_pika" src="assets/images/pikachu.png">
+    </button>
+  </div>
 
-  <span id="mini-span"></span>
-  <a mat-button color="primary" routerLink="/home">
-    Pokémon TCG Exchanges</a>
-  <span id="span-toolbar"></span>
+  <div class="title_container">
+    <h2>{{currentPageTitle | async }}</h2>
+  </div>
 
   <div class="link-container">
     <span *ngIf="!logged">
-    <a mat-button color="secondary" routerLink="/connection">
-      Se connecter</a>
-      /
+    <div class="links">
+      <a mat-button color="secondary" routerLink="/connection">
+        Se connecter</a>
+    </div>
+    <div class="links">
       <a mat-button color="secondary" routerLink="/signin">
         S'inscrire</a>
-      </span>
+    </div>
+  </span>
+      <br>
       <span *ngIf="logged">
         <a mat-button color="secondary" (click)="logout()">
           Déconnexion</a>

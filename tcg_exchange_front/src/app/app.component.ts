@@ -1,5 +1,7 @@
-import { Component, NgModule } from '@angular/core';
+import { Component, NgModule, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { IntercompoService } from './services/intercompo.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -7,11 +9,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'pokemonTcgExchange';
   showFiller = false;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private intercoSrv: IntercompoService,
+    ) {}
+
+  currentPageTitle?: Observable<string>;
+
+  ngOnInit(): void {
+    this.currentPageTitle = this.intercoSrv.pageTitle$;
+  }
 
   get logged(): boolean {
     return sessionStorage.getItem('token') ? true : false;

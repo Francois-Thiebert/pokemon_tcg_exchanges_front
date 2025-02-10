@@ -15,21 +15,26 @@
     <mat-icon>how_to_reg</mat-icon>Se connecter</a>
   </div>
 
-  <br>
-
+  <hr>
 
   <!-- Côté Admin -->
-  <!-- <div *ngIf="admin">
+  <div *ngIf="admin">
   <a mat-button color="secondary" routerLink="/livres">
     <mat-icon>library_books</mat-icon>Livres</a>
-<br> -->
+ </div>
+<br>
 
 
   <!-- Côté Adhérent -->
   <div *ngIf="adherent">
-  <!-- <a mat-button color="secondary" routerLink="/emprunter">
-    <mat-icon> local_library</mat-icon>Emprunter</a>
-<br> -->
+    <a mat-button color="secondary" routerLink="/wish-cards">
+    <mat-icon>search</mat-icon>Cartes recherchées</a>
+    <br>
+    <a mat-button color="secondary" routerLink="/to-give-cards">
+    <mat-icon>call_missed</mat-icon>Cartes à échanger</a>
+    <br>
+    <a mat-button color="secondary" routerLink="/exchange">
+    <mat-icon>compare_arrows</mat-icon>Mes échanges</a>
+<br>
 </div>
 
-</div>

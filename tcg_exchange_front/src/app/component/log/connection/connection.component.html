@@ -5,7 +5,7 @@
 
   <ng-container formGroupName="credentials">
     <div class="form-group">
-      <mat-form-field appearance="outline" >
+      <mat-form-field appearance="outline" [style.width.px]=400>
         <mat-label>Nom d'utilisateur</mat-label>
         <input matInput placeholder="Nom d'utilisateur" id="login"
       class="form-control" formControlName="login">
@@ -15,7 +15,7 @@
 
     <ng-container formGroupName="credentials">
       <div class="form-group">
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" [style.width.px]=400>
           <mat-label>Mot de passe</mat-label>
           <input matInput placeholder="Mot de passe" id="password"
           class="form-control" formControlName="password"

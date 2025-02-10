@@ -16,7 +16,7 @@ export class ObjectToJsonService {
       password: user.password,
       role: user.role,
       friendCode: user.friendCode,
-      wishLiset: user.wishList,
+      wishList: user.wishList,
       toGiveList : user.toGiveList
 
   }

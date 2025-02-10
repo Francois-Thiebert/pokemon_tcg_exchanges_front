@@ -29,11 +29,17 @@ import { SigninComponent } from './component/log/signin/signin.component';
 import { WishCardsComponent } from './component/cards/wish-cards/wish-cards.component';
 import { WelcomeComponent } from './component/popup/welcome/welcome.component';
 import { NavBarComponent } from './component/nav/nav-bar/nav-bar.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MajWishListComponent } from './component/popup/maj-wish-list/maj-wish-list.component';
+import { ToGiveCardsComponent } from './component/cards/to-give-cards/to-give-cards.component';
+import { ExchangeComponent } from './component/cards/exchange/exchange.component';
+
 
 
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, ConnectionComponent, SigninComponent, WishCardsComponent, WelcomeComponent, NavBarComponent,],
+  declarations: [AppComponent, HomeComponent, ConnectionComponent, SigninComponent, WishCardsComponent, WelcomeComponent, NavBarComponent, MajWishListComponent, ToGiveCardsComponent, ExchangeComponent,],
   imports: [
     AppRoutingModule,
     BrowserModule,
@@ -55,6 +61,8 @@ import { NavBarComponent } from './component/nav/nav-bar/nav-bar.component';
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
+    FlexLayoutModule,
+    MatGridListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
