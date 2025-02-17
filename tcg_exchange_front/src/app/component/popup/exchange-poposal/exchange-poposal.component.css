@@ -1,0 +1,78 @@
+/* Réduire l'espacement entre les tiles */
+mat-grid-list {
+  gap: 5px; /* Réduit l'espace entre les tiles */
+}
+
+/* Style général de la tile */
+.proposal {
+  margin: 0;  /* Supprimer les marges de chaque tile */
+  padding: 0; /* Supprimer les paddings */
+  background-color: white; /* Assure une couleur de fond uniforme */
+  box-shadow: none; /* Si tu ne veux pas de bordure ou ombre */
+}
+
+/* Ligne 1 (flexbox) */
+.line1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Centrer verticalement les éléments de la ligne 1 */
+  margin-bottom: 10px; /* Ajuster l'écart sous la ligne 1 */
+}
+
+/* Ajuster les espaces internes des éléments de la ligne 1 */
+.getCard, .giveCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;  /* Réduire l'écart entre les éléments */
+  text-align: center;
+}
+
+.getCard{
+  color:#145a32;
+}
+
+.giveCard{
+  color:#7b241c;
+}
+
+
+/* Bouton Choisir */
+button#choose {
+  width: 100%;
+  background-color: #f1c40f ;
+  color: white;
+  border-radius: 50px;
+  padding: 12px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px; /* Réduire l'écart sous le bouton */
+  margin-bottom: 0; /* Réduire l'espace sous le bouton */
+}
+
+
+
+
+/* Adaptabilité pour les petits écrans */
+@media (max-width: 768px) {
+  .line1 {
+    grid-template-columns: 1fr 1fr 1fr; /* 3 colonnes égales sur petits écrans */
+    gap: 5px;
+  }
+
+  h1{
+    font-size: small;
+  }
+
+  .getCard, .giveCard {
+    padding: 5px;
+  }
+
+  button#choose {
+    font-size: 0.9em;
+    padding: 10px;
+  }
+}

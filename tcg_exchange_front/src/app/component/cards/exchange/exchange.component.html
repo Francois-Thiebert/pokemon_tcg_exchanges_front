@@ -1,38 +1,42 @@
-<table class="styled-table">
+<div id="button-container">
+  <button mat-fab extended (click)="findExchange()" id="findMatch">
+    <mat-icon>search</mat-icon>Trouver un échange
+  </button>
+</div>
+<hr/>
 
-  <thead>
-    <tr>
-      <th scope="col"></th>
-      <th scope="col">Cartes recherchées</th>
-      <th scope="col">Cartes à céder</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">&#9826;</th>
-      <td>{{wishRarity0}}</td>
-      <td>{{giveRarity0}}</td>
-    </tr>
-    <tr>
-      <th scope="row">&#9826;&#9826;</th>
-      <td>{{wishRarity1}}</td>
-      <td>{{giveRarity1}}</td>
-    </tr>
-    <tr>
-      <th scope="row">&#9826;&#9826;&#9826;</th>
-      <td>{{wishRarity2}}</td>
-      <td>{{giveRarity2}}</td>
-    </tr>
-    <tr>
-      <th scope="row">&#9826;&#9826;&#9826;&#9826;</th>
-      <td>{{wishRarity3}}</td>
-      <td>{{giveRarity3}}</td>
-    </tr>
-    <tr>
-      <th id="star" scope="row">&#9733;</th>
-      <td>{{wishRarity4}}</td>
-      <td>{{giveRarity4}}</td>
-    </tr>
-  </tbody>
+<div class="new">
+  <span>Nouvelles demandes d'échange</span>
+  <mat-grid-list cols="{{column_number}}" rowHeight="{{row_siez}}">
+    <mat-grid-tile *ngFor="let e of exchanges2_new">
+      <div class="tile-content">
+        <!-- Ligne 1 : Get, Icon et Give -->
+        <div class="line1">
+          <div class="get">
+            <span class="card_name" id="name_card2">{{e.card2?.name}}</span>
+            <span class="SN">{{e.card2?.serialNumber}}</span>
+          </div>
+          <div class="icon"><mat-icon>compare_arrows</mat-icon></div>
+          <div class="give">
+            <span class="card_name" id="name_card1">{{e.card1?.name}}</span>
+            <span class="SN">{{e.card1?.serialNumber}}</span>
+          </div>
+        </div>
 
-</table>
+        <!-- Ligne 2 : Friend et Friend -->
+        <div class="line2">
+          <div class="friend">
+            <div class="icon">
+              <mat-icon>person_outline</mat-icon>
+            </div>
+            {{e.user1?.login}}
+          </div>
+        </div>
+        <div class="line3">
+          <div class="friend">Code ami : {{e.user1?.friendCode}}</div>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+

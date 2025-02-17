@@ -16,11 +16,15 @@ export class ExchangeService {
       }
 
       public getById(id: number): Observable<Exchange> {
-        return this.http.get<Exchange>(`${exchangeRest}/user/${id}`);
+        return this.http.get<Exchange>(`${exchangeRest}/${id}`);
+      }
+
+      public getNew(id: number): Observable<Exchange[]> {
+        return this.http.get<Exchange[]>(`${exchangeRest}/new/${id}`);
       }
 
       public getByUserId(id: number): Observable<Exchange[]> {
-        return this.http.get<Exchange[]>(`${exchangeRest}/all/${id}`);
+        return this.http.get<Exchange[]>(`${exchangeRest}/user/${id}`);
       }
 
       public delete(id: number): Observable<void> {

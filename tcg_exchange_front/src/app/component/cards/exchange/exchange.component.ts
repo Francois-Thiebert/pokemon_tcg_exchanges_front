@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Card } from 'src/app/model/card';
+import { Exchange } from 'src/app/model/exchange';
 import { User } from 'src/app/model/user';
 import { CardService } from 'src/app/services/card.service';
+import { ExchangeService } from 'src/app/services/exchange.service';
 import { IntercompoService } from 'src/app/services/intercompo.service';
 import { UserService } from 'src/app/services/user.service';
-
-interface CardExtended extends Card {
-  rarity_string?: string;
-  }
+import { ExchangePoposalComponent } from '../../popup/exchange-poposal/exchange-poposal.component';
 
 @Component({
   selector: 'app-exchange',
@@ -17,84 +16,113 @@ interface CardExtended extends Card {
 })
 export class ExchangeComponent implements OnInit{
 
-    userID?: number;
-    screenWidth?: number;
-    column_number?: number;
-    give_cards_init: Card[] = [];
-    wish_cards_init: Card[] = [];
-    user?: User;
+  userID?: number;
+  user?: User;
+  screenWidth?: number;
+  column_number?: number;
+  row_siez?: String;
+  exchanges?: Exchange[]=[];
+  exchanges1?: Exchange[]=[];
+  exchanges2?: Exchange[]=[];
+  exchanges1_validation?: Exchange[]=[];
+  exchanges2_new?: Exchange[]=[];
+  exchanges1_active?: Exchange[]=[];
+  exchanges2_active?: Exchange[]=[];
+  exchanges1_old?: Exchange[]=[];
+  exchanges2_old?: Exchange[]=[];
+  exchanges1_cancel?: Exchange[]=[];
+  exchanges2_cancel?: Exchange[]=[];
 
-    giveRarity0: number = 0;
-    giveRarity1: number = 0;
-    giveRarity2: number = 0;
-    giveRarity3: number = 0;
-    giveRarity4: number = 0;
-    wishRarity0: number = 0;
-    wishRarity1: number = 0;
-    wishRarity2: number = 0;
-    wishRarity3: number = 0;
-    wishRarity4: number = 0;
+  constructor(
+    private userSrv: UserService,
+    private exchangeSrv: ExchangeService,
+    private intercoSrv: IntercompoService,
+    private cardSrv: CardService,
+    private dialog: MatDialog,
+  ){}
 
-    constructor(
-        private userSrv: UserService,
-        private intercoSrv: IntercompoService,
-        private cardSrv: CardService,
-        private dialog: MatDialog,
-      ){}
-
-  ngOnInit(): void{
-    const userId = JSON.parse(sessionStorage.getItem('user')!)?.id;
-    this.userID=userId;
-    this.intercoSrv.setPageTitle('Mes Échanges')
-    this.userSrv.getById(userId).subscribe((user: User) => {
+ngOnInit(): void {
+  this.userID = JSON.parse(sessionStorage.getItem('user')!)?.id;
+  this.getDisplay();
+  this.intercoSrv.setPageTitle('Échanges')
+  this.userSrv.getById(this.userID!).subscribe((user: User) => {
     this.user=user;
-    this.give_cards_init = this.give_cards_init.concat(this.user.toGiveList!);
-    this.wish_cards_init = this.wish_cards_init.concat(this.user.wishList!);
-    this.getGiveCardRarityNumbers();
-    this.getWishCardRarityNumbers();
-    console.log("rarity to give:",this.giveRarity0, this.giveRarity1, this.giveRarity2, this.giveRarity3, this.giveRarity4);
-    console.log("rarity wished:",this.wishRarity0, this.wishRarity1, this.wishRarity2, this.wishRarity3, this.giveRarity4);
-      })
-    }
+    this.getExchanges(user);
+  });
 
-  getWishCardRarityNumbers(){
-    for (let c of this.wish_cards_init!) {
-      if (c.rarity == 0){
-        this.wishRarity0++;
-      }
-      else if (c.rarity == 1){
-        this.wishRarity1++;
-      }
-      else if (c.rarity == 2){
-        this.wishRarity2++;
-      }
-      else if (c.rarity == 3){
-        this.wishRarity3++;
-      }
-      else if (c.rarity == 4){
-        this.wishRarity4++;
-      }
+}
+
+findExchange(){
+  this.dialog.open(ExchangePoposalComponent, {width:'90%', height:'90%'})
+}
+
+getExchanges(user: User){
+  this.exchanges1 = user.exchanges1;
+  this.exchanges2 = user.exchanges2;
+  for (let e of this.exchanges1!){
+    if(e.state=='ASKED'){
+      this.exchangeSrv.getById(e.id!).subscribe((exch: Exchange) => {
+        this.exchanges1_validation=this.exchanges1_validation?.concat(exch);
+        console.log("demandes en attente de confirmation: ",this.exchanges1_validation);
+      });
+    }
+    if(e.state=='CONFIRMED'){
+      this.exchangeSrv.getById(e.id!).subscribe((exch: Exchange) => {
+        this.exchanges1_active=this.exchanges1_active?.concat(exch);
+        console.log("échanges en confirmés, en tant que demandeur: ",this.exchanges1_active);
+      });
+    }
+    if(e.state=='FINISHED'){
+      this.exchangeSrv.getById(e.id!).subscribe((exch: Exchange) => {
+        this.exchanges1_old=this.exchanges1_old?.concat(exch);
+        console.log("échanges en effectués, en tant que demandeur: ",this.exchanges1_old);
+      });
+    }
+    if(e.state=='CANCELED'){
+      this.exchangeSrv.getById(e.id!).subscribe((exch: Exchange) => {
+        this.exchanges1_cancel=this.exchanges1_cancel?.concat(exch);
+        console.log("échanges en annulés, en tant que demandeur: ",this.exchanges1_cancel);
+      });
     }
   }
-
-  getGiveCardRarityNumbers(){
-    for (let c of this.give_cards_init!) {
-      if (c.rarity == 0){
-        this.giveRarity0++;
-      }
-      else if (c.rarity == 1){
-        this.giveRarity1++;
-      }
-      else if (c.rarity == 2){
-        this.giveRarity2++;
-      }
-      else if (c.rarity == 3){
-        this.giveRarity3++;
-      }
-      else if (c.rarity == 4){
-        this.giveRarity4++;
-      }
+  for (let e of this.exchanges2!){
+    if(e.state=='ASKED'){
+      this.exchangeSrv.getById(e.id!).subscribe((exch: Exchange) => {
+        this.exchanges2_new=this.exchanges2_new?.concat(exch);
+        console.log("nouvelles demandes: ",this.exchanges2_new);
+      });
+    }
+    if(e.state=='CONFIRMED'){
+      this.exchangeSrv.getById(e.id!).subscribe((exch: Exchange) => {
+        this.exchanges2_active=this.exchanges2_active?.concat(exch);
+        console.log("échanges en confirmés, en tant que accepteur: ",this.exchanges2_active);
+      });
+    }if(e.state=='FINISHED'){
+      this.exchangeSrv.getById(e.id!).subscribe((exch: Exchange) => {
+        this.exchanges2_old=this.exchanges2_old?.concat(exch);
+        console.log("échanges en effectués, en tant que accepteur: ",this.exchanges2_old);
+      });
+    }
+    if(e.state=='CANCELED'){
+      this.exchangeSrv.getById(e.id!).subscribe((exch: Exchange) => {
+        this.exchanges2_cancel=this.exchanges2_cancel?.concat(exch);
+        console.log("échanges en annulés, en tant que accepteur: ",this.exchanges2_cancel);
+      });
     }
   }
+}
+
+getDisplay(){
+  this.screenWidth = window.innerWidth;
+  console.log("screen width: ", this.screenWidth)
+  if(this.screenWidth < 500){
+    this.column_number = 3;
+    this.row_siez="3:2"
+  }
+  else{
+    this.column_number = 5;
+    this.row_siez="2:1"
+  }
+}
 
 }

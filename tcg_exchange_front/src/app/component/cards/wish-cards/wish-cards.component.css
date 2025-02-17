@@ -13,7 +13,6 @@
 }
 .normal{
   background-color: #566573;
-  color: white;
 }
 .fire{
   background-color: #dc7633 ;
@@ -33,6 +32,9 @@
 }
 .dragon{
   background-color: #d4ac0d;
+}.trainer{
+  background-color: #1a5276;
+  color: white;
 }
 .inputs{
   width: 26%;
@@ -58,6 +60,7 @@ mat-grid-tile {
 .selected-card {
   border: 2px solid #566573;
   background-color: #f8f9f9;
+  color: #566573;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 

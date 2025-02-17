@@ -45,6 +45,26 @@
   color: white;
 }
 
+.example-container {
+  display: flex;
+  height: 100vh; /* S'assurer que le conteneur prend toute la hauteur */
+}
+
+.example-sidenav {
+  width: 250px; /* Largeur du drawer */
+  transition: transform 0.3s ease; /* Transition pour la manipulation du drawer */
+}
+
+.page-content {
+  flex: 1; /* Le contenu prend tout l'espace restant */
+  transition: margin-left 0.3s ease; /* Transition pour ajuster le contenu lorsque le drawer s'ouvre */
+}
+
+mat-drawer.opened + .page-content {
+  margin-left: 250px; /* Décalage du contenu lorsque le drawer est ouvert */
+}
+
+
 @media screen and (max-width: 768px) {
 
   .mat-toolbar {
@@ -103,6 +123,29 @@
   .title_container h2 {
     font-size: 1.1rem;
     text-align: center;
+  }
+
+  .example-sidenav {
+    width: 100vw; /* Utiliser toute la largeur de l'écran */
+    height: calc(100vh - 56px); /* La hauteur doit être égale à la hauteur de l'écran, moins la hauteur de la toolbar */
+    position: fixed;
+    top: 56px; /* Positionner juste sous la toolbar */
+    left: 0;
+    transition: transform 0.3s ease;
+    z-index: 1000; /* Assurez-vous que le drawer soit au-dessus du contenu */
+  }
+
+  .example-container {
+    position: relative;
+  }
+
+  .page-content {
+    margin-top: 56px; /* Décalage du contenu pour laisser de l'espace pour la toolbar */
+    transition: margin-left 0.3s ease;
+  }
+
+  mat-drawer.opened + .page-content {
+    margin-left: 0; /* Aucune marge à gauche lorsque le drawer est ouvert */
   }
 
 }

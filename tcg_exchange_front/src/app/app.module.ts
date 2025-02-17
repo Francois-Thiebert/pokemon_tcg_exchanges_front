@@ -34,12 +34,14 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MajWishListComponent } from './component/popup/maj-wish-list/maj-wish-list.component';
 import { ToGiveCardsComponent } from './component/cards/to-give-cards/to-give-cards.component';
 import { ExchangeComponent } from './component/cards/exchange/exchange.component';
+import { RatioComponent } from './component/cards/ratio/ratio.component';
+import { ExchangePoposalComponent } from './component/popup/exchange-poposal/exchange-poposal.component';
 
 
 
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, ConnectionComponent, SigninComponent, WishCardsComponent, WelcomeComponent, NavBarComponent, MajWishListComponent, ToGiveCardsComponent, ExchangeComponent,],
+  declarations: [AppComponent, HomeComponent, ConnectionComponent, SigninComponent, WishCardsComponent, WelcomeComponent, NavBarComponent, MajWishListComponent, ToGiveCardsComponent, ExchangeComponent, RatioComponent, ExchangePoposalComponent,],
   imports: [
     AppRoutingModule,
     BrowserModule,

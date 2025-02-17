@@ -17,7 +17,9 @@ export class ObjectToJsonService {
       role: user.role,
       friendCode: user.friendCode,
       wishList: user.wishList,
-      toGiveList : user.toGiveList
+      toGiveList : user.toGiveList,
+      exchanges1: user.exchanges1,
+      exchanges2: user.exchanges2,
 
   }
   if (user.id) {
@@ -32,6 +34,7 @@ export class ObjectToJsonService {
       rarity: card.rarity,
       serialNumber: card.serialNumber,
       picture: card.picture,
+      collection: card.collection,
       wisher: card.wisher,
       giver: card.giver,
   }
@@ -48,6 +51,7 @@ export class ObjectToJsonService {
       date: exchange.date,
       user1: exchange.user1,
       user2: exchange.user2,
+      state: exchange.state,
   }
   if (exchange.id) {
     Object.assign(obj, { id: exchange.id });

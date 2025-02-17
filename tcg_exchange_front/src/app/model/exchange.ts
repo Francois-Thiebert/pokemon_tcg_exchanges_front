@@ -1,7 +1,14 @@
+import { State } from './state';
 import { Card } from "./card";
 import { User } from "./user";
 
 export class Exchange {
+  public get state(): State | undefined {
+    return this._state;
+  }
+  public set state(value: State | undefined) {
+    this._state = value;
+  }
   public get date(): Date | undefined {
     return this._date;
   }
@@ -45,5 +52,6 @@ export class Exchange {
       private _user1?: User,
       private _user2?: User,
       private _date?: Date,
+      private _state?: State,
   ){}
 }

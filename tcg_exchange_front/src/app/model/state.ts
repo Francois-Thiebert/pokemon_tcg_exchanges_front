@@ -1,0 +1,6 @@
+export enum State {
+  ASKED = 'ASKED',
+  CONFIRMED = 'CONFIRMED',
+  FINISHED = 'FINISHED',
+  CANCELED = 'CANCELED',
+}

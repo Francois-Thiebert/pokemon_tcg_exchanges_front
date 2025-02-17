@@ -9,6 +9,8 @@ import { WishCardsComponent } from './component/cards/wish-cards/wish-cards.comp
 import { WelcomeComponent } from './component/popup/welcome/welcome.component';
 import { ToGiveCardsComponent } from './component/cards/to-give-cards/to-give-cards.component';
 import { ExchangeComponent } from './component/cards/exchange/exchange.component';
+import { RatioComponent } from './component/cards/ratio/ratio.component';
+import { ExchangePoposalComponent } from './component/popup/exchange-poposal/exchange-poposal.component';
 
 const routes: Routes = [
   {path: '',
@@ -23,8 +25,12 @@ const routes: Routes = [
     component: WishCardsComponent,},
   {path: 'to-give-cards',
     component: ToGiveCardsComponent,},
+  {path: 'ratio',
+    component: RatioComponent,},
   {path: 'exchange',
     component: ExchangeComponent,},
+  {path: 'exchange-proposal',
+    component: ExchangePoposalComponent,},
 ];
 
 @NgModule({

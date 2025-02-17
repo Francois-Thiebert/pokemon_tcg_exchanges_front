@@ -3,26 +3,28 @@
     <button mat-fab extended (click)="updateGiveList()" [disabled]="!update" id="addButton">
       <mat-icon>done</mat-icon> Mettre à jour
     </button>
-    <mat-form-field class="inputs">
+    <mat-form-field class="inputs" (change)="filterSelect()">
       <mat-label>Type</mat-label>
-      <select matNativeControl>
-        <option value="*">Tout</option>
-        <option value="7">Normal</option>
-        <option value="0">Plante</option>
-        <option value="1">Eau</option>
-        <option value="8">Feu</option>
-        <option value="2">Psy</option>
-        <option value="3">Obscurité</option>
-        <option value="4">Electique</option>
-        <option value="5">Combat</option>
-        <option value="6">Métal</option>
-        <option value="9">Dragon</option>
+      <select matNativeControl [(ngModel)]="filterType">
+        <option value='*'>Tout</option>
+        <option value=normal>Normal</option>
+        <option value=plant>Plante</option>
+        <option value=water>Eau</option>
+        <option value=fire>Feu</option>
+        <option value=psy>Psy</option>
+        <option value=darkness>Obscurité</option>
+        <option value=electric>Electrique</option>
+        <option value=fight>Combat</option>
+        <option value=metal>Métal</option>
+        <option value=dragon>Dragon</option>
+        <option value=trainer>Dresseur</option>
       </select>
     </mat-form-field>
 
-    <mat-form-field class="inputs">
+
+    <mat-form-field class="inputs" (change)="filterSelect()">
       <mat-label>Rarté</mat-label>
-      <select matNativeControl>
+      <select matNativeControl [(ngModel)]="filterRarity">
         <option value="*">Tout</option>
         <option value="0">&#9826;</option>
         <option value="1">&#9826;&#9826;</option>
@@ -32,13 +34,13 @@
       </select>
     </mat-form-field>
 
-    <mat-form-field class="inputs">
+    <mat-form-field class="inputs" (change)="filterSelect()">
       <mat-label>Série</mat-label>
-      <select matNativeControl>
+      <select matNativeControl [(ngModel)]="filterCollection">
         <option value="*">Tout</option>
-        <option value="1">Puissance Génétique</option>
-        <option value="2">Île Fabuleuse</option>
-        <option value="3">Choc Spatio-Temporel</option>
+        <option value="0">Puissance Génétique</option>
+        <option value="1">Île Fabuleuse</option>
+        <option value="2">Choc Spatio-Temporel</option>
       </select>
     </mat-form-field>
   </mat-grid-list>
@@ -47,7 +49,7 @@
 
 
 <mat-grid-list cols="{{column_number}}" rowHeight="2:1">
-    <mat-grid-tile *ngFor="let c of card_list" class="{{c.type}}" (click)="selectCard(c)" [ngClass]="{'selected-card': give_cards_new.includes(c)}">
+    <mat-grid-tile *ngFor="let c of card_list_display" class="{{c.type}}" (click)="selectCard(c)" [ngClass]="{'selected-card': give_cards_new.includes(c)}">
       <div class="tile-content">
         <div class="name">{{c.name}}</div>
         <div class="serial_number">{{c.serialNumber}}</div>

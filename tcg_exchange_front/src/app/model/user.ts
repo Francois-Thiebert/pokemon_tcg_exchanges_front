@@ -1,7 +1,20 @@
 import { Card } from "./card";
+import { Exchange } from "./exchange";
 import { Role } from "./role";
 
 export class User {
+  public get exchanges2(): Exchange[] | undefined {
+    return this._exchanges2;
+  }
+  public set exchanges2(value: Exchange[] | undefined) {
+    this._exchanges2 = value;
+  }
+  public get exchanges1(): Exchange[] | undefined {
+    return this._exchanges1;
+  }
+  public set exchanges1(value: Exchange[] | undefined) {
+    this._exchanges1 = value;
+  }
   public get toGiveList(): Card[] | undefined {
     return this._toGiveList;
   }
@@ -52,5 +65,7 @@ export class User {
     private _friendCode?: String,
     private _wishList?: Card[],
     private _toGiveList?: Card[],
+    private _exchanges1?: Exchange[],
+    private _exchanges2?: Exchange[],
 ){}
 }

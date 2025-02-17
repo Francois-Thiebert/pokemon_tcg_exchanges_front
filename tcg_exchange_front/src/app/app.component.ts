@@ -1,7 +1,8 @@
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, NgModule, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IntercompoService } from './services/intercompo.service';
 import { Observable } from 'rxjs';
+import { MatDrawer } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ import { Observable } from 'rxjs';
 })
 
 export class AppComponent implements OnInit{
+
   title = 'pokemonTcgExchange';
   showFiller = false;
 
