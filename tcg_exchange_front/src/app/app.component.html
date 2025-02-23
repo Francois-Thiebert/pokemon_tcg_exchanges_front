@@ -1,45 +1,64 @@
 
-<router-outlet></router-outlet>
-
 <mat-toolbar>
-  <div class="pika_container">
-    <button id="pika_button" mat-mini-fab (click)="drawer.toggle()">
-      <img id="img_pika" src="assets/images/pikachu.png">
-    </button>
-  </div>
+  <div class="toolbar_container">
 
-  <div class="title_container">
-    <h2>{{currentPageTitle | async }}</h2>
-  </div>
+    <div class="links_container">
 
-  <div class="link-container">
-    <span *ngIf="!logged">
-    <div class="links">
-      <a mat-button color="secondary" routerLink="/connection">
-        Se connecter</a>
+      <div class="section" id="wish" *ngIf="adherent">
+        <div class="section_button_container">
+          <button class="section_button" id="sulfu_button" mat-mini-fab routerLink="/wish-cards">
+            <img class="img_button" id="sulfu_img" src="assets/images/sulfura.png">
+          </button>
+        </div>
+        <div class="section_text_container">
+          <div class="section_text">Cartes recherchées</div>
+        </div>
+      </div>
+
+      <div class="section" id="give" *ngIf="adherent">
+        <div class="section_button_container">
+          <button class="section_button" id="denti_button" mat-mini-fab routerLink="/to-give-cards">
+            <img class="img_button" id="denti_img" src="assets/images/denticriss.png">
+          </button>
+        </div>
+        <div class="section_text_container">
+          <div class="section_text">Cartes à céder</div>
+        </div>
+      </div>
+
+      <div class="section" id="exchanges" *ngIf="adherent">
+        <div class="section_button_container">
+          <button class="section_button" id="exch_button" mat-mini-fab routerLink="/exchange">
+            <img class="img_button" id="exch_img" src="assets/images/exchange.png">
+          </button>
+        </div>
+        <div class="section_text_container">
+          <div class="section_text">Échanges</div>
+        </div>
+      </div>
+
     </div>
-    <div class="links">
-      <a mat-button color="secondary" routerLink="/signin">
-        S'inscrire</a>
+
+    <div class="title_container">
+      <div class="title">{{currentPageTitle | async }}</div>
     </div>
-  </span>
-      <br>
-      <span *ngIf="logged">
-        <a mat-button color="secondary" (click)="logout()">
-          Déconnexion</a>
-      </span>
+
+    <div class="links2_container" *ngIf="adherent">
+      <div class="section" id="disco">
+        <div class="section_button_container">
+          <button class="section_button" id="abra_button" mat-mini-fab (click)="logout()">
+            <img class="img_button" id="abra_img" src="assets/images/abra.png">
+          </button>
+        </div>
+        <div class="section_text_container">
+          <div class="section_text">Déconnexion</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </mat-toolbar>
 
-<mat-drawer-container class="example-container">
-  <mat-drawer #drawer class="example-sidenav" mode="side" [opened]="drawer.opened">
-    <div>
-      <app-nav-bar></app-nav-bar>
-    </div>
-  </mat-drawer>
-  <mat-drawer-content class="page-content">
-    <div class="flex-container" style="align-self: center">
-      <router-outlet></router-outlet>
-    </div>
-  </mat-drawer-content>
-</mat-drawer-container>
+<router-outlet></router-outlet>
+
+

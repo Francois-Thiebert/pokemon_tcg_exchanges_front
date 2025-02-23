@@ -6,6 +6,7 @@ import { CardService } from 'src/app/services/card.service';
 import { Exchange } from 'src/app/model/exchange';
 import { ExchangeService } from 'src/app/services/exchange.service';
 import { User } from 'src/app/model/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-exchange-poposal',
@@ -26,6 +27,7 @@ export class ExchangePoposalComponent implements OnInit{
     private userSrv: UserService,
     private cardSrv: CardService,
     private exchangeSrv: ExchangeService,
+    private router: Router,
     public dialogRef: MatDialogRef<MajWishListComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
@@ -56,6 +58,8 @@ export class ExchangePoposalComponent implements OnInit{
   chooseExchange(exchange: Exchange){
     this.exchangeSrv.create(exchange).subscribe((exch) => {
       this.dialogRef.close();
+      this.router.navigateByUrl('/exchange');
+      window.location.reload();
     });
   }
 

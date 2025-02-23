@@ -1,3 +1,4 @@
+import { NewExchangeConfirmComponent } from './component/popup/new-exchange-confirm/new-exchange-confirm.component';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
@@ -31,6 +32,8 @@ const routes: Routes = [
     component: ExchangeComponent,},
   {path: 'exchange-proposal',
     component: ExchangePoposalComponent,},
+  {path: 'new-exchange-confirm',
+    component: NewExchangeConfirmComponent,},
 ];
 
 @NgModule({

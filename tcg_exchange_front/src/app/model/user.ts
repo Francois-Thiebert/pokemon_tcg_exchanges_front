@@ -3,6 +3,12 @@ import { Exchange } from "./exchange";
 import { Role } from "./role";
 
 export class User {
+  public get token(): string | undefined{
+    return this._token;
+  }
+  public set token(value: string | undefined) {
+    this._token = value;
+  }
   public get exchanges2(): Exchange[] | undefined {
     return this._exchanges2;
   }
@@ -67,5 +73,6 @@ export class User {
     private _toGiveList?: Card[],
     private _exchanges1?: Exchange[],
     private _exchanges2?: Exchange[],
+    private _token?: string,
 ){}
 }

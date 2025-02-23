@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Card } from 'src/app/model/card';
 import { Exchange } from 'src/app/model/exchange';
@@ -8,6 +8,7 @@ import { ExchangeService } from 'src/app/services/exchange.service';
 import { IntercompoService } from 'src/app/services/intercompo.service';
 import { UserService } from 'src/app/services/user.service';
 import { ExchangePoposalComponent } from '../../popup/exchange-poposal/exchange-poposal.component';
+import { State } from 'src/app/model/state';
 
 @Component({
   selector: 'app-exchange',
@@ -24,14 +25,22 @@ export class ExchangeComponent implements OnInit{
   exchanges?: Exchange[]=[];
   exchanges1?: Exchange[]=[];
   exchanges2?: Exchange[]=[];
-  exchanges1_validation?: Exchange[]=[];
-  exchanges2_new?: Exchange[]=[];
-  exchanges1_active?: Exchange[]=[];
-  exchanges2_active?: Exchange[]=[];
-  exchanges1_old?: Exchange[]=[];
-  exchanges2_old?: Exchange[]=[];
-  exchanges1_cancel?: Exchange[]=[];
-  exchanges2_cancel?: Exchange[]=[];
+  exchanges_validation?: Exchange[]=[];
+  exchanges_new?: Exchange[]=[];
+  exchanges_active?: Exchange[]=[];
+  exchanges_old?: Exchange[]=[];
+  exchanges_cancel?: Exchange[]=[];
+  show_new_exchanges: boolean = false;
+  show_val_exchanges: boolean = false;
+  show_current_exchanges: boolean = false;
+  show_cancel_exchanges: boolean = false;
+  show_old_exchanges: boolean = false;
+  nb_exch_val?: number;
+  nb_exch_new?: number;
+  nb_exch_current?: number;
+  nb_exch_old?: number;
+  nb_exch_cancel?: number;
+  isNewDemand?: boolean;
 
   constructor(
     private userSrv: UserService,
@@ -56,57 +65,113 @@ findExchange(){
   this.dialog.open(ExchangePoposalComponent, {width:'90%', height:'90%'})
 }
 
+finishExchange(exchange: Exchange){
+  exchange.state=State.FINISHED;
+  this.exchangeSrv.update(exchange).subscribe((exch_update) => {
+    window.location.reload();
+  });
+}
+
+confirmExchange(exchange: Exchange){
+  exchange.state=State.CONFIRMED;
+  this.exchangeSrv.update(exchange).subscribe((exch_update) => {
+    window.location.reload();
+  });
+}
+
+cancelExchange(exchange: Exchange){
+  exchange.state=State.CANCELED;
+  this.exchangeSrv.update(exchange).subscribe((exch_update) => {
+    window.location.reload();
+  });
+}
+
 getExchanges(user: User){
   this.exchanges1 = user.exchanges1;
   this.exchanges2 = user.exchanges2;
   for (let e of this.exchanges1!){
     if(e.state=='ASKED'){
       this.exchangeSrv.getById(e.id!).subscribe((exch: Exchange) => {
-        this.exchanges1_validation=this.exchanges1_validation?.concat(exch);
-        console.log("demandes en attente de confirmation: ",this.exchanges1_validation);
+        this.exchanges_validation=this.exchanges_validation?.concat(exch);
+        this.nb_exch_val = this.exchanges_validation?.length;
+        console.log("demandes en attente de confirmation: ",this.exchanges_validation);
       });
     }
     if(e.state=='CONFIRMED'){
       this.exchangeSrv.getById(e.id!).subscribe((exch: Exchange) => {
-        this.exchanges1_active=this.exchanges1_active?.concat(exch);
-        console.log("échanges en confirmés, en tant que demandeur: ",this.exchanges1_active);
+        this.exchanges_active=this.exchanges_active?.concat(exch);
+        this.nb_exch_current=this.exchanges_active?.length;
+        console.log("échanges en confirmés, en tant que demandeur: ",this.exchanges_active);
       });
     }
     if(e.state=='FINISHED'){
       this.exchangeSrv.getById(e.id!).subscribe((exch: Exchange) => {
-        this.exchanges1_old=this.exchanges1_old?.concat(exch);
-        console.log("échanges en effectués, en tant que demandeur: ",this.exchanges1_old);
+        this.exchanges_old=this.exchanges_old?.concat(exch);
+        this;this.nb_exch_old = this.exchanges_old?.length;
+        console.log("échanges en effectués, en tant que demandeur: ",this.exchanges_old);
       });
     }
     if(e.state=='CANCELED'){
       this.exchangeSrv.getById(e.id!).subscribe((exch: Exchange) => {
-        this.exchanges1_cancel=this.exchanges1_cancel?.concat(exch);
-        console.log("échanges en annulés, en tant que demandeur: ",this.exchanges1_cancel);
+        this.exchanges_cancel=this.exchanges_cancel?.concat(exch);
+        this.nb_exch_cancel = this.exchanges_cancel?.length;
+        console.log("échanges en annulés, en tant que demandeur: ",this.exchanges_cancel);
       });
     }
   }
   for (let e of this.exchanges2!){
     if(e.state=='ASKED'){
       this.exchangeSrv.getById(e.id!).subscribe((exch: Exchange) => {
-        this.exchanges2_new=this.exchanges2_new?.concat(exch);
-        console.log("nouvelles demandes: ",this.exchanges2_new);
+        this.exchanges_new=this.exchanges_new?.concat(exch);
+        this.nb_exch_new = this.exchanges_new?.length;
+        if(this.nb_exch_new! > 0){
+          this.isNewDemand = true
+        }
+        console.log("nouvelles demandes: ",this.exchanges_new);
       });
     }
     if(e.state=='CONFIRMED'){
       this.exchangeSrv.getById(e.id!).subscribe((exch: Exchange) => {
-        this.exchanges2_active=this.exchanges2_active?.concat(exch);
-        console.log("échanges en confirmés, en tant que accepteur: ",this.exchanges2_active);
+        let newUser1 = exch.user2;
+        let newUser2 = exch.user1;
+        let newCard1 = exch.card2;
+        let newCard2 = exch.card1;
+        exch.user1 = newUser1;
+        exch.user2 = newUser2;
+        exch.card1 = newCard1;
+        exch.card2 = newCard2;
+        this.exchanges_active=this.exchanges_active?.concat(exch);
+        this.nb_exch_current = this.exchanges_active?.length;
+        console.log("échanges en confirmés, en tant que accepteur: ",this.exchanges_active);
       });
     }if(e.state=='FINISHED'){
       this.exchangeSrv.getById(e.id!).subscribe((exch: Exchange) => {
-        this.exchanges2_old=this.exchanges2_old?.concat(exch);
-        console.log("échanges en effectués, en tant que accepteur: ",this.exchanges2_old);
+        let newUser1 = exch.user2;
+        let newUser2 = exch.user1;
+        let newCard1 = exch.card2;
+        let newCard2 = exch.card1;
+        exch.user1 = newUser1;
+        exch.user2 = newUser2;
+        exch.card1 = newCard1;
+        exch.card2 = newCard2;
+        this.exchanges_old=this.exchanges_old?.concat(exch);
+        this.nb_exch_old = this.exchanges_old?.length;
+        console.log("échanges en effectués, en tant que accepteur: ",this.exchanges_old);
       });
     }
     if(e.state=='CANCELED'){
       this.exchangeSrv.getById(e.id!).subscribe((exch: Exchange) => {
-        this.exchanges2_cancel=this.exchanges2_cancel?.concat(exch);
-        console.log("échanges en annulés, en tant que accepteur: ",this.exchanges2_cancel);
+        let newUser1 = exch.user2;
+        let newUser2 = exch.user1;
+        let newCard1 = exch.card2;
+        let newCard2 = exch.card1;
+        exch.user1 = newUser1;
+        exch.user2 = newUser2;
+        exch.card1 = newCard1;
+        exch.card2 = newCard2;
+        this.exchanges_cancel=this.exchanges_cancel?.concat(exch);
+        this.nb_exch_cancel = this.exchanges_cancel?.length;
+        console.log("échanges en annulés, en tant que accepteur: ",this.exchanges_cancel);
       });
     }
   }
@@ -121,8 +186,50 @@ getDisplay(){
   }
   else{
     this.column_number = 5;
-    this.row_siez="2:1"
+    this.row_siez="3:2"
   }
 }
+
+click_current_exchanges() {
+  if (this.show_current_exchanges) {
+    this.show_current_exchanges = false;
+  } else {
+    this.show_current_exchanges = true;
+  }
+  console.log(this.show_current_exchanges);
+}
+click_new_exchanges() {
+  if (this.show_new_exchanges) {
+    this.show_new_exchanges = false;
+  } else {
+    this.show_new_exchanges = true;
+  }
+  console.log(this.show_new_exchanges);
+}
+click_val_exchanges() {
+  if (this.show_val_exchanges) {
+    this.show_val_exchanges = false;
+  } else {
+    this.show_val_exchanges = true;
+  }
+  console.log(this.show_val_exchanges);
+}
+click_old_exchanges() {
+  if (this.show_old_exchanges) {
+    this.show_old_exchanges = false;
+  } else {
+    this.show_old_exchanges = true;
+  }
+  console.log(this.show_old_exchanges);
+}
+click_cancel_exchanges() {
+  if (this.show_cancel_exchanges) {
+    this.show_cancel_exchanges = false;
+  } else {
+    this.show_cancel_exchanges = true;
+  }
+  console.log(this.show_cancel_exchanges);
+}
+
 
 }

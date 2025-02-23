@@ -1,42 +1,188 @@
-<div id="button-container">
-  <button mat-fab extended (click)="findExchange()" id="findMatch">
+<div class="row_container" id="first_row">
+  <button mat-fab extended (click)="findExchange()" id="findMatch" [disabled]="isNewDemand">
     <mat-icon>search</mat-icon>Trouver un échange
   </button>
+  <span *ngIf="isNewDemand">vous avez des demandes d'échanges à traiter</span>
 </div>
 <hr/>
 
-<div class="new">
-  <span>Nouvelles demandes d'échange</span>
-  <mat-grid-list cols="{{column_number}}" rowHeight="{{row_siez}}">
-    <mat-grid-tile *ngFor="let e of exchanges2_new">
-      <div class="tile-content">
-        <!-- Ligne 1 : Get, Icon et Give -->
-        <div class="line1">
-          <div class="get">
-            <span class="card_name" id="name_card2">{{e.card2?.name}}</span>
-            <span class="SN">{{e.card2?.serialNumber}}</span>
-          </div>
-          <div class="icon"><mat-icon>compare_arrows</mat-icon></div>
-          <div class="give">
-            <span class="card_name" id="name_card1">{{e.card1?.name}}</span>
-            <span class="SN">{{e.card1?.serialNumber}}</span>
-          </div>
-        </div>
-
-        <!-- Ligne 2 : Friend et Friend -->
-        <div class="line2">
-          <div class="friend">
-            <div class="icon">
-              <mat-icon>person_outline</mat-icon>
-            </div>
-            {{e.user1?.login}}
-          </div>
-        </div>
-        <div class="line3">
-          <div class="friend">Code ami : {{e.user1?.friendCode}}</div>
+<div class="exchanges_list_container" id="current_exchanges">
+  <div class="title_list" (click)="click_current_exchanges()">
+    <div class="icon_title_list"><mat-icon>autorenew</mat-icon></div>
+    <div class="text_title_list" matBadge="{{nb_exch_current}}" matBadgeOverlap="false"><a>Échanges en cours</a></div>
+  </div>
+  <div class="exchanges_list" *ngIf="show_current_exchanges">
+    <div class="exchange" *ngFor="let e of exchanges_active">
+      <div class="line1">
+        <div class="get">{{e.card1?.name}}</div>
+        <div class="give">{{e.card2?.name}}</div>
+      </div>
+      <div class="line2">
+        <div class="serial_number" id="sn_get">{{e.card1?.serialNumber}}</div>
+        <div class="icon_exch"><mat-icon id="exch_icon">compare_arrows</mat-icon></div>
+        <div class="serial_number" id="sn_give">{{e.card2?.serialNumber}}</div>
+      </div>
+      <div class="line3">
+        <div class="row_container">
+          <div class="friend_name_icon"><mat-icon>person_outline</mat-icon></div>
+          <div class="friend_name_text">{{e.user2?.login}}</div>
         </div>
       </div>
-    </mat-grid-tile>
-  </mat-grid-list>
+      <div class="line4">
+        <div class="row_container">
+          <div class="friend_code_icon"><mat-icon>insert_emoticon</mat-icon></div>
+          <div class="friend_code_text">{{e.user1?.friendCode}}</div>
+        </div>
+      </div>
+      <div class="line5">
+        <div class="row_container">
+          <button mat-fab class="exch_button" id="confirm_button" (click)="finishExchange(e)"><mat-icon>outlined_flag</mat-icon></button>
+          <button mat-fab class="exch_button" id="cancel_button" (click)="cancelExchange(e)"><mat-icon id="cancel_icon">cancel</mat-icon></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr/>
+
+<div class="exchanges_list_container" id="new_exchanges">
+  <div class="title_list" (click)="click_new_exchanges()">
+    <div class="icon_title_list"><mat-icon>fiber_new</mat-icon></div>
+    <div class="text_title_list" matBadge="{{nb_exch_new}}" matBadgeOverlap="false">Nouvelles demandes d'échange</div>
+  </div>
+  <div class="exchanges_list" *ngIf="show_new_exchanges">
+    <div class="exchange" *ngFor="let e of exchanges_new">
+      <div class="line1">
+        <div class="get">{{e.card2?.name}}</div>
+        <div class="give">{{e.card1?.name}}</div>
+      </div>
+      <div class="line2">
+        <div class="serial_number" id="sn_get">{{e.card2?.serialNumber}}</div>
+        <div class="icon_exch"><mat-icon id="exch_icon">compare_arrows</mat-icon></div>
+        <div class="serial_number" id="sn_give">{{e.card1?.serialNumber}}</div>
+      </div>
+      <div class="line3">
+        <div class="row_container">
+          <div class="friend_name_icon"><mat-icon>person_outline</mat-icon></div>
+          <div class="friend_name_text">{{e.user1?.login}}</div>
+        </div>
+      </div>
+      <div class="line4">
+        <div class="row_container">
+          <div class="friend_code_icon"><mat-icon>insert_emoticon</mat-icon></div>
+          <div class="friend_code_text">{{e.user1?.friendCode}}</div>
+        </div>
+      </div>
+      <div class="line5">
+        <div class="row_container">
+          <button mat-fab class="exch_button" id="confirm_button" (click)="confirmExchange(e)"><mat-icon>check_circle</mat-icon></button>
+          <button mat-fab class="exch_button" id="cancel_button" (click)="cancelExchange(e)"><mat-icon id="cancel_icon">cancel</mat-icon></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="exchanges_list_container" id="onhold_exchanges">
+    <div class="title_list" (click)="click_val_exchanges()">
+      <div class="icon_title_list"><mat-icon>access_time</mat-icon></div>
+      <div class="text_title_list" matBadge="{{nb_exch_val}}" matBadgeOverlap="false">Demandes en attente de validation</div>
+    </div>
+    <div class="exchanges_list" *ngIf="show_val_exchanges">
+      <div class="exchange" *ngFor="let e of exchanges_validation">
+        <div class="line1">
+          <div class="get">{{e.card1?.name}}</div>
+          <div class="give">{{e.card2?.name}}</div>
+        </div>
+        <div class="line2">
+          <div class="serial_number" id="sn_get">{{e.card1?.serialNumber}}</div>
+          <div class="icon_exch"><mat-icon id="exch_icon">compare_arrows</mat-icon></div>
+          <div class="serial_number" id="sn_give">{{e.card2?.serialNumber}}</div>
+        </div>
+        <div class="line3">
+          <div class="row_container">
+            <div class="friend_name_icon"><mat-icon>person_outline</mat-icon></div>
+            <div class="friend_name_text">{{e.user2?.login}}</div>
+          </div>
+        </div>
+        <div class="line4">
+          <div class="row_container">
+            <div class="friend_code_icon"><mat-icon>insert_emoticon</mat-icon></div>
+            <div class="friend_code_text">{{e.user2?.friendCode}}</div>
+          </div>
+        </div>
+        <div class="line5">
+          <div class="row_container">
+            <button mat-fab class="exch_button" id="cancel_button" (click)="cancelExchange(e)"><mat-icon id="cancel_icon">cancel</mat-icon></button>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
 
+<hr/>
+
+<div class="exchanges_list_container" id="current_exchanges">
+  <div class="title_list" (click)="click_old_exchanges()">
+    <div class="icon_title_list"><mat-icon>flag</mat-icon></div>
+    <div class="text_title_list" matBadge="{{nb_exch_old}}" matBadgeOverlap="false">Échanges terminés</div>
+  </div>
+  <div class="exchanges_list" *ngIf="show_old_exchanges">
+    <div class="exchange" *ngFor="let e of exchanges_old">
+      <div class="line1">
+        <div class="get">{{e.card1?.name}}</div>
+        <div class="give">{{e.card2?.name}}</div>
+      </div>
+      <div class="line2">
+        <div class="serial_number" id="sn_get">{{e.card1?.serialNumber}}</div>
+        <div class="icon_exch"><mat-icon id="exch_icon">compare_arrows</mat-icon></div>
+        <div class="serial_number" id="sn_give">{{e.card2?.serialNumber}}</div>
+      </div>
+      <div class="line3">
+        <div class="row_container">
+          <div class="friend_name_icon"><mat-icon>person_outline</mat-icon></div>
+          <div class="friend_name_text">{{e.user2?.login}}</div>
+        </div>
+      </div>
+      <div class="line4">
+        <div class="row_container">
+          <div class="friend_code_icon"><mat-icon>insert_emoticon</mat-icon></div>
+          <div class="friend_code_text">{{e.user1?.friendCode}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="exchanges_list_container" id="current_exchanges">
+    <div class="title_list" (click)="click_cancel_exchanges()">
+      <div class="icon_title_list"><mat-icon>cancel</mat-icon></div>
+      <div class="text_title_list" matBadge="{{nb_exch_cancel}}" matBadgeOverlap="false">Échanges annulés</div>
+    </div>
+    <div class="exchanges_list" *ngIf="show_cancel_exchanges">
+      <div class="exchange" *ngFor="let e of exchanges_cancel">
+        <div class="line1">
+          <div class="get">{{e.card1?.name}}</div>
+          <div class="give">{{e.card2?.name}}</div>
+        </div>
+        <div class="line2">
+          <div class="serial_number" id="sn_get">{{e.card1?.serialNumber}}</div>
+          <div class="icon_exch"><mat-icon id="exch_icon">compare_arrows</mat-icon></div>
+          <div class="serial_number" id="sn_give">{{e.card2?.serialNumber}}</div>
+        </div>
+        <div class="line3">
+          <div class="row_container">
+            <div class="friend_name_icon"><mat-icon>person_outline</mat-icon></div>
+            <div class="friend_name_text">{{e.user2?.login}}</div>
+          </div>
+        </div>
+        <div class="line4">
+          <div class="row_container">
+            <div class="friend_code_icon"><mat-icon>insert_emoticon</mat-icon></div>
+            <div class="friend_code_text">{{e.user1?.friendCode}}</div>
+          </div>
+        </div>
+      </div>
+    </div>

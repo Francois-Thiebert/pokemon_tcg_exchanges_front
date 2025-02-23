@@ -2,109 +2,124 @@
   background-color: #f1c40f;
   padding: 10px 20px;
 }
-#button-container {
-  display: flex;
-  justify-content: center;
-}
-/* Contenu de chaque tile */
-.tile-content {
-  display: flex;
+
+#first_row{
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #d1d1d1; /* Bordure légère */
-  padding: 15px;
-  height: 100%;
-  width: 100%;
-  min-height: 250px; /* Hauteur minimale pour les tiles */
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  color: red;
 }
 
-/* Ligne 1 : Get, Icon et Give */
-.line1 {
+.title_list{
+  font-size: 20px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.exchanges_list{
   display: flex;
-  justify-content: space-between; /* Espacer les éléments sur la ligne */
-  width: 100%; /* Assurez-vous que la ligne prend toute la largeur disponible */
+  flex-direction: row;
+  overflow-x:scroll;
+  overflow-y:hidden;
 }
 
-.get, .give {
-  flex: 1; /* Faire en sorte que les colonnes prennent une largeur égale */
-  text-align: center;
-}
-
-#name_card2{
-  color:#145a32;
-}
-#name_card1{
-  color:#7b241c;
-}
-
-.icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 0.5; /* La colonne "icon" occupe moins d'espace */
-}
-
-.icon mat-icon {
-  font-size: 30px;
-  color: #007bff;
-}
-
-/* Ligne 2 : Friend et Friend */
-.line2 {
-  display: flex;
-  justify-content: space-between; /* Espacer les éléments sur la ligne */
-  width: 100%; /* Assurez-vous que la ligne prend toute la largeur disponible */
-  margin-top: 10px; /* Espace entre les lignes */
-}
-
-.friend {
-  flex: 1; /* Faire en sorte que les colonnes prennent une largeur égale */
-  text-align: center;
-}
-
-.SN {
-  font-size: small;
-  color: #777;
-  display: block;
-  margin-top: 2px;
-}
-.new{
-  overflow-y:scroll;
-  overflow-x:hidden;
-  height:150px;
-}
-
-.new span {
-  font-size: 0.5rem;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 10px;
-}
-mat-grid-tile{
+.exchange{
+  color: black;
+  background-color: #f9e79f ;
+  margin-left: 3px;
+  margin-right: 3px;
+  border: 1px solid black;
   border-radius: 15px;
-  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1); /* Ombre douce */
-  background-color: #d5d8dc;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.line1, .line2{
+  justify-content: space-between;
+}
+
+.title_list, .line1, .line2, .line3, .line4, .line5{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+.give, .get , .serial_number {
+  margin: 10px;
+}
+
+.give, .get {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.give{
+  color: #922b21 ;
+}
+
+.get{
+  color: #196f3d;
+}
+
+.button_container{
+  align-items: end;
+}
+
+.row_container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.friend_name_icon, .friend_name_text{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button.container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#sn_give{
+  align-items: end;
+}
+
+.exch_button{
+  border: 1px solid white;
+  border-radius: 15px;
+  width: 40px;
+  height: 45px;
+  margin: 5px;
+}
+#confirm_button{
+  background-color: #27ae60;
+}
+#exch_icon {
+  width: 100%;
+  color: #2980b9 ;
+  font-size: 30px;
 }
 
 @media screen and (max-width: 768px) {
-  .card-name {
-    font-size: 1.2rem; /* Taille de police */
-    font-weight: bold; /* Optionnel */
-    line-height: 1.1; /* Réduit davantage l'espace entre les lignes */
-    word-wrap: break-word; /* Permet de couper les mots longs */
-    overflow-wrap: break-word; /* Alternative pour les anciens navigateurs */
-    white-space: normal; /* Permet un retour à la ligne normal */
-    margin: 0; /* Supprime les marges supplémentaires qui pourraient être présentes */
-    padding: 0; /* Assurez-vous qu'aucun padding ne crée d'espaces inutiles */
-    display: inline-block; /* Optionnel : Si vous voulez que le texte se comporte comme un bloc avec moins de marges */
+
+  .title_list{
+    font-size: 16px;
   }
 
-  .friend {
-    font-size: 0.2rem;
+  .exch_button{
+    margin: 0px;
+    margin-left: 2px;
+    margin-right: 2px;
   }
-  .icon mat-icon {
-    font-size: 10px; /* Exemple de taille */
+
+  .give, .get , .serial_number {
+    margin: 3px;
   }
+
+  .give, .get {
+    font-size: 0.9rem;
+  }
+
 }

@@ -52,8 +52,10 @@ ngOnInit(): void {
       error: (error: any) => {
         console.debug(error);
         this.showError = true;
-      },
-    });
+      }
+    }
+  );
+
   }
 
 }
