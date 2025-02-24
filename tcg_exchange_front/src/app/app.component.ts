@@ -18,17 +18,44 @@ export class AppComponent implements OnInit{
   title = 'pokemonTcgExchange';
   showFiller = false;
   user!: User;
+  isWhishPage: boolean = false;
+  isGivePage: boolean = false;
+  isExchangePage: boolean = false;
+  isOther: boolean = false;
 
   constructor(
     private router: Router,
     private intercoSrv: IntercompoService,
-        private userSrv: UserService,
+    private userSrv: UserService,
     ) {}
 
-  currentPageTitle?: Observable<string>;
+  currentPageTitle?: String;
 
   ngOnInit(): void {
-    this.currentPageTitle = this.intercoSrv.pageTitle$;
+    this.intercoSrv.pageTitle$.subscribe((pageTitle: string) => {
+      this.currentPageTitle = pageTitle;
+        if (this.currentPageTitle === "Échanges") {
+          this.isExchangePage = true;
+          this.isWhishPage = false;
+          this.isGivePage = false;
+          this.isOther = false;
+        } else if (this.currentPageTitle === "Cartes Recherchées") {
+          this.isWhishPage = true;
+          this.isExchangePage = false;
+          this.isGivePage = false;
+          this.isOther = false;
+        } else if (this.currentPageTitle === "Cartes à Céder") {
+          this.isGivePage = true;
+          this.isExchangePage = false;
+          this.isWhishPage = false;
+          this.isOther = false;
+        } else {
+          this.isOther = true;
+        }
+
+      console.log("isOther page : "+this.isOther);
+      console.log("isWish page : "+this.isWhishPage);
+    });
     const userId = JSON.parse(sessionStorage.getItem('user')!)?.id;
     this.userSrv.getById(userId).subscribe((user: User) => {
       this.user = user;

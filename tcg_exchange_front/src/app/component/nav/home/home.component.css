@@ -56,3 +56,23 @@ h3{
   width: 180px;
 }
 
+@media (max-width: 768px) {
+
+  #magicarpe{
+    height: 100px;
+    width: 100px;
+  }
+  #leviator{
+    height: 130px;
+    width: 130px;
+  }
+
+  .button_container{
+    height: 27%;
+  }
+
+  #signin_container, #login_contaier{
+    width: 40%;
+  }
+
+}

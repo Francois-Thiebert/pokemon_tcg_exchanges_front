@@ -34,8 +34,9 @@
   background-color: #d4ac0d;
 }
 .trainer{
-  background-color: #1a5276;
-  color: white;
+  background-color: #e5e8e8;
+  color: #1a5276;
+  border: 1px solid #1a5276;
 }
 .inputs{
   width: 26%;
@@ -68,9 +69,10 @@ mat-grid-tile {
 .tile-content {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   text-align: center;
+  height: 100%;
 }
 
 .serial_number{
@@ -82,4 +84,12 @@ mat-grid-tile {
 .name{
   margin: 0;
   padding: 0;
+}
+
+@media (max-width: 768px) {
+
+  .name{
+    padding-top: 2px;
+  }
+
 }

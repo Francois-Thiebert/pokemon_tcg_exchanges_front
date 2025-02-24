@@ -34,6 +34,14 @@
   height: 100%;
   justify-content: center;
 }
+.title-home-page{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
 .title {
   color: white;
   display: flex;
@@ -41,6 +49,9 @@
   align-items: center;
   height: 100%;
   font-size: 1.5rem;
+}
+.links-home-page, .links2-home-page{
+  width: 0%;
 }
 .section {
   display: flex;
@@ -59,6 +70,9 @@
 .section_button_container{
   width: 50px;
   height: 50px;
+}
+.active-page{
+  background-color: #f9e79f;
 }
 .section_text{
   color: white;
@@ -109,18 +123,34 @@
     height: 60px;
   }
 
-  .section {
+  .section_button_container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+    width: 50px;
     height: 50px;
   }
 
   .section_button {
     width: 30px;
     height: 30px;
+    font-size: 24px;
+    border: 1px solid black;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+    background-color: #566573;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centre l'icône ou le texte dans le bouton */
   }
+
+  .img_button {
+    width: 40px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centre l'image à l'intérieur du container */
+  }
+
 
   #sulfu_img {
     width: 40px;
@@ -144,7 +174,7 @@
   }
 
   .title {
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
 
   .links_container {
@@ -153,17 +183,20 @@
   }
 
   .title_container {
-    width: 30%;
+    width: 43%;
     height: 50px;
   }
 
   .links2_container {
-    width: 25%;
+    width: 12%;
     height: 50px;
   }
 
   .mat-toolbar {
     height: 60px;
+  }
+  .active-page{
+    background-color: #f9e79f;
   }
 }
 

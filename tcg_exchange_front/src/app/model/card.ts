@@ -2,6 +2,12 @@ import { Type } from "./type";
 import { User } from "./user";
 
 export class Card {
+  public get rarity_string(): String | undefined {
+    return this._rarity_string;
+  }
+  public set rarity_string(value: String | undefined) {
+    this._rarity_string = value;
+  }
   public get collection(): number | undefined {
     return this._collection;
   }
@@ -60,6 +66,7 @@ export class Card {
         private _id?: number,
         private _name?: String,
         private _rarity?: number,
+        private _rarity_string?: String,
         private _type?: Type,
         private _serialNumber?: String,
         private _collection?: number,

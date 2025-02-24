@@ -4,7 +4,7 @@ export enum Type {
   psy = 'psy',
   darkness = 'darkness',
   fire = 'fire',
-  electric = 'electric',
+  electric = 'electic',
   fight = 'fight',
   metal = 'metal',
   normal = 'normal',

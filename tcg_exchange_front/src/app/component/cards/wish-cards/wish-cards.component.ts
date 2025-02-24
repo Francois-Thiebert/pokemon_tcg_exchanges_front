@@ -9,9 +9,9 @@ import { IntercompoService } from 'src/app/services/intercompo.service';
 import { UserService } from 'src/app/services/user.service';
 import { MajWishListComponent } from '../../popup/maj-wish-list/maj-wish-list.component';
 
-interface CardExtended extends Card {
-rarity_string?: string;
-}
+// interface CardExtended extends Card {
+// rarity_string?: string;
+// }
 
 @Component({
   selector: 'app-wish-cards',
@@ -23,10 +23,14 @@ export class WishCardsComponent implements OnInit{
   userID?: number;
   screenWidth?: number;
   column_number?: number;
-  wish_cards_new: CardExtended[] = [];
-  wish_cards_init: CardExtended[] = [];
-  card_list?: CardExtended[];
-  card_list_display?: CardExtended[];
+  // wish_cards_new: CardExtended[] = [];
+  // wish_cards_init: CardExtended[] = [];
+  // card_list?: CardExtended[];
+  // card_list_display?: CardExtended[];
+  wish_cards_new: Card[] = [];
+  wish_cards_init: Card[] = [];
+  card_list?: Card[];
+  card_list_display?: Card[];
   user?: User;
   update?: boolean = false;
   isInitialized?: boolean = false;
@@ -52,7 +56,7 @@ export class WishCardsComponent implements OnInit{
       this.card_list=cards;
       this.card_list_display=this.card_list;
       this.sortCards(this.card_list);
-      this.getCardRarityString(this.card_list);
+      // this.getCardRarityString(this.card_list);
       this.userSrv.getById(userId).subscribe((user: User) => {
         this.user=user;
         this.wish_cards_init = this.wish_cards_init.concat(this.user.wishList!);
@@ -62,7 +66,7 @@ export class WishCardsComponent implements OnInit{
     })
   }
 
-  filterCard(cards: CardExtended[]): CardExtended[] {
+  filterCard(cards: Card[]): Card[] {
     if (this.filterType != null && this.filterType != "*") {
       cards = cards.filter(c => c.type === this.filterType);
     }
@@ -76,7 +80,7 @@ export class WishCardsComponent implements OnInit{
   }
 
 
-  sortCards(cards: CardExtended[]) {
+  sortCards(cards: Card[]) {
     let collectionNumber: number = 0;
     let collectionNumberInit: number = -1;
 
@@ -105,25 +109,25 @@ export class WishCardsComponent implements OnInit{
   }
 
 
-  getCardRarityString(cards: CardExtended[]) {
-    for (let c of cards!){
-      if(c.rarity==0){
-        c.rarity_string='&#9826;'
-      }
-      else if(c.rarity==1){
-        c.rarity_string='&#9826;&#9826;'
-      }
-      else if(c.rarity==2){
-        c.rarity_string='&#9826;&#9826;&#9826;'
-      }
-      else if(c.rarity==3){
-        c.rarity_string='&#9826;&#9826;&#9826;&#9826;'
-      }
-      else if(c.rarity==4){
-        c.rarity_string='&#9733;'
-      }
-      };
-    }
+  // getCardRarityString(cards: CardExtended[]) {
+  //   for (let c of cards!){
+  //     if(c.rarity==0){
+  //       c.rarity_string='&#9826;'
+  //     }
+  //     else if(c.rarity==1){
+  //       c.rarity_string='&#9826;&#9826;'
+  //     }
+  //     else if(c.rarity==2){
+  //       c.rarity_string='&#9826;&#9826;&#9826;'
+  //     }
+  //     else if(c.rarity==3){
+  //       c.rarity_string='&#9826;&#9826;&#9826;&#9826;'
+  //     }
+  //     else if(c.rarity==4){
+  //       c.rarity_string='&#9733;'
+  //     }
+  //     };
+  //   }
 
     getWishedCards(){
       for (let c of this.card_list!) {
@@ -133,7 +137,7 @@ export class WishCardsComponent implements OnInit{
       }
     }
 
-    selectCard(card: CardExtended) {
+    selectCard(card: Card) {
       const index = this.wish_cards_new.indexOf(card);
       if (index !== -1) {
         this.wish_cards_new.splice(index, 1);

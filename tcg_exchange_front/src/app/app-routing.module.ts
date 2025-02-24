@@ -12,6 +12,8 @@ import { ToGiveCardsComponent } from './component/cards/to-give-cards/to-give-ca
 import { ExchangeComponent } from './component/cards/exchange/exchange.component';
 import { RatioComponent } from './component/cards/ratio/ratio.component';
 import { ExchangePoposalComponent } from './component/popup/exchange-poposal/exchange-poposal.component';
+import { AnonymousGuardService } from './services/guardServ/anonymous-guard-service';
+import { UserGuardService } from './services/guardServ/user-guard-service';
 
 const routes: Routes = [
   {path: '',
@@ -19,21 +21,31 @@ const routes: Routes = [
   {path: 'home',
     component: HomeComponent,},
   {path: 'signin',
-    component: SigninComponent,},
+    component: SigninComponent,
+    canActivate: [AnonymousGuardService],},
   {path: 'connection',
-    component: ConnectionComponent,},
+    component: ConnectionComponent,
+    canActivate: [AnonymousGuardService],},
   {path: 'wish-cards',
-    component: WishCardsComponent,},
+    component: WishCardsComponent,
+    canActivate: [UserGuardService],},
   {path: 'to-give-cards',
-    component: ToGiveCardsComponent,},
+    component: ToGiveCardsComponent,
+    canActivate: [UserGuardService],},
   {path: 'ratio',
-    component: RatioComponent,},
+    component: RatioComponent,
+    canActivate: [UserGuardService],},
   {path: 'exchange',
-    component: ExchangeComponent,},
+    component: ExchangeComponent,
+    canActivate: [UserGuardService],},
   {path: 'exchange-proposal',
-    component: ExchangePoposalComponent,},
+    component: ExchangePoposalComponent,
+    canActivate: [UserGuardService],},
   {path: 'new-exchange-confirm',
-    component: NewExchangeConfirmComponent,},
+    component: NewExchangeConfirmComponent,
+    canActivate: [UserGuardService],},
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
 
 @NgModule({

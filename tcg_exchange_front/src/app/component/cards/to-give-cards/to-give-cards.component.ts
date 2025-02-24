@@ -7,9 +7,9 @@ import { IntercompoService } from 'src/app/services/intercompo.service';
 import { UserService } from 'src/app/services/user.service';
 import { MajWishListComponent } from '../../popup/maj-wish-list/maj-wish-list.component';
 
-interface CardExtended extends Card {
-rarity_string?: string;
-}
+// interface CardExtended extends Card {
+// rarity_string?: string;
+// }
 
 
 @Component({
@@ -22,11 +22,16 @@ export class ToGiveCardsComponent implements OnInit{
   userID?: number;
   screenWidth?: number;
   column_number?: number;
-  give_cards_new: CardExtended[] = [];
-  give_cards_init: CardExtended[] = [];
-  wish_cards_init: CardExtended[] = [];
-  card_list?: CardExtended[];
-  card_list_display?: CardExtended[];
+  // give_cards_new: CardExtended[] = [];
+  // give_cards_init: CardExtended[] = [];
+  // wish_cards_init: CardExtended[] = [];
+  // card_list?: CardExtended[];
+  // card_list_display?: CardExtended[];
+  give_cards_new: Card[] = [];
+  give_cards_init: Card[] = [];
+  wish_cards_init: Card[] = [];
+  card_list?: Card[];
+  card_list_display?: Card[];
   user?: User;
   update?: boolean = false;
   isInitialized?: boolean = false;
@@ -50,7 +55,7 @@ export class ToGiveCardsComponent implements OnInit{
         this.card_list=cards;
         this.card_list_display=this.card_list;
         this.sortCards(this.card_list);
-        this.getCardRarityString(this.card_list);
+        // this.getCardRarityString(this.card_list);
         this.userSrv.getById(userId).subscribe((user: User) => {
           this.user=user;
           this.give_cards_init = this.give_cards_init.concat(this.user.toGiveList!);
@@ -61,7 +66,7 @@ export class ToGiveCardsComponent implements OnInit{
       })
     }
 
-    filterCard(cards: CardExtended[]): CardExtended[] {
+    filterCard(cards: Card[]): Card[] {
       if (this.filterType != null && this.filterType != "*") {
         cards = cards.filter(c => c.type === this.filterType);
       }
@@ -74,7 +79,7 @@ export class ToGiveCardsComponent implements OnInit{
       return cards;
     }
 
-    sortCards(cards: CardExtended[]) {
+    sortCards(cards: Card[]) {
       let collectionNumber: number = 0;
       let collectionNumberInit: number = -1;
 
@@ -125,7 +130,7 @@ export class ToGiveCardsComponent implements OnInit{
       }
     }
 
-    selectCard(card: CardExtended) {
+    selectCard(card: Card) {
       const index = this.give_cards_new.indexOf(card);
       if (index !== -1) {
         this.give_cards_new.splice(index, 1);
@@ -148,25 +153,25 @@ export class ToGiveCardsComponent implements OnInit{
       }
     }
 
-    getCardRarityString(cards: CardExtended[]) {
-      for (let c of cards!){
-        if(c.rarity==0){
-          c.rarity_string='&#9826;'
-        }
-        else if(c.rarity==1){
-          c.rarity_string='&#9826;&#9826;'
-        }
-        else if(c.rarity==2){
-          c.rarity_string='&#9826;&#9826;&#9826;'
-        }
-        else if(c.rarity==3){
-          c.rarity_string='&#9826;&#9826;&#9826;&#9826;'
-        }
-        else if(c.rarity==4){
-          c.rarity_string='&#9733;'
-        }
-        };
-      }
+    // getCardRarityString(cards: CardExtended[]) {
+    //   for (let c of cards!){
+    //     if(c.rarity==0){
+    //       c.rarity_string='&#9826;'
+    //     }
+    //     else if(c.rarity==1){
+    //       c.rarity_string='&#9826;&#9826;'
+    //     }
+    //     else if(c.rarity==2){
+    //       c.rarity_string='&#9826;&#9826;&#9826;'
+    //     }
+    //     else if(c.rarity==3){
+    //       c.rarity_string='&#9826;&#9826;&#9826;&#9826;'
+    //     }
+    //     else if(c.rarity==4){
+    //       c.rarity_string='&#9733;'
+    //     }
+    //     };
+    //   }
 
     getColumnNumber(){
       this.screenWidth = window.innerWidth;

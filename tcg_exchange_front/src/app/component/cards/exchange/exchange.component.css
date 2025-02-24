@@ -31,6 +31,11 @@
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
 }
 
+#rarity{
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
 .line1, .line2{
   justify-content: space-between;
 }
