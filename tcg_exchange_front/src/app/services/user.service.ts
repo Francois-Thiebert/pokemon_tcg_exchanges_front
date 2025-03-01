@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ObjectToJsonService } from './object-to-json.service';
 import { Observable } from 'rxjs';
 import { User } from '../model/user';
-import { loginRest, userRest } from '../env';
+import { loginCheckRest, loginRest, userRest } from '../env';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +40,7 @@ export class UserService {
 
   public checkLogin(login: string): Observable<boolean> {
     return this.http.get<boolean>(
-      'http://localhost:8080/tcgexchanges/api/user/login/check/' + login
+      loginCheckRest + login
     );
   }
 
