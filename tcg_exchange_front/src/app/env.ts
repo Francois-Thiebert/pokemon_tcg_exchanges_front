@@ -1,4 +1,4 @@
-export const srvRest: string = 'http://176.159.136.78:9080/tcgexchanges/api';
+export const srvRest: string = 'http://http://176.159.136.78:9080/tcgexchanges/api';
 
 export const userRest: string = `${srvRest}/user`;
 export const cardRest: string = `${srvRest}/card`;
