@@ -14,6 +14,7 @@ import { RatioComponent } from './component/cards/ratio/ratio.component';
 import { ExchangePoposalComponent } from './component/popup/exchange-poposal/exchange-poposal.component';
 import { AnonymousGuardService } from './services/guardServ/anonymous-guard-service';
 import { UserGuardService } from './services/guardServ/user-guard-service';
+import { NewExchangeValidationComponent } from './component/popup/new-exchange-validation/new-exchange-validation.component';
 
 const routes: Routes = [
   {path: '',
@@ -43,6 +44,9 @@ const routes: Routes = [
     canActivate: [UserGuardService],},
   {path: 'new-exchange-confirm',
     component: NewExchangeConfirmComponent,
+    canActivate: [UserGuardService],},
+  {path: 'new-exchange-validation',
+    component: NewExchangeValidationComponent,
     canActivate: [UserGuardService],},
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home', pathMatch: 'full' },

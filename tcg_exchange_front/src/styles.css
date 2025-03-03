@@ -38,6 +38,10 @@ h3{
   background-color: #27ae60;
 }
 
+.cancel_button{
+  background-color: #922b21;
+}
+
 .page-content {
   margin: auto;
   width: 100%;

@@ -40,12 +40,16 @@ import { ExchangePoposalComponent } from './component/popup/exchange-poposal/exc
 import { NewExchangeConfirmComponent } from './component/popup/new-exchange-confirm/new-exchange-confirm.component';
 
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { NewExchangeValidationComponent } from './component/popup/new-exchange-validation/new-exchange-validation.component';
+import { CancelExchangeComponent } from './component/popup/cancel-exchange/cancel-exchange.component';
+import { ValidationExchangeComponent } from './component/popup/validation-exchange/validation-exchange.component';
+import { FinishExchangeComponent } from './component/popup/finish-exchange/finish-exchange.component';
 
 
 
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, ConnectionComponent, SigninComponent, WishCardsComponent, WelcomeComponent, NavBarComponent, MajWishListComponent, ToGiveCardsComponent, ExchangeComponent, RatioComponent, ExchangePoposalComponent, NewExchangeConfirmComponent,],
+  declarations: [AppComponent, HomeComponent, ConnectionComponent, SigninComponent, WishCardsComponent, WelcomeComponent, NavBarComponent, MajWishListComponent, ToGiveCardsComponent, ExchangeComponent, RatioComponent, ExchangePoposalComponent, NewExchangeConfirmComponent, NewExchangeValidationComponent, CancelExchangeComponent, ValidationExchangeComponent, FinishExchangeComponent,],
   imports: [
     AppRoutingModule,
     BrowserModule,

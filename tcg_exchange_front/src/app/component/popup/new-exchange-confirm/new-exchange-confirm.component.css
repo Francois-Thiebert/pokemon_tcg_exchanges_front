@@ -11,18 +11,44 @@
 #card1, #card2{
  font-weight: bold;
 }
-.agree_button{
-  background-color: #27ae60;
+.mat-button{
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 0;
   align-items: center;
   justify-content: center;
+  color: white;
 }
+#agree_button{
+  background-color: #27ae60;
+  color: white;
+}
+#cancel_button{
+  background-color: #922b21;
+  color: white;
+}
+
 .button_container{
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 30vh;
   padding-top: 0;
+}
+
+.cancel_button_container, .agree_button_container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+#get{
+  color: #27ae60;
+  font-weight: bold;
+}
+#give{
+  color: #922b21;
+  font-weight: bold;
 }

@@ -1,6 +1,8 @@
 /* Réduire l'espacement entre les tiles */
 mat-grid-list {
-  gap: 5px; /* Réduit l'espace entre les tiles */
+  gap: 5px;
+  height: 100%;
+  margin-bottom: 10px;/* Réduit l'espace entre les tiles */
 }
 
 /* Style général de la tile */

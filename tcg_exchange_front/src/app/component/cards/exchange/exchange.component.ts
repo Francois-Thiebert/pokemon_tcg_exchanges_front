@@ -9,6 +9,9 @@ import { IntercompoService } from 'src/app/services/intercompo.service';
 import { UserService } from 'src/app/services/user.service';
 import { ExchangePoposalComponent } from '../../popup/exchange-poposal/exchange-poposal.component';
 import { State } from 'src/app/model/state';
+import { CancelExchangeComponent } from '../../popup/cancel-exchange/cancel-exchange.component';
+import { ValidationExchangeComponent } from '../../popup/validation-exchange/validation-exchange.component';
+import { FinishExchangeComponent } from '../../popup/finish-exchange/finish-exchange.component';
 
 @Component({
   selector: 'app-exchange',
@@ -66,24 +69,15 @@ findExchange(){
 }
 
 finishExchange(exchange: Exchange){
-  exchange.state=State.FINISHED;
-  this.exchangeSrv.update(exchange).subscribe((exch_update) => {
-    window.location.reload();
-  });
+  this.dialog.open(FinishExchangeComponent, {width:'300px', height:'130px', data: exchange})
 }
 
 confirmExchange(exchange: Exchange){
-  exchange.state=State.CONFIRMED;
-  this.exchangeSrv.update(exchange).subscribe((exch_update) => {
-    window.location.reload();
-  });
+  this.dialog.open(ValidationExchangeComponent, {width:'300px', height:'130px', data: exchange})
 }
 
 cancelExchange(exchange: Exchange){
-  exchange.state=State.CANCELED;
-  this.exchangeSrv.update(exchange).subscribe((exch_update) => {
-    window.location.reload();
-  });
+  this.dialog.open(CancelExchangeComponent, {width:'300px', height:'130px', data: exchange})
 }
 
 getExchanges(user: User){

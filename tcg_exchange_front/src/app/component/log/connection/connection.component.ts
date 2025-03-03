@@ -37,7 +37,6 @@ ngOnInit(): void {
   submit(){
     this.login=this.form.get('credentials.login')?.value,
     this.password=this.form.get('credentials.password')?.value
-    console.log(this.login, this.password)
 
     this.userSrv.login(this.login!, this.password!).subscribe({
       next: (infos: User) => {

@@ -1,8 +1,19 @@
 <div class="container">
-  <div id="title">Demande envoyée !</div>
+
   <br>
-  <div id="message">Votre <span id="card1">machin</span> a été retiré de tes cartes recherchées et <span id="card2">truc</span> de tes cartes à céder.</div>
+  <div id="message">Es-tu sûr de vouloir choisir cet échange ?</div>
+
   <br>
+
+  <div id="exchange"><span id="get">{{exchange_confirm.card1?.name}}</span> contre <span id="give">{{exchange_confirm.card2?.name}}</span></div>
+
+  <br>
+
   <div id="button_container">
-    <button mat-button (click)="onClick()" class="agree_button"><mat-icon>done</mat-icon></button></div>
+    <div class="agree_button_container">
+      <button mat-button (click)="send()" id="agree_button"><mat-icon>send</mat-icon>envoyer la demande</button></div>
+    <div class="cancel_button_container">
+      <button mat-button (click)="cancel()" id="cancel_button"><mat-icon>cancel</mat-icon>annuler</button></div>
+  </div>
+
 </div>

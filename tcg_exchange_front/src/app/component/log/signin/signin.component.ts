@@ -89,7 +89,6 @@ export class SigninComponent {
     this.login=this.form.get('compteGroup.login')?.value,
     this.password=this.form.get('compteGroup.passwordGroup.password')?.value,
     this.friend_code=this.form.get('friendCode')?.value,
-    console.log(this.login, this.password, this.friend_code)
     this.user.login = this.login;
     this.user.password = this.password;
     this.user.friendCode = this.friend_code;

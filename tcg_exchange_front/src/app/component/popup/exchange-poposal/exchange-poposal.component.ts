@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MajWishListComponent } from '../maj-wish-list/maj-wish-list.component';
 import { UserService } from 'src/app/services/user.service';
 import { CardService } from 'src/app/services/card.service';
@@ -7,6 +7,8 @@ import { Exchange } from 'src/app/model/exchange';
 import { ExchangeService } from 'src/app/services/exchange.service';
 import { User } from 'src/app/model/user';
 import { Router } from '@angular/router';
+import { NewExchangeConfirmComponent } from '../new-exchange-confirm/new-exchange-confirm.component';
+import { NewExchangeValidationComponent } from '../new-exchange-validation/new-exchange-validation.component';
 
 @Component({
   selector: 'app-exchange-poposal',
@@ -27,7 +29,7 @@ export class ExchangePoposalComponent implements OnInit{
     private userSrv: UserService,
     private cardSrv: CardService,
     private exchangeSrv: ExchangeService,
-    private router: Router,
+    private dialog: MatDialog,
     public dialogRef: MatDialogRef<MajWishListComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
@@ -56,11 +58,7 @@ export class ExchangePoposalComponent implements OnInit{
   }
 
   chooseExchange(exchange: Exchange){
-    this.exchangeSrv.create(exchange).subscribe((exch) => {
-      this.dialogRef.close();
-      this.router.navigateByUrl('/exchange');
-      window.location.reload();
-    });
+    this.dialog.open(NewExchangeConfirmComponent, {width:'300px', height:'180px', data: exchange});
   }
 
 }
