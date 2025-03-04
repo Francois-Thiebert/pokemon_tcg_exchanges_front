@@ -31,6 +31,13 @@ export class ExchangeService {
         return this.http.delete<void>(`${exchangeRest}/${id}`);
       }
 
+      public cancel(exchange: Exchange): Observable<Exchange> {
+        return this.http.put<Exchange>(
+          `${exchangeRest}/cancel/${exchange.id}`,
+          this.convert.exchangeToJson(exchange)
+        );
+      }
+
       public update(exchange: Exchange): Observable<Exchange> {
         return this.http.put<Exchange>(
           `${exchangeRest}/${exchange.id}`,
