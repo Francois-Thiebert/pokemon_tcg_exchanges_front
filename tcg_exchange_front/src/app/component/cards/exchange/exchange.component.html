@@ -6,6 +6,7 @@
 </div>
 <hr/>
 
+<!-- échanges en cours -->
 <div class="exchanges_list_container" id="current_exchanges">
   <div class="title_list" (click)="click_current_exchanges()">
     <div class="icon_title_list"><mat-icon>autorenew</mat-icon></div>
@@ -23,17 +24,22 @@
         <div class="serial_number" id="sn_give">{{e.card2?.serialNumber}}</div>
       </div>
       <div class="line3">
-        <div class="row_container">
+          <div class="card_collection"><img class="img_collection" src={{e.card1?.collection_img}}></div>
           <div class="rarity_value"><p [innerHTML]="e.card1?.rarity_string" id="rarity"></p></div>
-        </div>
+          <div class="card_collection"><img class="img_collection" src={{e.card2?.collection_img}}></div>
       </div>
       <div class="line4">
         <div class="row_container">
           <div class="friend_name_icon"><mat-icon>person_outline</mat-icon></div>
-          <div class="friend_name_text"><span>{{e.user2?.login}} | {{e.user2?.friendCode}}</span></div>
+          <div class="friend_name_text"><span>{{e.user2?.login}}</span></div>
         </div>
       </div>
       <div class="line5">
+        <div class="row_container">
+          <div class="friend_code_icon"><button id="copy_button" mat-icon-button (click)=copyToClipboard(e.user2?.friendCode!)><mat-icon id="copy_icon">content_copy</mat-icon></button></div>
+          <div class="friend_code_text"><span>{{e.user2?.friendCode}}</span></div></div>
+        </div>
+      <div class="line6">
         <div class="row_container">
           <button mat-fab class="exch_button" id="confirm_button" (click)="finishExchange(e)"><mat-icon>outlined_flag</mat-icon></button>
           <button mat-fab class="exch_button" id="cancel_button" (click)="cancelExchange(e)"><mat-icon id="cancel_icon">cancel</mat-icon></button>
@@ -44,6 +50,7 @@
 
   <hr/>
 
+  <!-- nouvelles demandes -->
 <div class="exchanges_list_container" id="new_exchanges">
   <div class="title_list" (click)="click_new_exchanges()">
     <div class="icon_title_list"><mat-icon>fiber_new</mat-icon></div>
@@ -61,27 +68,32 @@
         <div class="serial_number" id="sn_give">{{e.card1?.serialNumber}}</div>
       </div>
       <div class="line3">
-        <div class="row_container">
-          <div class="rarity_value"><p [innerHTML]="e.card1?.rarity_string" id="rarity"></p></div>
-        </div>
+        <div class="card_collection"><img class="img_collection" src={{e.card2?.collection_img}}></div>
+        <div class="rarity_value"><p [innerHTML]="e.card1?.rarity_string" id="rarity"></p></div>
+        <div class="card_collection"><img class="img_collection" src={{e.card1?.collection_img}}></div>
       </div>
       <div class="line4">
         <div class="row_container">
           <div class="friend_name_icon"><mat-icon>person_outline</mat-icon></div>
-          <div class="friend_name_text"><span>{{e.user1?.login}} | {{e.user1?.friendCode}}</span></div>
+          <div class="friend_name_text"><span>{{e.user2?.login}}</span></div>
         </div>
       </div>
       <div class="line5">
         <div class="row_container">
-          <button mat-fab class="exch_button" id="confirm_button" (click)="confirmExchange(e)"><mat-icon>check_circle</mat-icon></button>
-          <button mat-fab class="exch_button" id="cancel_button" (click)="cancelExchange(e)"><mat-icon id="cancel_icon">cancel</mat-icon></button>
+          <div class="friend_code_icon"><button id="copy_button" mat-icon-button (click)=copyToClipboard(e.user1?.friendCode!)><mat-icon id="copy_icon">content_copy</mat-icon></button></div>
+          <div class="friend_code_text"><span>{{e.user1?.friendCode}}</span></div></div>
         </div>
+        <div class="line6">
+          <div class="row_container">
+            <button mat-fab class="exch_button" id="confirm_button" (click)="confirmExchange(e)"><mat-icon>check_circle</mat-icon></button>
+            <button mat-fab class="exch_button" id="cancel_button" (click)="cancelExchange(e)"><mat-icon id="cancel_icon">cancel</mat-icon></button>
+          </div>
       </div>
     </div>
   </div>
 
   <hr/>
-
+<!-- échanges en attente de valisation -->
   <div class="exchanges_list_container" id="onhold_exchanges">
     <div class="title_list" (click)="click_val_exchanges()">
       <div class="icon_title_list"><mat-icon>access_time</mat-icon></div>
@@ -99,17 +111,22 @@
           <div class="serial_number" id="sn_give">{{e.card2?.serialNumber}}</div>
         </div>
         <div class="line3">
-          <div class="row_container">
-            <div class="rarity_value"><p [innerHTML]="e.card1?.rarity_string" id="rarity"></p></div>
-          </div>
+          <div class="card_collection"><img class="img_collection" src={{e.card1?.collection_img}}></div>
+          <div class="rarity_value"><p [innerHTML]="e.card1?.rarity_string" id="rarity"></p></div>
+          <div class="card_collection"><img class="img_collection" src={{e.card2?.collection_img}}></div>
+      </div>
+      <div class="line4">
+        <div class="row_container">
+          <div class="friend_name_icon"><mat-icon>person_outline</mat-icon></div>
+          <div class="friend_name_text"><span>{{e.user2?.login}}</span></div>
         </div>
-        <div class="line4">
-          <div class="row_container">
-            <div class="friend_name_icon"><mat-icon>person_outline</mat-icon></div>
-            <div class="friend_name_text"><span>{{e.user2?.login}} | {{e.user2?.friendCode}}</span></div>
-          </div>
+      </div>
+      <div class="line5">
+        <div class="row_container">
+          <div class="friend_code_icon"><button id="copy_button" mat-icon-button (click)=copyToClipboard(e.user2?.friendCode!)><mat-icon id="copy_icon">content_copy</mat-icon></button></div>
+          <div class="friend_code_text"><span>{{e.user2?.friendCode}}</span></div></div>
         </div>
-        <div class="line5">
+        <div class="line6">
           <div class="row_container">
             <button mat-fab class="exch_button" id="cancel_button" (click)="cancelExchange(e)"><mat-icon id="cancel_icon">cancel</mat-icon></button>
           </div>
@@ -119,7 +136,7 @@
 </div>
 
 <hr/>
-
+<!-- échanges terminés -->
 <div class="exchanges_list_container" id="current_exchanges">
   <div class="title_list" (click)="click_old_exchanges()">
     <div class="icon_title_list"><mat-icon>flag</mat-icon></div>
@@ -137,21 +154,21 @@
         <div class="serial_number" id="sn_give">{{e.card2?.serialNumber}}</div>
       </div>
       <div class="line3">
-        <div class="row_container">
-          <div class="rarity_value"><p [innerHTML]="e.card1?.rarity_string" id="rarity"></p></div>
-        </div>
-      </div>
+        <div class="card_collection"><img class="img_collection" src={{e.card1?.collection_img}}></div>
+        <div class="rarity_value"><p [innerHTML]="e.card1?.rarity_string" id="rarity"></p></div>
+        <div class="card_collection"><img class="img_collection" src={{e.card2?.collection_img}}></div>
+    </div>
       <div class="line4">
         <div class="row_container">
           <div class="friend_name_icon"><mat-icon>person_outline</mat-icon></div>
-          <div class="friend_name_text"><span>{{e.user2?.login}} | {{e.user2?.friendCode}}</span></div>
+          <div class="friend_name_text"><span>{{e.user2?.login}}</span></div>
         </div>
       </div>
     </div>
   </div>
 
   <hr/>
-
+<!-- échanges annulés -->
   <div class="exchanges_list_container" id="current_exchanges">
     <div class="title_list" (click)="click_cancel_exchanges()">
       <div class="icon_title_list"><mat-icon>cancel</mat-icon></div>
@@ -169,14 +186,14 @@
           <div class="serial_number" id="sn_give">{{e.card2?.serialNumber}}</div>
         </div>
         <div class="line3">
-          <div class="row_container">
-            <div class="rarity_value"><p [innerHTML]="e.card1?.rarity_string" id="rarity"></p></div>
-          </div>
-        </div>
+          <div class="card_collection"><img class="img_collection" src={{e.card1?.collection_img}}></div>
+          <div class="rarity_value"><p [innerHTML]="e.card1?.rarity_string" id="rarity"></p></div>
+          <div class="card_collection"><img class="img_collection" src={{e.card2?.collection_img}}></div>
+      </div>
         <div class="line4">
           <div class="row_container">
             <div class="friend_name_icon"><mat-icon>person_outline</mat-icon></div>
-            <div class="friend_name_text"><span>{{e.user2?.login}} | {{e.user2?.friendCode}}</span></div>
+            <div class="friend_name_text"><span>{{e.user2?.login}}</span></div>
           </div>
         </div>
       </div>

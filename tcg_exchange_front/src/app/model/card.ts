@@ -2,6 +2,12 @@ import { Type } from "./type";
 import { User } from "./user";
 
 export class Card {
+  public get collection_img(): String | undefined {
+    return this._collection_img;
+  }
+  public set collection_img(value: String | undefined) {
+    this._collection_img = value;
+  }
   public get rarity_string(): String | undefined {
     return this._rarity_string;
   }
@@ -13,6 +19,17 @@ export class Card {
   }
   public set collection(value: number | undefined) {
     this._collection = value;
+    if (value === 0) {
+      this._collection_img = "assets/images/puissance-genetique.png";
+    } else if (value === 1) {
+      this._collection_img = "assets/images/ile-fabulseuse.png";
+    } else if (value === 2) {
+      this._collection_img = "assets/images/choc-spatio-temporel.png";
+    } else if (value === 3) {
+      this._collection_img = "assets/images/lumiere-triomphale.png";
+    }else {
+      this._collection_img = undefined;
+    }
   }
   public get type(): Type | undefined {
     return this._type;
@@ -70,6 +87,7 @@ export class Card {
         private _type?: Type,
         private _serialNumber?: String,
         private _collection?: number,
+        private _collection_img?: String,
         private _picture?: String,
         private _wisher?: User[],
         private _giver?: User[],

@@ -86,6 +86,7 @@ getExchanges(user: User){
   for (let e of this.exchanges1!){
     if(e.state=='ASKED'){
       this.exchangeSrv.getById(e.id!).subscribe((exch: Exchange) => {
+        this.getCollectionImgByExchange(exch);
         this.exchanges_validation=this.exchanges_validation?.concat(exch);
         this.nb_exch_val = this.exchanges_validation?.length;
         console.log("demandes en attente de confirmation: ",this.exchanges_validation);
@@ -93,6 +94,7 @@ getExchanges(user: User){
     }
     if(e.state=='CONFIRMED'){
       this.exchangeSrv.getById(e.id!).subscribe((exch: Exchange) => {
+        this.getCollectionImgByExchange(exch);
         this.exchanges_active=this.exchanges_active?.concat(exch);
         this.nb_exch_current=this.exchanges_active?.length;
         console.log("échanges en confirmés, en tant que demandeur: ",this.exchanges_active);
@@ -100,6 +102,7 @@ getExchanges(user: User){
     }
     if(e.state=='FINISHED'){
       this.exchangeSrv.getById(e.id!).subscribe((exch: Exchange) => {
+        this.getCollectionImgByExchange(exch);
         this.exchanges_old=this.exchanges_old?.concat(exch);
         this;this.nb_exch_old = this.exchanges_old?.length;
         console.log("échanges en effectués, en tant que demandeur: ",this.exchanges_old);
@@ -107,6 +110,7 @@ getExchanges(user: User){
     }
     if(e.state=='CANCELED'){
       this.exchangeSrv.getById(e.id!).subscribe((exch: Exchange) => {
+        this.getCollectionImgByExchange(exch);
         this.exchanges_cancel=this.exchanges_cancel?.concat(exch);
         this.nb_exch_cancel = this.exchanges_cancel?.length;
         console.log("échanges en annulés, en tant que demandeur: ",this.exchanges_cancel);
@@ -116,6 +120,7 @@ getExchanges(user: User){
   for (let e of this.exchanges2!){
     if(e.state=='ASKED'){
       this.exchangeSrv.getById(e.id!).subscribe((exch: Exchange) => {
+        this.getCollectionImgByExchange(exch);
         this.exchanges_new=this.exchanges_new?.concat(exch);
         this.nb_exch_new = this.exchanges_new?.length;
         if(this.nb_exch_new! > 0){
@@ -134,6 +139,7 @@ getExchanges(user: User){
         exch.user2 = newUser2;
         exch.card1 = newCard1;
         exch.card2 = newCard2;
+        this.getCollectionImgByExchange(exch);
         this.exchanges_active=this.exchanges_active?.concat(exch);
         this.nb_exch_current = this.exchanges_active?.length;
         console.log("échanges en confirmés, en tant que accepteur: ",this.exchanges_active);
@@ -148,6 +154,7 @@ getExchanges(user: User){
         exch.user2 = newUser2;
         exch.card1 = newCard1;
         exch.card2 = newCard2;
+        this.getCollectionImgByExchange(exch);
         this.exchanges_old=this.exchanges_old?.concat(exch);
         this.nb_exch_old = this.exchanges_old?.length;
         console.log("échanges en effectués, en tant que accepteur: ",this.exchanges_old);
@@ -163,6 +170,7 @@ getExchanges(user: User){
         exch.user2 = newUser2;
         exch.card1 = newCard1;
         exch.card2 = newCard2;
+        this.getCollectionImgByExchange(exch);
         this.exchanges_cancel=this.exchanges_cancel?.concat(exch);
         this.nb_exch_cancel = this.exchanges_cancel?.length;
         console.log("échanges en annulés, en tant que accepteur: ",this.exchanges_cancel);
@@ -223,6 +231,36 @@ click_cancel_exchanges() {
     this.show_cancel_exchanges = true;
   }
   console.log(this.show_cancel_exchanges);
+}
+
+copyToClipboard(friendCode: String): void {
+  let friendCodePrimitive: string = friendCode.toString();
+  if (friendCodePrimitive) {
+    navigator.clipboard.writeText(friendCodePrimitive).then(() => {
+      console.log('Friend code copied to clipboard!');
+    }).catch((err) => {
+      console.error('Failed to copy text: ', err);
+    });
+  }
+}
+
+getCollectionImgByCard(card: Card){
+  if (card.collection === 0) {
+    card.collection_img = "assets/images/puissance-genetique.png";
+  } else if (card.collection === 1) {
+    card.collection_img = "assets/images/ile-fabuleuse.png";
+  } else if (card.collection === 2) {
+    card.collection_img = "assets/images/choc-spatio-temporel.png";
+  } else if (card.collection === 3) {
+    card.collection_img = "assets/images/lumiere-triomphale.png";
+  }else {
+    card.collection_img = undefined;
+  }
+}
+
+getCollectionImgByExchange(exchange: Exchange){
+    this.getCollectionImgByCard(exchange.card1!);
+    this.getCollectionImgByCard(exchange.card2!);
 }
 
 

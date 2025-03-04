@@ -4,6 +4,7 @@ import { ExchangeService } from 'src/app/services/exchange.service';
 import { NewExchangeConfirmComponent } from '../new-exchange-confirm/new-exchange-confirm.component';
 import { Exchange } from 'src/app/model/exchange';
 import { State } from 'src/app/model/state';
+import { CancelExchangeValidationComponent } from '../cancel-exchange-validation/cancel-exchange-validation.component';
 
 @Component({
   selector: 'app-cancel-exchange',
@@ -20,10 +21,9 @@ export class CancelExchangeComponent {
       ) { }
 
       onClick(){
-        this.exchange.state=State.CANCELED;
-        this.exchangeSrv.update(this.exchange).subscribe((exch_update) => {
-        window.location.reload();
+        this.exchangeSrv.cancel(this.exchange).subscribe((exch_update) => {
         this.dialogRef.close();
+        this.dialog.open(CancelExchangeValidationComponent, {width:'300px', height:'175px', data: this.exchange})
         });
       }
 
