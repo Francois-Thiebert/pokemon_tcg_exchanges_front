@@ -22,6 +22,7 @@ export class AppComponent implements OnInit{
   isGivePage: boolean = false;
   isExchangePage: boolean = false;
   isOther: boolean = false;
+  isAuth: boolean = false;
 
   constructor(
     private router: Router,
@@ -90,4 +91,6 @@ export class AppComponent implements OnInit{
     }
     return false;
   }
+
 }
+

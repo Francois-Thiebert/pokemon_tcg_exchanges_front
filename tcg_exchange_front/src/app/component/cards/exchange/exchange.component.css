@@ -22,13 +22,58 @@
 }
 
 .exchange{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   color: black;
   background-color: #f9e79f ;
   margin-left: 3px;
   margin-right: 3px;
   border: 1px solid black;
   border-radius: 15px;
-  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.row{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.card{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 7px;
+  color: white;
+  border: 1px solid black;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+#cardGet{
+  margin-right: 0;
+  background-color: #196f3d;
+}
+#cardGive{
+  margin-left: 0;
+  background-color: #922b21 ;
+}
+
+.Name{
+  font-size: 1.1rem;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin: 3px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.serial_number{
+  font-size: 0.6rem;
 }
 
 #rarity{
@@ -36,32 +81,11 @@
   font-size: 1.2rem;
 }
 
-.line1, .line2, .line3 {
-  justify-content: space-between;
-}
-
-.title_list, .line1, .line2, .line3, .line4, .line5, .line6{
+.title_list{
   display: flex;
   flex-direction: row;
   align-items: center;
   width: 100%;
-}
-
-.give, .get , .serial_number, .img_collection {
-  margin: 10px;
-}
-
-.give, .get {
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-
-.give{
-  color: #922b21 ;
-}
-
-.get{
-  color: #196f3d;
 }
 
 .button_container{
@@ -86,11 +110,6 @@
   align-items: center;
   justify-content: center;
 }
-
-#sn_give{
-  align-items: end;
-}
-
 .exch_button{
   border: 1px solid white;
   border-radius: 15px;
@@ -116,7 +135,7 @@
 }
 #exch_icon {
   width: 100%;
-  color: #2980b9 ;
+  color: black ;
   font-size: 30px;
 }
 
@@ -134,24 +153,16 @@
 
 }
 
-@media screen and (max-width: 768px) {
+#row2_container{
+  margin-bottom: 5px;
+}
 
-  .title_list{
-    font-size: 16px;
-  }
+@media screen and (max-width: 768px) {
 
   .exch_button{
     margin: 0px;
     margin-left: 2px;
     margin-right: 2px;
-  }
-
-  .give, .get , .serial_number {
-    margin: 3px;
-  }
-
-  .give, .get {
-    font-size: 0.9rem;
   }
 
 }
