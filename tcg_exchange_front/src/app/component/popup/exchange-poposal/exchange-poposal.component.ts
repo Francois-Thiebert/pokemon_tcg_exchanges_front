@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MajWishListComponent } from '../maj-wish-list/maj-wish-list.component';
 import { UserService } from 'src/app/services/user.service';
@@ -9,6 +9,8 @@ import { User } from 'src/app/model/user';
 import { Router } from '@angular/router';
 import { NewExchangeConfirmComponent } from '../new-exchange-confirm/new-exchange-confirm.component';
 import { NewExchangeValidationComponent } from '../new-exchange-validation/new-exchange-validation.component';
+import { ExchangeComponent } from '../../cards/exchange/exchange.component';
+import { Role } from 'src/app/model/role';
 
 @Component({
   selector: 'app-exchange-poposal',
@@ -24,6 +26,7 @@ export class ExchangePoposalComponent implements OnInit{
   proposals_number?: number;
   rowHeight?: any;
   screenWidth?: number;
+  isAdmin?: boolean = false;
 
   constructor(
     private userSrv: UserService,
@@ -36,19 +39,19 @@ export class ExchangePoposalComponent implements OnInit{
 
   ngOnInit(): void {
     this.userID = JSON.parse(sessionStorage.getItem('user')!)?.id;
+    this.setIsAdmin();
     this.getRowHeight();
     this.userSrv.getById(this.userID!).subscribe((user: User) => {
         this.exchangeSrv.getNew(this.userID!).subscribe((newExchanges) => {
           this.exchanges = newExchanges;
           this.proposals_number = this.exchanges?.length;
-          console.log(this.proposals_number,this.exchanges);
+          this.getCollectionImgExchanges();
         });
     });
   }
 
   getRowHeight(){
     this.screenWidth = window.innerWidth;
-    console.log("screen width: ", this.screenWidth)
     if(this.screenWidth < 500){
       this.rowHeight = '3:2';
     }
@@ -59,6 +62,19 @@ export class ExchangePoposalComponent implements OnInit{
 
   chooseExchange(exchange: Exchange){
     this.dialog.open(NewExchangeConfirmComponent, {width:'300px', height:'180px', data: exchange});
+  }
+
+  getCollectionImgExchanges(){
+    for(let e of this.exchanges!){
+      this.exchangeSrv.getCollectionImgByExchange(e);
+    }
+  }
+
+  setIsAdmin(){
+    if(JSON.parse(sessionStorage.getItem('user')!)?.role === Role.ROLE_ADMIN){
+      this.isAdmin = true;
+    }
+    console.log("isAdmin = ",this.isAdmin)
   }
 
 }

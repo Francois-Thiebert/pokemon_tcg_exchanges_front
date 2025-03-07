@@ -1,7 +1,6 @@
-<mat-grid-list cols="1" rowHeight="{{rowHeight}}">
+<!-- <mat-grid-list cols="1" rowHeight="{{rowHeight}}">
   <mat-grid-tile *ngFor="let e of exchanges" class="proposal">
     <div class="tile-content">
-      <!-- Ligne 1 (flexbox) -->
       <div class="line1">
         <div class="getCard">
           <p>obtenir</p>
@@ -18,7 +17,6 @@
         </div>
       </div>
 
-      <!-- Ligne 2 -->
       <button mat-fab extended id="choose" (click)="chooseExchange(e)">
         <mat-icon>check_circle</mat-icon>
         Choisir
@@ -26,4 +24,39 @@
     </div>
   </mat-grid-tile>
   <br>
-</mat-grid-list>
+</mat-grid-list> -->
+
+<div class="exchanges_list">
+  <div class="exchange" *ngFor="let e of exchanges">
+    <div class="row" id="row0">
+      <div class="rarity"><p [innerHTML]="e.card1?.rarity_string" id="rarity"></p></div>
+    </div>
+    <div class="row" id="row1">
+      <div class="card" id="cardGet">
+        <div class="Name">{{e.card1?.name}}</div>
+        <div class="serial_number" id="sn_get">{{e.card1?.serialNumber}}</div>
+        <div class="card_collection"><img class="img_collection" src={{e.card1?.collection_img}}></div>
+      </div>
+      <div class="exch_icon_container">
+        <div class="icon_exch"><mat-icon id="exch_icon">compare_arrows</mat-icon></div>
+      </div>
+      <div class="card" id="cardGive">
+        <div class="Name">{{e.card2?.name}}</div>
+        <div class="serial_number" id="sn_get">{{e.card2?.serialNumber}}</div>
+        <div class="card_collection"><img class="img_collection" src={{e.card2?.collection_img}}></div>
+      </div>
+    </div>
+    <div class="row" id="row2" *ngIf="isAdmin">
+      <div class="row_container" id="row2_container">
+        <div class="friend_name_icon"><mat-icon>person_outline</mat-icon></div>
+        <div class="friend_name_text"><span>{{e?.user2?.login}}</span></div>
+      </div>
+    </div>
+    <div class="row" id="row3">
+      <button mat-fab extended id="choose" (click)="chooseExchange(e)">
+        <mat-icon>check_circle</mat-icon>
+        Choisir
+      </button>
+    </div>
+  </div>
+</div>

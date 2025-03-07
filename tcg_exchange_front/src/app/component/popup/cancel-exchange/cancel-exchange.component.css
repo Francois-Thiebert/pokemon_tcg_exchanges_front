@@ -1,6 +1,16 @@
-#agree_button {
+body{
+  background-color: #f9e79f ;
+  height: 100%;
+}
+
+button{
+  margin-right: 3px;
+  margin-left: 3px;
+}
+
+.agree_button {
   background-color: #27ae60;
-  color: white;
+  color: white !important;
 }
 
 #cancel_button {
@@ -37,4 +47,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.select, .inputs{
+  width: 100%;
 }

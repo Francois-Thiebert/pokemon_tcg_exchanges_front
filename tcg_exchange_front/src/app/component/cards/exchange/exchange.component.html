@@ -13,40 +13,31 @@
     <div class="text_title_list" matBadge="{{nb_exch_current}}" matBadgeOverlap="false"><a>Échanges en cours</a></div>
   </div>
   <div class="exchanges_list" *ngIf="show_current_exchanges">
-    <div class="exchange" *ngFor="let e of exchanges_active">
-      <div class="line1">
-        <div class="get">{{e.card1?.name}}</div>
-        <div class="give">{{e.card2?.name}}</div>
-      </div>
-      <div class="line2">
-        <div class="serial_number" id="sn_get">{{e.card1?.serialNumber}}</div>
-        <div class="icon_exch"><mat-icon id="exch_icon">compare_arrows</mat-icon></div>
-        <div class="serial_number" id="sn_give">{{e.card2?.serialNumber}}</div>
-      </div>
-      <div class="line3">
+    <div class="exchange" *ngFor="let e of exchanges_active" (click)="displayDetails(e)">
+      <div class="row" id="row1">
+        <div class="card" id="cardGet">
+          <div class="Name">{{e.card1?.name}}</div>
+          <div class="serial_number" id="sn_get">{{e.card1?.serialNumber}}</div>
           <div class="card_collection"><img class="img_collection" src={{e.card1?.collection_img}}></div>
-          <div class="rarity_value"><p [innerHTML]="e.card1?.rarity_string" id="rarity"></p></div>
+        </div>
+        <div class="exch_icon_container">
+          <div class="icon_exch"><mat-icon id="exch_icon">compare_arrows</mat-icon></div>
+        </div>
+        <div class="card" id="cardGive">
+          <div class="Name">{{e.card2?.name}}</div>
+          <div class="serial_number" id="sn_get">{{e.card2?.serialNumber}}</div>
           <div class="card_collection"><img class="img_collection" src={{e.card2?.collection_img}}></div>
+        </div>
       </div>
-      <div class="line4">
-        <div class="row_container">
+      <div class="row" id="row2">
+        <div class="row_container" id="row2_container">
           <div class="friend_name_icon"><mat-icon>person_outline</mat-icon></div>
-          <div class="friend_name_text"><span>{{e.user2?.login}}</span></div>
-        </div>
-      </div>
-      <div class="line5">
-        <div class="row_container">
-          <div class="friend_code_icon"><button id="copy_button" mat-icon-button (click)=copyToClipboard(e.user2?.friendCode!)><mat-icon id="copy_icon">content_copy</mat-icon></button></div>
-          <div class="friend_code_text"><span>{{e.user2?.friendCode}}</span></div></div>
-        </div>
-      <div class="line6">
-        <div class="row_container">
-          <button mat-fab class="exch_button" id="confirm_button" (click)="finishExchange(e)"><mat-icon>outlined_flag</mat-icon></button>
-          <button mat-fab class="exch_button" id="cancel_button" (click)="cancelExchange(e)"><mat-icon id="cancel_icon">cancel</mat-icon></button>
+          <div class="friend_name_text"><span>{{e?.user2?.login}}</span></div>
         </div>
       </div>
     </div>
   </div>
+</div>
 
   <hr/>
 
@@ -54,40 +45,31 @@
 <div class="exchanges_list_container" id="new_exchanges">
   <div class="title_list" (click)="click_new_exchanges()">
     <div class="icon_title_list"><mat-icon>fiber_new</mat-icon></div>
-    <div class="text_title_list" matBadge="{{nb_exch_new}}" matBadgeOverlap="false">Nouvelles demandes d'échange</div>
+    <div class="text_title_list" matBadgeColor="accent" matBadge="{{nb_exch_new}}" matBadgeOverlap="false">Nouvelles demandes d'échange</div>
   </div>
   <div class="exchanges_list" *ngIf="show_new_exchanges">
-    <div class="exchange" *ngFor="let e of exchanges_new">
-      <div class="line1">
-        <div class="get">{{e.card2?.name}}</div>
-        <div class="give">{{e.card1?.name}}</div>
+    <div class="exchange" *ngFor="let e of exchanges_new" (click)="displayDetails(e)">
+      <div class="row" id="row1">
+        <div class="card" id="cardGet">
+          <div class="Name">{{e.card2?.name}}</div>
+          <div class="serial_number" id="sn_get">{{e.card2?.serialNumber}}</div>
+          <div class="card_collection"><img class="img_collection" src={{e.card2?.collection_img}}></div>
+        </div>
+        <div class="exch_icon_container">
+          <div class="icon_exch"><mat-icon id="exch_icon">compare_arrows</mat-icon></div>
+        </div>
+        <div class="card" id="cardGive">
+          <div class="Name">{{e.card1?.name}}</div>
+          <div class="serial_number" id="sn_get">{{e.card1?.serialNumber}}</div>
+          <div class="card_collection"><img class="img_collection" src={{e.card1?.collection_img}}></div>
+        </div>
       </div>
-      <div class="line2">
-        <div class="serial_number" id="sn_get">{{e.card2?.serialNumber}}</div>
-        <div class="icon_exch"><mat-icon id="exch_icon">compare_arrows</mat-icon></div>
-        <div class="serial_number" id="sn_give">{{e.card1?.serialNumber}}</div>
-      </div>
-      <div class="line3">
-        <div class="card_collection"><img class="img_collection" src={{e.card2?.collection_img}}></div>
-        <div class="rarity_value"><p [innerHTML]="e.card1?.rarity_string" id="rarity"></p></div>
-        <div class="card_collection"><img class="img_collection" src={{e.card1?.collection_img}}></div>
-      </div>
-      <div class="line4">
-        <div class="row_container">
+      <div class="row" id="row2">
+        <div class="row_container" id="row2_container">
           <div class="friend_name_icon"><mat-icon>person_outline</mat-icon></div>
-          <div class="friend_name_text"><span>{{e.user1?.login}}</span></div>
+          <div class="friend_name_text"><span>{{e?.user1?.login}}</span></div>
         </div>
       </div>
-      <div class="line5">
-        <div class="row_container">
-          <div class="friend_code_icon"><button id="copy_button" mat-icon-button (click)=copyToClipboard(e.user1?.friendCode!)><mat-icon id="copy_icon">content_copy</mat-icon></button></div>
-          <div class="friend_code_text"><span>{{e.user1?.friendCode}}</span></div></div>
-        </div>
-        <div class="line6">
-          <div class="row_container">
-            <button mat-fab class="exch_button" id="confirm_button" (click)="confirmExchange(e)"><mat-icon>check_circle</mat-icon></button>
-            <button mat-fab class="exch_button" id="cancel_button" (click)="cancelExchange(e)"><mat-icon id="cancel_icon">cancel</mat-icon></button>
-          </div>
       </div>
     </div>
   </div>
@@ -100,39 +82,30 @@
       <div class="text_title_list" matBadge="{{nb_exch_val}}" matBadgeOverlap="false">Demandes en attente de validation</div>
     </div>
     <div class="exchanges_list" *ngIf="show_val_exchanges">
-      <div class="exchange" *ngFor="let e of exchanges_validation">
-        <div class="line1">
-          <div class="get">{{e.card1?.name}}</div>
-          <div class="give">{{e.card2?.name}}</div>
-        </div>
-        <div class="line2">
-          <div class="serial_number" id="sn_get">{{e.card1?.serialNumber}}</div>
-          <div class="icon_exch"><mat-icon id="exch_icon">compare_arrows</mat-icon></div>
-          <div class="serial_number" id="sn_give">{{e.card2?.serialNumber}}</div>
-        </div>
-        <div class="line3">
-          <div class="card_collection"><img class="img_collection" src={{e.card1?.collection_img}}></div>
-          <div class="rarity_value"><p [innerHTML]="e.card1?.rarity_string" id="rarity"></p></div>
-          <div class="card_collection"><img class="img_collection" src={{e.card2?.collection_img}}></div>
-      </div>
-      <div class="line4">
-        <div class="row_container">
-          <div class="friend_name_icon"><mat-icon>person_outline</mat-icon></div>
-          <div class="friend_name_text"><span>{{e.user2?.login}}</span></div>
-        </div>
-      </div>
-      <div class="line5">
-        <div class="row_container">
-          <div class="friend_code_icon"><button id="copy_button" mat-icon-button (click)=copyToClipboard(e.user2?.friendCode!)><mat-icon id="copy_icon">content_copy</mat-icon></button></div>
-          <div class="friend_code_text"><span>{{e.user2?.friendCode}}</span></div></div>
-        </div>
-        <div class="line6">
-          <div class="row_container">
-            <button mat-fab class="exch_button" id="cancel_button" (click)="cancelExchange(e)"><mat-icon id="cancel_icon">cancel</mat-icon></button>
+      <div class="exchange" *ngFor="let e of exchanges_validation" (click)="displayDetails(e)">
+        <div class="row" id="row1">
+          <div class="card" id="cardGet">
+            <div class="Name">{{e.card1?.name}}</div>
+            <div class="serial_number" id="sn_get">{{e.card1?.serialNumber}}</div>
+            <div class="card_collection"><img class="img_collection" src={{e.card1?.collection_img}}></div>
+          </div>
+          <div class="exch_icon_container">
+            <div class="icon_exch"><mat-icon id="exch_icon">compare_arrows</mat-icon></div>
+          </div>
+          <div class="card" id="cardGive">
+            <div class="Name">{{e.card2?.name}}</div>
+            <div class="serial_number" id="sn_get">{{e.card2?.serialNumber}}</div>
+            <div class="card_collection"><img class="img_collection" src={{e.card2?.collection_img}}></div>
           </div>
         </div>
+        <div class="row" id="row2">
+          <div class="row_container" id="row2_container">
+            <div class="friend_name_icon"><mat-icon>person_outline</mat-icon></div>
+            <div class="friend_name_text"><span>{{e?.user2?.login}}</span></div>
+          </div>
+        </div>
+        </div>
       </div>
-    </div>
 </div>
 
 <hr/>
@@ -143,26 +116,28 @@
     <div class="text_title_list" matBadge="{{nb_exch_old}}" matBadgeOverlap="false">Échanges terminés</div>
   </div>
   <div class="exchanges_list" *ngIf="show_old_exchanges">
-    <div class="exchange" *ngFor="let e of exchanges_old">
-      <div class="line1">
-        <div class="get">{{e.card1?.name}}</div>
-        <div class="give">{{e.card2?.name}}</div>
-      </div>
-      <div class="line2">
-        <div class="serial_number" id="sn_get">{{e.card1?.serialNumber}}</div>
-        <div class="icon_exch"><mat-icon id="exch_icon">compare_arrows</mat-icon></div>
-        <div class="serial_number" id="sn_give">{{e.card2?.serialNumber}}</div>
-      </div>
-      <div class="line3">
-        <div class="card_collection"><img class="img_collection" src={{e.card1?.collection_img}}></div>
-        <div class="rarity_value"><p [innerHTML]="e.card1?.rarity_string" id="rarity"></p></div>
-        <div class="card_collection"><img class="img_collection" src={{e.card2?.collection_img}}></div>
-    </div>
-      <div class="line4">
-        <div class="row_container">
-          <div class="friend_name_icon"><mat-icon>person_outline</mat-icon></div>
-          <div class="friend_name_text"><span>{{e.user2?.login}}</span></div>
+    <div class="exchange" *ngFor="let e of exchanges_old" (click)="displayDetails(e)">
+      <div class="row" id="row1">
+        <div class="card" id="cardGet">
+          <div class="Name">{{e.card1?.name}}</div>
+          <div class="serial_number" id="sn_get">{{e.card1?.serialNumber}}</div>
+          <div class="card_collection"><img class="img_collection" src={{e.card1?.collection_img}}></div>
         </div>
+        <div class="exch_icon_container">
+          <div class="icon_exch"><mat-icon id="exch_icon">compare_arrows</mat-icon></div>
+        </div>
+        <div class="card" id="cardGive">
+          <div class="Name">{{e.card2?.name}}</div>
+          <div class="serial_number" id="sn_get">{{e.card2?.serialNumber}}</div>
+          <div class="card_collection"><img class="img_collection" src={{e.card2?.collection_img}}></div>
+        </div>
+      </div>
+      <div class="row" id="row2">
+        <div class="row_container" id="row2_container">
+          <div class="friend_name_icon"><mat-icon>person_outline</mat-icon></div>
+          <div class="friend_name_text"><span>{{e?.user2?.login}}</span></div>
+        </div>
+      </div>
       </div>
     </div>
   </div>
@@ -175,26 +150,28 @@
       <div class="text_title_list" matBadge="{{nb_exch_cancel}}" matBadgeOverlap="false">Échanges annulés</div>
     </div>
     <div class="exchanges_list" *ngIf="show_cancel_exchanges">
-      <div class="exchange" *ngFor="let e of exchanges_cancel">
-        <div class="line1">
-          <div class="get">{{e.card1?.name}}</div>
-          <div class="give">{{e.card2?.name}}</div>
-        </div>
-        <div class="line2">
-          <div class="serial_number" id="sn_get">{{e.card1?.serialNumber}}</div>
-          <div class="icon_exch"><mat-icon id="exch_icon">compare_arrows</mat-icon></div>
-          <div class="serial_number" id="sn_give">{{e.card2?.serialNumber}}</div>
-        </div>
-        <div class="line3">
-          <div class="card_collection"><img class="img_collection" src={{e.card1?.collection_img}}></div>
-          <div class="rarity_value"><p [innerHTML]="e.card1?.rarity_string" id="rarity"></p></div>
-          <div class="card_collection"><img class="img_collection" src={{e.card2?.collection_img}}></div>
-      </div>
-        <div class="line4">
-          <div class="row_container">
-            <div class="friend_name_icon"><mat-icon>person_outline</mat-icon></div>
-            <div class="friend_name_text"><span>{{e.user2?.login}}</span></div>
+      <div class="exchange" *ngFor="let e of exchanges_cancel" (click)="displayDetails(e)">
+        <div class="row" id="row1">
+          <div class="card" id="cardGet">
+            <div class="Name">{{e.card1?.name}}</div>
+            <div class="serial_number" id="sn_get">{{e.card1?.serialNumber}}</div>
+            <div class="card_collection"><img class="img_collection" src={{e.card1?.collection_img}}></div>
           </div>
+          <div class="exch_icon_container">
+            <div class="icon_exch"><mat-icon id="exch_icon">compare_arrows</mat-icon></div>
+          </div>
+          <div class="card" id="cardGive">
+            <div class="Name">{{e.card2?.name}}</div>
+            <div class="serial_number" id="sn_get">{{e.card2?.serialNumber}}</div>
+            <div class="card_collection"><img class="img_collection" src={{e.card2?.collection_img}}></div>
+          </div>
+        </div>
+        <div class="row" id="row2">
+          <div class="row_container" id="row2_container">
+            <div class="friend_name_icon"><mat-icon>person_outline</mat-icon></div>
+            <div class="friend_name_text"><span>{{e?.user2?.login}}</span></div>
+          </div>
+        </div>
         </div>
       </div>
     </div>

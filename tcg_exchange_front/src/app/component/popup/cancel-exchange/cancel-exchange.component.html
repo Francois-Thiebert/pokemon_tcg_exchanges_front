@@ -1,10 +1,31 @@
-<div class="container">
-  <br>
-  <div id="message">Es-tu sûr de vouloir annuler cet échange ?</div>
-  <br>
+<body>
 
-  <div id="button_container">
-    <button mat-button (click)="onClick()" id="agree_button">oui</button>
-    <button mat-button (click)="cancel()" id="cancel_button">non</button>
+  <div class="container">
+    <br>
+    <div id="message">Pour quelle raison souhaites-tu annuler cet échange ?</div>
+
+    <br>
+
+    <div class="select">
+      <mat-form-field class="inputs" (change)="selectCause()">
+        <mat-label>Cause</mat-label>
+        <select matNativeControl [(ngModel)]="cause">
+          <option value=NotSearched>Je ne recherche pas cette carte</option>
+          <option value=NotToGive>Je ne donne pas cette carte</option>
+          <option value=UserToManyExchanges>J'ai fait beaucoup d'échanges avec cet utilisateur</option>
+          <option value=UserNotTrust>L'autre utilisateur semble inactif</option>
+          <option value=Other>Autre</option>
+        </select>
+      </mat-form-field>
+    </div>
+
+    <br>
+
+    <div id="button_container">
+      <button mat-button (click)="onClick()"
+      [disabled]="!selected" [ngClass]="{'agree_button': selected}">annuler l'échange</button>
+      <button mat-button (click)="cancel()" id="cancel_button">retour</button>
+    </div>
   </div>
-</div>
+
+</body>

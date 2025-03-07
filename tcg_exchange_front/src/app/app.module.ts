@@ -45,12 +45,13 @@ import { CancelExchangeComponent } from './component/popup/cancel-exchange/cance
 import { ValidationExchangeComponent } from './component/popup/validation-exchange/validation-exchange.component';
 import { FinishExchangeComponent } from './component/popup/finish-exchange/finish-exchange.component';
 import { CancelExchangeValidationComponent } from './component/popup/cancel-exchange-validation/cancel-exchange-validation.component';
+import { ExchangeDetailsComponent } from './component/cards/exchange/exchange-details/exchange-details.component';
 
 
 
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, ConnectionComponent, SigninComponent, WishCardsComponent, WelcomeComponent, NavBarComponent, MajWishListComponent, ToGiveCardsComponent, ExchangeComponent, RatioComponent, ExchangePoposalComponent, NewExchangeConfirmComponent, NewExchangeValidationComponent, CancelExchangeComponent, ValidationExchangeComponent, FinishExchangeComponent, CancelExchangeValidationComponent,],
+  declarations: [AppComponent, HomeComponent, ConnectionComponent, SigninComponent, WishCardsComponent, WelcomeComponent, NavBarComponent, MajWishListComponent, ToGiveCardsComponent, ExchangeComponent, RatioComponent, ExchangePoposalComponent, NewExchangeConfirmComponent, NewExchangeValidationComponent, CancelExchangeComponent, ValidationExchangeComponent, FinishExchangeComponent, CancelExchangeValidationComponent, ExchangeDetailsComponent,],
   imports: [
     AppRoutingModule,
     BrowserModule,

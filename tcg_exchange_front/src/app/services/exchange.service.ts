@@ -4,6 +4,8 @@ import { ObjectToJsonService } from './object-to-json.service';
 import { Observable } from 'rxjs';
 import { Exchange } from '../model/exchange';
 import { exchangeRest } from '../env';
+import { Card } from '../model/card';
+import { Cause } from '../model/cause';
 
 @Injectable({
   providedIn: 'root'
@@ -31,9 +33,9 @@ export class ExchangeService {
         return this.http.delete<void>(`${exchangeRest}/${id}`);
       }
 
-      public cancel(exchange: Exchange): Observable<Exchange> {
+      public cancel(exchange: Exchange, userId: number, cause: Cause): Observable<Exchange> {
         return this.http.put<Exchange>(
-          `${exchangeRest}/cancel/${exchange.id}`,
+          `${exchangeRest}/cancel/${exchange.id}/${userId}/${cause}`,
           this.convert.exchangeToJson(exchange)
         );
       }
@@ -50,5 +52,24 @@ export class ExchangeService {
           exchangeRest,
           this.convert.exchangeToJson(exchange)
         );
+      }
+
+      public getCollectionImgByCard(card: Card){
+        if (card.collection === 0) {
+          card.collection_img = "assets/images/puissance-genetique.png";
+        } else if (card.collection === 1) {
+          card.collection_img = "assets/images/ile-fabuleuse.png";
+        } else if (card.collection === 2) {
+          card.collection_img = "assets/images/choc-spatio-temporel.png";
+        } else if (card.collection === 3) {
+          card.collection_img = "assets/images/lumiere-triomphale.png";
+        }else {
+          card.collection_img = undefined;
+        }
+      }
+
+      getCollectionImgByExchange(exchange: Exchange){
+          this.getCollectionImgByCard(exchange.card1!);
+          this.getCollectionImgByCard(exchange.card2!);
       }
 }
