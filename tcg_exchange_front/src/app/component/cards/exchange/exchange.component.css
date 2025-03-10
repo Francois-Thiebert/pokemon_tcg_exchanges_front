@@ -3,9 +3,14 @@
   padding: 10px 20px;
 }
 
-#first_row{
+#button_container{
   flex-direction: column;
   color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-right: 40px;
 }
 
 .title_list{
@@ -88,17 +93,6 @@
   width: 100%;
 }
 
-.button_container{
-  align-items: end;
-}
-
-.row_container{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
 .friend_name_icon, .friend_name_text, .friend_code_icon{
   display: flex;
   align-items: center;
@@ -155,6 +149,25 @@
 
 #row2_container{
   margin-bottom: 5px;
+}
+
+#info_button {
+  color: #1f618d;
+  flex-shrink: 0;
+}
+
+#info {
+  display: flex;
+  justify-content: flex-start;
+}
+
+#header{
+  height: 8%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
 }
 
 @media screen and (max-width: 768px) {

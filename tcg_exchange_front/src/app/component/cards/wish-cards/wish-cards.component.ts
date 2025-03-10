@@ -8,6 +8,8 @@ import { CardService } from 'src/app/services/card.service';
 import { IntercompoService } from 'src/app/services/intercompo.service';
 import { UserService } from 'src/app/services/user.service';
 import { MajWishListComponent } from '../../popup/maj-wish-list/maj-wish-list.component';
+import { HelpToGiveComponent } from '../../popup/help-to-give/help-to-give.component';
+import { HelpWishComponent } from '../../popup/help-wish/help-wish.component';
 
 // interface CardExtended extends Card {
 // rarity_string?: string;
@@ -37,6 +39,7 @@ export class WishCardsComponent implements OnInit{
   filterType?: any;
   filterRarity?: any;
   filterCollection?: any;
+  filterSelected?: any;
 
 
   constructor(
@@ -76,6 +79,13 @@ export class WishCardsComponent implements OnInit{
     if (this.filterCollection != null && this.filterCollection != "*") {
       cards = cards.filter(c => c.collection == this.filterCollection);
     }
+    if (this.filterSelected !== null && this.filterSelected !== "*") {
+      if (this.filterSelected === 'true') {
+        cards = cards.filter(c => this.wish_cards_new.includes(c));
+      } else {
+        cards = cards.filter(c => !this.wish_cards_new.includes(c));
+      }
+    }
     return cards;
   }
 
@@ -107,27 +117,6 @@ export class WishCardsComponent implements OnInit{
       collectionNumberInit--;
     }
   }
-
-
-  // getCardRarityString(cards: CardExtended[]) {
-  //   for (let c of cards!){
-  //     if(c.rarity==0){
-  //       c.rarity_string='&#9826;'
-  //     }
-  //     else if(c.rarity==1){
-  //       c.rarity_string='&#9826;&#9826;'
-  //     }
-  //     else if(c.rarity==2){
-  //       c.rarity_string='&#9826;&#9826;&#9826;'
-  //     }
-  //     else if(c.rarity==3){
-  //       c.rarity_string='&#9826;&#9826;&#9826;&#9826;'
-  //     }
-  //     else if(c.rarity==4){
-  //       c.rarity_string='&#9733;'
-  //     }
-  //     };
-  //   }
 
     getWishedCards(){
       for (let c of this.card_list!) {
@@ -180,9 +169,10 @@ export class WishCardsComponent implements OnInit{
 
     filterSelect() {
       this.card_list_display = this.filterCard(this.card_list!);
-      console.log("rareté: ", this.filterCollection)
-      console.log(this.card_list_display?.length)
-      console.log(this.card_list_display)
     }
+
+    help(){
+        this.dialog.open(HelpWishComponent, {width:'80%', height:'30%'})
+      }
 
 }

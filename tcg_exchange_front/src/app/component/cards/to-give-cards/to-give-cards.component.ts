@@ -6,6 +6,7 @@ import { CardService } from 'src/app/services/card.service';
 import { IntercompoService } from 'src/app/services/intercompo.service';
 import { UserService } from 'src/app/services/user.service';
 import { MajWishListComponent } from '../../popup/maj-wish-list/maj-wish-list.component';
+import { HelpToGiveComponent } from '../../popup/help-to-give/help-to-give.component';
 
 // interface CardExtended extends Card {
 // rarity_string?: string;
@@ -38,6 +39,7 @@ export class ToGiveCardsComponent implements OnInit{
   filterType?: any;
   filterRarity?: any;
   filterCollection?: any;
+  filterSelected?: any;
 
   constructor(
       private userSrv: UserService,
@@ -75,6 +77,13 @@ export class ToGiveCardsComponent implements OnInit{
       }
       if (this.filterCollection != null && this.filterCollection != "*") {
         cards = cards.filter(c => c.collection == this.filterCollection);
+      }
+      if (this.filterSelected !== null && this.filterSelected !== "*") {
+        if (this.filterSelected === 'true') {
+          cards = cards.filter(c => this.give_cards_new.includes(c));
+        } else {
+          cards = cards.filter(c => !this.give_cards_new.includes(c));
+        }
       }
       return cards;
     }
@@ -153,26 +162,6 @@ export class ToGiveCardsComponent implements OnInit{
       }
     }
 
-    // getCardRarityString(cards: CardExtended[]) {
-    //   for (let c of cards!){
-    //     if(c.rarity==0){
-    //       c.rarity_string='&#9826;'
-    //     }
-    //     else if(c.rarity==1){
-    //       c.rarity_string='&#9826;&#9826;'
-    //     }
-    //     else if(c.rarity==2){
-    //       c.rarity_string='&#9826;&#9826;&#9826;'
-    //     }
-    //     else if(c.rarity==3){
-    //       c.rarity_string='&#9826;&#9826;&#9826;&#9826;'
-    //     }
-    //     else if(c.rarity==4){
-    //       c.rarity_string='&#9733;'
-    //     }
-    //     };
-    //   }
-
     getColumnNumber(){
       this.screenWidth = window.innerWidth;
       console.log("screen width: ", this.screenWidth)
@@ -197,5 +186,9 @@ export class ToGiveCardsComponent implements OnInit{
       console.log(this.card_list_display?.length)
       console.log(this.card_list_display)
     }
+
+  help(){
+    this.dialog.open(HelpToGiveComponent, {width:'80%', height:'35%'})
+  }
 
 }

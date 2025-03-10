@@ -24,6 +24,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatDialogModule,MatDialogRef} from '@angular/material/dialog';
 import {MatBadgeModule} from '@angular/material/badge';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 
 import { ConnectionComponent } from './component/log/connection/connection.component';
 import { SigninComponent } from './component/log/signin/signin.component';
@@ -46,12 +47,15 @@ import { ValidationExchangeComponent } from './component/popup/validation-exchan
 import { FinishExchangeComponent } from './component/popup/finish-exchange/finish-exchange.component';
 import { CancelExchangeValidationComponent } from './component/popup/cancel-exchange-validation/cancel-exchange-validation.component';
 import { ExchangeDetailsComponent } from './component/cards/exchange/exchange-details/exchange-details.component';
+import { HelpToGiveComponent } from './component/popup/help-to-give/help-to-give.component';
+import { HelpWishComponent } from './component/popup/help-wish/help-wish.component';
+import { HelpExchangeComponent } from './component/popup/help-exchange/help-exchange.component';
 
 
 
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, ConnectionComponent, SigninComponent, WishCardsComponent, WelcomeComponent, NavBarComponent, MajWishListComponent, ToGiveCardsComponent, ExchangeComponent, RatioComponent, ExchangePoposalComponent, NewExchangeConfirmComponent, NewExchangeValidationComponent, CancelExchangeComponent, ValidationExchangeComponent, FinishExchangeComponent, CancelExchangeValidationComponent, ExchangeDetailsComponent,],
+  declarations: [AppComponent, HomeComponent, ConnectionComponent, SigninComponent, WishCardsComponent, WelcomeComponent, NavBarComponent, MajWishListComponent, ToGiveCardsComponent, ExchangeComponent, RatioComponent, ExchangePoposalComponent, NewExchangeConfirmComponent, NewExchangeValidationComponent, CancelExchangeComponent, ValidationExchangeComponent, FinishExchangeComponent, CancelExchangeValidationComponent, ExchangeDetailsComponent, HelpToGiveComponent, HelpWishComponent, HelpExchangeComponent,],
   imports: [
     AppRoutingModule,
     BrowserModule,
@@ -76,6 +80,7 @@ import { ExchangeDetailsComponent } from './component/cards/exchange/exchange-de
     FlexLayoutModule,
     MatGridListModule,
     MatBadgeModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -1,8 +1,15 @@
-<header>
+<div id="filters">
   <mat-grid-list cols="4" rowHeight="100px" class="fixed-header">
-    <button mat-fab extended (click)="updateGiveList()" [disabled]="!update" id="addButton">
-      <mat-icon>done</mat-icon> Mettre à jour
-    </button>
+
+    <mat-form-field class="inputs" (change)="filterSelect()">
+      <mat-label>Voir</mat-label>
+      <select matNativeControl [(ngModel)]="filterSelected">
+        <option value='*'>Tout</option>
+        <option value=true>Cartes sélectionnées</option>
+        <option value=false>Cartes non-sélectionnées</option>
+      </select>
+    </mat-form-field>
+
     <mat-form-field class="inputs" (change)="filterSelect()">
       <mat-label>Type</mat-label>
       <select matNativeControl [(ngModel)]="filterType">
@@ -43,17 +50,37 @@
         <option value="2">Choc Spatio-Temporel</option>
       </select>
     </mat-form-field>
+
   </mat-grid-list>
-</header>
+</div>
+
+<div id="row2">
+  <div id="update_button">
+    <button mat-fab extended (click)="updateGiveList()" [disabled]="!update" id="addButton">
+      <mat-icon>done</mat-icon> Mettre à jour
+    </button>
+  </div>
+  <div id="info">
+    <button id="info_button" mat-icon-button (click)="help()"><mat-icon>live_help</mat-icon></button>
+  </div>
+</div>
 
 
-
-<mat-grid-list cols="{{column_number}}" rowHeight="2:1">
-    <mat-grid-tile *ngFor="let c of card_list_display" class="{{c.type}}" (click)="selectCard(c)" [ngClass]="{'selected-card': give_cards_new.includes(c)}">
-      <div class="tile-content">
-        <div class="name">{{c.name}}</div>
-        <div class="serial_number">{{c.serialNumber}}</div>
-        <p [innerHTML]="c.rarity_string" class="{{c.rarity_string}}"></p>
-      </div>
-    </mat-grid-tile>
-  </mat-grid-list>
+<div id="card_list">
+  <mat-grid-list cols="{{column_number}}" rowHeight="2:1">
+      <mat-grid-tile *ngFor="let c of card_list_display" class="{{c.type}}" (click)="selectCard(c)" [ngClass]="{'selected-card': give_cards_new.includes(c)}">
+        <div class="tile-content">
+          <div class="name">{{c.name}}</div>
+          <div class="serial_number">{{c.serialNumber}}</div>
+          <div class="row3">
+            <div [ngClass]="{'selected-card-rarity': give_cards_new.includes(c)}">
+              <p [innerHTML]="c.rarity_string" class="{{c.rarity_string}}"></p>
+            </div>
+            <div id="check">
+              <p *ngIf="give_cards_new.includes(c)"><mat-icon>check</mat-icon></p>
+            </div>
+          </div>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+</div>

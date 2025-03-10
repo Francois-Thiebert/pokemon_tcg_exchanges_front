@@ -42,6 +42,10 @@ h3{
   background-color: #922b21;
 }
 
+p{
+  margin: 0 !important
+}
+
 .page-content {
   margin: auto;
   width: 100%;
@@ -49,3 +53,6 @@ h3{
   min-height: 450px;
 
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

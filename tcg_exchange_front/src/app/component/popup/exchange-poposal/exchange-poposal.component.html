@@ -1,31 +1,3 @@
-<!-- <mat-grid-list cols="1" rowHeight="{{rowHeight}}">
-  <mat-grid-tile *ngFor="let e of exchanges" class="proposal">
-    <div class="tile-content">
-      <div class="line1">
-        <div class="getCard">
-          <p>obtenir</p>
-          <h2>{{e.card1?.name}}</h2>
-          <p>{{e.card1?.serialNumber}}</p>
-        </div>
-
-        <mat-icon class="arrow-icon">compare_arrows</mat-icon>
-
-        <div class="giveCard">
-          <p>contre</p>
-          <h2>{{e.card2?.name}}</h2>
-          <p>{{e.card2?.serialNumber}}</p>
-        </div>
-      </div>
-
-      <button mat-fab extended id="choose" (click)="chooseExchange(e)">
-        <mat-icon>check_circle</mat-icon>
-        Choisir
-      </button>
-    </div>
-  </mat-grid-tile>
-  <br>
-</mat-grid-list> -->
-
 <div class="exchanges_list">
   <div class="exchange" *ngFor="let e of exchanges">
     <div class="row" id="row0">
@@ -59,4 +31,13 @@
       </button>
     </div>
   </div>
+</div>
+
+<div *ngIf="noResult" id="no_exchange" inert>
+  <div id="title"> <mat-icon>mood_bad</mat-icon> <br/> Aucun échange n'a été trouvé</div>
+  <div>Vérifie que tes listes de cartes recherchées et cartes à céder sont à jours et réessaie un peu plus tard</div>
+</div>
+
+<div *ngIf="isLoading" class="loading-container">
+  <mat-spinner></mat-spinner>
 </div>

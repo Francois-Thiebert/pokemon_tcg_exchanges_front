@@ -39,13 +39,14 @@
   border: 1px solid #1a5276;
 }
 .inputs{
-  width: 26%;
+  width: 25%;
 }
 #addButton{
   width: 20%;
   border-radius: 5px;
   background-color: #1e8449;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 41%;
 }
 
 mat-grid-tile {
@@ -73,6 +74,7 @@ mat-grid-tile {
   align-items: center;
   text-align: center;
   height: 100%;
+  width: 100%;
 }
 
 .serial_number{
@@ -86,10 +88,94 @@ mat-grid-tile {
   padding: 0;
 }
 
+.row3 {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.selected-card-rarity {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.selected-card-rarity p {
+  width: 50%;
+  margin-left: 33% !important;
+}
+
+#check {
+  flex-shrink: 0;
+}
+
+#check mat-icon {
+  font-size: 1rem;
+  color: #28b463;
+}
+
+.row3 div:not(#check) {
+  text-align: center;
+  flex-grow: 1;
+}
+
+#card_list{
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+#filters {
+  height: 8%;
+  width: 100%;
+}
+#row2 {
+  height: 8%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between; /* Garde cela pour espacer les éléments */
+}
+
+#info_button {
+  color: #1f618d;
+  flex-shrink: 0;
+}
+
+#info {
+  width: 20%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#update_button {
+  width: 80%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+#field_selected {
+  width: 25%;
+  height: 10%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-end;
+}
+
+
+
+
 @media (max-width: 768px) {
 
   .name{
     padding-top: 2px;
+  }
+
+  .selected-card-rarity p{
+    width: 50%;
+    margin-left: 37% !important;
+    margin-bottom: 10px !important;
   }
 
 }
