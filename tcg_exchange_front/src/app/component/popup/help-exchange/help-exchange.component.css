@@ -1,0 +1,25 @@
+mat-icon {
+  font-size: 1rem;
+  color: #28b463;
+}
+
+div{
+  color: #1f618d;
+  margin: 7px;
+}
+
+#div1{
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+#content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+hr{
+  color: black;
+}

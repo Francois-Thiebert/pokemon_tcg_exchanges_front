@@ -1,8 +1,13 @@
-<div class="row_container" id="first_row">
-  <button mat-fab extended (click)="findExchange()" id="findMatch" [disabled]="isNewDemand">
-    <mat-icon>search</mat-icon>Trouver un échange
-  </button>
-  <span *ngIf="isNewDemand">vous avez des demandes d'échanges à traiter</span>
+<div id="header">
+  <div id="info">
+    <button id="info_button" mat-icon-button (click)="help()"><mat-icon>live_help</mat-icon></button>
+  </div>
+  <div id="button_container">
+    <button mat-fab extended (click)="findExchange()" id="findMatch" [disabled]="isNewDemand">
+      <mat-icon>search</mat-icon>Trouver un échange
+    </button>
+    <span *ngIf="isNewDemand">vous avez des demandes d'échanges à traiter</span>
+  </div>
 </div>
 <hr/>
 

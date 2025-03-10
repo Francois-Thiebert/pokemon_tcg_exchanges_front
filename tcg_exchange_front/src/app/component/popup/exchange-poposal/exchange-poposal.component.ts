@@ -27,6 +27,8 @@ export class ExchangePoposalComponent implements OnInit{
   rowHeight?: any;
   screenWidth?: number;
   isAdmin?: boolean = false;
+  noResult?: boolean = false;
+  isLoading?: boolean = true;
 
   constructor(
     private userSrv: UserService,
@@ -46,6 +48,10 @@ export class ExchangePoposalComponent implements OnInit{
           this.exchanges = newExchanges;
           this.proposals_number = this.exchanges?.length;
           this.getCollectionImgExchanges();
+          if(this.proposals_number < 1){
+            this.noResult = true;
+          }
+          this.isLoading = false;
         });
     });
   }

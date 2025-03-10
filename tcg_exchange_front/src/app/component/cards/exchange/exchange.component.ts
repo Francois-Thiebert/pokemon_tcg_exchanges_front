@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Card } from 'src/app/model/card';
 import { Exchange } from 'src/app/model/exchange';
 import { User } from 'src/app/model/user';
 import { CardService } from 'src/app/services/card.service';
@@ -8,11 +7,11 @@ import { ExchangeService } from 'src/app/services/exchange.service';
 import { IntercompoService } from 'src/app/services/intercompo.service';
 import { UserService } from 'src/app/services/user.service';
 import { ExchangePoposalComponent } from '../../popup/exchange-poposal/exchange-poposal.component';
-import { State } from 'src/app/model/state';
 import { CancelExchangeComponent } from '../../popup/cancel-exchange/cancel-exchange.component';
 import { ValidationExchangeComponent } from '../../popup/validation-exchange/validation-exchange.component';
 import { FinishExchangeComponent } from '../../popup/finish-exchange/finish-exchange.component';
 import { ExchangeDetailsComponent } from './exchange-details/exchange-details.component';
+import { HelpExchangeComponent } from '../../popup/help-exchange/help-exchange.component';
 
 @Component({
   selector: 'app-exchange',
@@ -253,6 +252,10 @@ copyToClipboard(friendCode: String): void {
     });
   }
 }
+
+help(){
+    this.dialog.open(HelpExchangeComponent, {width:'80%', height:'50%'})
+  }
 
 
 }

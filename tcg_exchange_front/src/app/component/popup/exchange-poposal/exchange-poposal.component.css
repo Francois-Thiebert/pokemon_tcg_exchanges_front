@@ -165,3 +165,27 @@ button#choose {
   height: 40px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
 }
+
+#no_exchange{
+  color: #1f618d;
+  margin-top : 30px;
+  padding: 20px;
+  font-size: 0.7rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#title{
+  font-size: 1.3rem;
+  margin-top: 50px !important;
+  margin-bottom: 40px !important;
+  font-weight: bold;
+}
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Centrer le spinner dans la page */
+}
