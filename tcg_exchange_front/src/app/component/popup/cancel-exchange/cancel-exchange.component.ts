@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ExchangeService } from 'src/app/services/exchange.service';
 import { NewExchangeConfirmComponent } from '../new-exchange-confirm/new-exchange-confirm.component';
@@ -12,10 +12,12 @@ import { Cause } from 'src/app/model/cause';
   templateUrl: './cancel-exchange.component.html',
   styleUrls: ['./cancel-exchange.component.css']
 })
-export class CancelExchangeComponent {
+export class CancelExchangeComponent implements OnInit{
 
   cause?: Cause;
   selected?: boolean = false;
+  isDemand?: boolean = false;
+  userid: number = JSON.parse(sessionStorage.getItem('user')!)?.id;
 
   constructor(
       private exchangeSrv: ExchangeService,
@@ -24,7 +26,12 @@ export class CancelExchangeComponent {
       @Inject(MAT_DIALOG_DATA) public exchange: Exchange
       ) { }
 
-      userid: number = JSON.parse(sessionStorage.getItem('user')!)?.id;
+  ngOnInit(): void {
+    if (this.exchange.state === State.ASKED && this.exchange.user2?.id === this.userid){
+      this.isDemand=true;
+    }
+  }
+
 
       onClick(){
         this.exchangeSrv.cancel(this.exchange, this.userid, this.cause!).subscribe((exch_update) => {

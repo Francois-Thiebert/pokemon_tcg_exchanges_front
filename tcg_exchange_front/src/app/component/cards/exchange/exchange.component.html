@@ -1,17 +1,21 @@
 <div id="header">
-  <div id="info">
-    <button id="info_button" mat-icon-button (click)="help()"><mat-icon>live_help</mat-icon></button>
+  <div id="header_container">
+    <div id="button_container">
+      <button mat-fab extended (click)="findExchange()" id="findMatch" [disabled]="isNewDemand">
+        <mat-icon>search</mat-icon>Trouver un échange
+      </button>
+    </div>
+    <div id="info">
+      <button id="info_button" mat-icon-button (click)="help()"><mat-icon>live_help</mat-icon></button>
+    </div>
   </div>
-  <div id="button_container">
-    <button mat-fab extended (click)="findExchange()" id="findMatch" [disabled]="isNewDemand">
-      <mat-icon>search</mat-icon>Trouver un échange
-    </button>
-    <span *ngIf="isNewDemand">vous avez des demandes d'échanges à traiter</span>
-  </div>
+  <div id="header_warning">
+    <span *ngIf="isNewDemand">vous avez des demandes d'échanges à traiter</span></div>
 </div>
 <hr/>
 
-<!-- échanges en cours -->
+<div id="all_exchanges_container" *ngIf="!isLoading">
+  <!-- échanges en cours -->
 <div class="exchanges_list_container" id="current_exchanges">
   <div class="title_list" (click)="click_current_exchanges()">
     <div class="icon_title_list"><mat-icon>autorenew</mat-icon></div>
@@ -179,4 +183,9 @@
         </div>
         </div>
       </div>
+    </div>
+</div>
+
+    <div *ngIf="isLoading" class="loading-container">
+      <mat-spinner></mat-spinner>
     </div>

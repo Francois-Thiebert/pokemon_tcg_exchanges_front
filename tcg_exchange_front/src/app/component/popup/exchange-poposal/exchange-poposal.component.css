@@ -187,5 +187,5 @@ button#choose {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Centrer le spinner dans la page */
+  height: 50%;
 }
