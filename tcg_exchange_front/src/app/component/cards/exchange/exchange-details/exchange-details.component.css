@@ -71,6 +71,11 @@ body{
 
 #confirm_button{
   background-color: #27ae60;
+  color: white;
+}
+#cancel_button{
+  background-color: #f76e6e;
+  color: white;
 }
 
 .rarity{
@@ -103,4 +108,3 @@ body{
   } */
 
 }
-

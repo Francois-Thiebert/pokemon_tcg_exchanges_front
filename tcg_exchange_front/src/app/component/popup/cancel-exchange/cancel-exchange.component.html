@@ -13,7 +13,7 @@
           <option value=NotSearched>Je ne recherche pas cette carte</option>
           <option value=NotToGive>Je ne donne pas cette carte</option>
           <option value=UserToManyExchanges>J'ai fait beaucoup d'échanges avec cet utilisateur</option>
-          <option value=UserNotTrust>L'autre utilisateur semble inactif</option>
+          <option *ngIf="!isDemand" value=UserNotTrust>L'autre utilisateur semble inactif</option>
           <option value=Other>Autre</option>
         </select>
       </mat-form-field>

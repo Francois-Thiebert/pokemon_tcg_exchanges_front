@@ -5,12 +5,11 @@
 
 #button_container{
   flex-direction: column;
-  color: red;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-right: 40px;
+  margin-left: 45px;
 }
 
 .title_list{
@@ -162,12 +161,27 @@
 }
 
 #header{
-  height: 8%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
+}
+#header_container{
   display: flex;
   align-items: center;
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
+}
+#header_warning{
+  color: red;
+}
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
 }
 
 @media screen and (max-width: 768px) {

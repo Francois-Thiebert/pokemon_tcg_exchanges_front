@@ -44,6 +44,7 @@ export class ExchangeComponent implements OnInit{
   nb_exch_old?: number;
   nb_exch_cancel?: number;
   isNewDemand?: boolean;
+  isLoading?: boolean = true;
 
   constructor(
     private userSrv: UserService,
@@ -54,6 +55,7 @@ export class ExchangeComponent implements OnInit{
   ){}
 
 ngOnInit(): void {
+  console.log("loading ? "+this.isLoading)
   this.userID = JSON.parse(sessionStorage.getItem('user')!)?.id;
   this.getDisplay();
   this.intercoSrv.setPageTitle('Échanges')
@@ -98,7 +100,6 @@ getExchanges(user: User){
         this.exchangeSrv.getCollectionImgByExchange(exch);
         this.exchanges_validation=this.exchanges_validation?.concat(exch);
         this.nb_exch_val = this.exchanges_validation?.length;
-        console.log("demandes en attente de confirmation: ",this.exchanges_validation);
       });
     }
     if(e.state=='CONFIRMED'){
@@ -106,7 +107,6 @@ getExchanges(user: User){
         this.exchangeSrv.getCollectionImgByExchange(exch);
         this.exchanges_active=this.exchanges_active?.concat(exch);
         this.nb_exch_current=this.exchanges_active?.length;
-        console.log("échanges en confirmés, en tant que demandeur: ",this.exchanges_active);
       });
     }
     if(e.state=='FINISHED'){
@@ -114,7 +114,6 @@ getExchanges(user: User){
         this.exchangeSrv.getCollectionImgByExchange(exch);
         this.exchanges_old=this.exchanges_old?.concat(exch);
         this;this.nb_exch_old = this.exchanges_old?.length;
-        console.log("échanges en effectués, en tant que demandeur: ",this.exchanges_old);
       });
     }
     if(e.state=='CANCELED'){
@@ -122,7 +121,6 @@ getExchanges(user: User){
         this.exchangeSrv.getCollectionImgByExchange(exch);
         this.exchanges_cancel=this.exchanges_cancel?.concat(exch);
         this.nb_exch_cancel = this.exchanges_cancel?.length;
-        console.log("échanges en annulés, en tant que demandeur: ",this.exchanges_cancel);
       });
     }
   }
@@ -135,7 +133,6 @@ getExchanges(user: User){
         if(this.nb_exch_new! > 0){
           this.isNewDemand = true
         }
-        console.log("nouvelles demandes: ",this.exchanges_new);
       });
     }
     if(e.state=='CONFIRMED'){
@@ -151,7 +148,6 @@ getExchanges(user: User){
         this.exchangeSrv.getCollectionImgByExchange(exch);
         this.exchanges_active=this.exchanges_active?.concat(exch);
         this.nb_exch_current = this.exchanges_active?.length;
-        console.log("échanges en confirmés, en tant que accepteur: ",this.exchanges_active);
       });
     }if(e.state=='FINISHED'){
       this.exchangeSrv.getById(e.id!).subscribe((exch: Exchange) => {
@@ -166,7 +162,6 @@ getExchanges(user: User){
         this.exchangeSrv.getCollectionImgByExchange(exch);
         this.exchanges_old=this.exchanges_old?.concat(exch);
         this.nb_exch_old = this.exchanges_old?.length;
-        console.log("échanges en effectués, en tant que accepteur: ",this.exchanges_old);
       });
     }
     if(e.state=='CANCELED'){
@@ -182,7 +177,8 @@ getExchanges(user: User){
         this.exchangeSrv.getCollectionImgByExchange(exch);
         this.exchanges_cancel=this.exchanges_cancel?.concat(exch);
         this.nb_exch_cancel = this.exchanges_cancel?.length;
-        console.log("échanges en annulés, en tant que accepteur: ",this.exchanges_cancel);
+        this.isLoading = false;
+        console.log("loading ? "+this.isLoading)
       });
     }
   }

@@ -1,66 +1,66 @@
 <body>
 
-<div class="container">
+  <div class="container">
 
-  <div class="row" id="row0">
-    <div class="rarity"><p [innerHTML]="exchange?.card1?.rarity_string" id="rarity"></p></div>
+    <div class="row" id="row0">
+      <div class="rarity"><p [innerHTML]="exchange?.card1?.rarity_string" id="rarity"></p></div>
+    </div>
+
+    <div class="row" id="row1" *ngIf="!is_user2">
+      <div class="card" id="cardGet">
+        <div class="Name">{{exchange?.card1?.name}}</div>
+        <div class="serial_number" id="sn_get">{{exchange?.card1?.serialNumber}}</div>
+        <div class="card_collection"><img class="img_collection" src={{exchange?.card1?.collection_img}}></div>
+      </div>
+      <div class="exch_icon_container">
+        <div class="icon_exch"><mat-icon id="exch_icon">compare_arrows</mat-icon></div>
+      </div>
+      <div class="card" id="cardGive">
+        <div class="Name">{{exchange?.card2?.name}}</div>
+        <div class="serial_number" id="sn_get">{{exchange?.card2?.serialNumber}}</div>
+        <div class="card_collection"><img class="img_collection" src={{exchange?.card2?.collection_img}}></div>
+      </div>
+    </div>
+
+    <div class="row" id="row1" *ngIf="is_user2">
+      <div class="card" id="cardGet">
+        <div class="Name">{{exchange?.card2?.name}}</div>
+        <div class="serial_number" id="sn_get">{{exchange?.card2?.serialNumber}}</div>
+        <div class="card_collection"><img class="img_collection" src={{exchange?.card2?.collection_img}}></div>
+      </div>
+      <div class="exch_icon_container">
+        <div class="icon_exch"><mat-icon id="exch_icon">compare_arrows</mat-icon></div>
+      </div>
+      <div class="card" id="cardGive">
+        <div class="Name">{{exchange?.card1?.name}}</div>
+        <div class="serial_number" id="sn_get">{{exchange?.card1?.serialNumber}}</div>
+        <div class="card_collection"><img class="img_collection" src={{exchange?.card1?.collection_img}}></div>
+      </div>
+    </div>
+
+    <div class="row" id="row2">
+      <div class="row_container">
+        <div class="friend_name_icon"><mat-icon>person_outline</mat-icon></div>
+        <div class="friend_name_text" *ngIf="!is_user2"><span>{{exchange?.user2?.login}}</span></div>
+        <div class="friend_name_text" *ngIf="is_user2"><span>{{exchange?.user1?.login}}</span></div>
+      </div>
+    </div>
+
+    <div class="row" id="row3">
+      <div class="friend_code_icon"><button id="copy_button" mat-icon-button (click)=copyToClipboard(exchange?.user2?.friendCode!)><mat-icon id="copy_icon">content_copy</mat-icon></button></div>
+      <div class="friend_code_text" *ngIf="!copy_code && !is_user2"><span>{{exchange?.user2?.friendCode}}</span></div>
+      <div class="friend_code_text" *ngIf="!copy_code && is_user2"><span>{{exchange?.user1?.friendCode}}</span></div>
+      <div class="friend_code_text" *ngIf="copy_code"><span>code copié</span></div>
+    </div>
+
+    <div class="row" id="row4">
+      <div class="row_container">
+        <button mat-button class="exch_button" id="confirm_button" (click)="finishExchange(exchange)" *ngIf="display_button_finish"><mat-icon>outlined_flag</mat-icon>Terminer</button>
+        <button mat-button class="exch_button" id="confirm_button" (click)="confirmExchange(exchange)" *ngIf="display_button_accept"><mat-icon>check_circle</mat-icon>Accepter</button>
+        <button mat-button matButtonColor="accent" class="exch_button" id="cancel_button" (click)="cancelExchange(exchange)" *ngIf="display_button_cancel"><mat-icon id="cancel_icon">cancel</mat-icon>Annuler</button>
+      </div>
+    </div>
+
   </div>
 
-  <div class="row" id="row1" *ngIf="!is_user2">
-    <div class="card" id="cardGet">
-      <div class="Name">{{exchange?.card1?.name}}</div>
-      <div class="serial_number" id="sn_get">{{exchange?.card1?.serialNumber}}</div>
-      <div class="card_collection"><img class="img_collection" src={{exchange?.card1?.collection_img}}></div>
-    </div>
-    <div class="exch_icon_container">
-      <div class="icon_exch"><mat-icon id="exch_icon">compare_arrows</mat-icon></div>
-    </div>
-    <div class="card" id="cardGive">
-      <div class="Name">{{exchange?.card2?.name}}</div>
-      <div class="serial_number" id="sn_get">{{exchange?.card2?.serialNumber}}</div>
-      <div class="card_collection"><img class="img_collection" src={{exchange?.card2?.collection_img}}></div>
-    </div>
-  </div>
-
-  <div class="row" id="row1" *ngIf="is_user2">
-    <div class="card" id="cardGet">
-      <div class="Name">{{exchange?.card2?.name}}</div>
-      <div class="serial_number" id="sn_get">{{exchange?.card2?.serialNumber}}</div>
-      <div class="card_collection"><img class="img_collection" src={{exchange?.card2?.collection_img}}></div>
-    </div>
-    <div class="exch_icon_container">
-      <div class="icon_exch"><mat-icon id="exch_icon">compare_arrows</mat-icon></div>
-    </div>
-    <div class="card" id="cardGive">
-      <div class="Name">{{exchange?.card1?.name}}</div>
-      <div class="serial_number" id="sn_get">{{exchange?.card1?.serialNumber}}</div>
-      <div class="card_collection"><img class="img_collection" src={{exchange?.card1?.collection_img}}></div>
-    </div>
-  </div>
-
-  <div class="row" id="row2">
-    <div class="row_container">
-      <div class="friend_name_icon"><mat-icon>person_outline</mat-icon></div>
-      <div class="friend_name_text" *ngIf="!is_user2"><span>{{exchange?.user2?.login}}</span></div>
-      <div class="friend_name_text" *ngIf="is_user2"><span>{{exchange?.user1?.login}}</span></div>
-    </div>
-  </div>
-
-  <div class="row" id="row3">
-    <div class="friend_code_icon"><button id="copy_button" mat-icon-button (click)=copyToClipboard(exchange?.user2?.friendCode!)><mat-icon id="copy_icon">content_copy</mat-icon></button></div>
-    <div class="friend_code_text" *ngIf="!copy_code && !is_user2"><span>{{exchange?.user2?.friendCode}}</span></div>
-    <div class="friend_code_text" *ngIf="!copy_code && is_user2"><span>{{exchange?.user1?.friendCode}}</span></div>
-    <div class="friend_code_text" *ngIf="copy_code"><span>code copié</span></div>
-  </div>
-
-  <div class="row" id="row4">
-    <div class="row_container">
-      <button mat-fab class="exch_button" id="confirm_button" (click)="finishExchange(exchange)" *ngIf="display_button_finish"><mat-icon>outlined_flag</mat-icon></button>
-      <button mat-fab class="exch_button" id="confirm_button" (click)="confirmExchange(exchange)" *ngIf="display_button_accept"><mat-icon>check_circle</mat-icon></button>
-      <button mat-fab class="exch_button" id="cancel_button" (click)="cancelExchange(exchange)" *ngIf="display_button_cancel"><mat-icon id="cancel_icon">cancel</mat-icon></button>
-    </div>
-  </div>
-
-</div>
-
-</body>
+  </body>
