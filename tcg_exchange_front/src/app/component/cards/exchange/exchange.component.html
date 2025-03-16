@@ -1,7 +1,7 @@
 <div id="header">
   <div id="header_container">
     <div id="button_container">
-      <button mat-fab extended (click)="findExchange()" id="findMatch" [disabled]="isNewDemand">
+      <button mat-fab extended (click)="findExchange()" id="findMatch" [disabled]="isNewDemand || isBlocked">
         <mat-icon>search</mat-icon>Trouver un échange
       </button>
     </div>
@@ -10,11 +10,23 @@
     </div>
   </div>
   <div id="header_warning">
-    <span *ngIf="isNewDemand">vous avez des demandes d'échanges à traiter</span></div>
+    <span *ngIf="isNewDemand && !isBlocked">vous avez des demandes d'échanges à traiter</span></div>
 </div>
 <hr/>
 
-<div id="all_exchanges_container" *ngIf="!isLoading">
+<div is="blocked_container" *ngIf="isBlocked && !hasAskedUnblocking">
+  <div id="icon_blocked"><mat-icon>mood_bad</mat-icon></div>
+  <div id="message_blocked">Vous avez été temporairement bloqué pour inactivité</div>
+  <div id="button_blocked">
+    <button mat-button id="confirm_button" (click)="ask_unblock()">demander un débloquage</button></div>
+</div>
+
+<div id="asked_unblock_container" *ngIf="isBlocked && hasAskedUnblocking">
+  <div id="icon_asked_unblock"><mat-icon>mood</mat-icon></div>
+  <div id="message_asked_unblock">Votre demande de débloquage sera rapidement traitée par nos modérateurs. Revenez dans quelques temps pour vérifier votre débloquage.</div>
+</div>
+
+<div id="all_exchanges_container" *ngIf="!isLoading && !isBlocked">
   <!-- échanges en cours -->
 <div class="exchanges_list_container" id="current_exchanges">
   <div class="title_list" (click)="click_current_exchanges()">
@@ -26,16 +38,18 @@
       <div class="row" id="row1">
         <div class="card" id="cardGet">
           <div class="Name">{{e.card1?.name}}</div>
-          <div class="serial_number" id="sn_get">{{e.card1?.serialNumber}}</div>
-          <div class="card_collection"><img class="img_collection" src={{e.card1?.collection_img}}></div>
+          <!-- <div class="serial_number" id="sn_get">{{e.card1?.serialNumber}}</div>
+          <div class="card_collection"><img class="img_collection" src={{e.card1?.collection_img}}></div> -->
+          <div class="card_img"><img class="img_card" src="{{e.card1?.picture}}"></div>
         </div>
         <div class="exch_icon_container">
           <div class="icon_exch"><mat-icon id="exch_icon">compare_arrows</mat-icon></div>
         </div>
         <div class="card" id="cardGive">
           <div class="Name">{{e.card2?.name}}</div>
-          <div class="serial_number" id="sn_get">{{e.card2?.serialNumber}}</div>
-          <div class="card_collection"><img class="img_collection" src={{e.card2?.collection_img}}></div>
+          <!-- <div class="serial_number" id="sn_get">{{e.card2?.serialNumber}}</div>
+          <div class="card_collection"><img class="img_collection" src={{e.card2?.collection_img}}></div> -->
+          <div class="card_img"><img class="img_card" src="{{e.card2?.picture}}"></div>
         </div>
       </div>
       <div class="row" id="row2">
@@ -61,16 +75,18 @@
       <div class="row" id="row1">
         <div class="card" id="cardGet">
           <div class="Name">{{e.card2?.name}}</div>
-          <div class="serial_number" id="sn_get">{{e.card2?.serialNumber}}</div>
-          <div class="card_collection"><img class="img_collection" src={{e.card2?.collection_img}}></div>
+          <!-- <div class="serial_number" id="sn_get">{{e.card2?.serialNumber}}</div>
+          <div class="card_collection"><img class="img_collection" src={{e.card2?.collection_img}}></div> -->
+          <div class="card_img"><img class="img_card" src="{{e.card2?.picture}}"></div>
         </div>
         <div class="exch_icon_container">
           <div class="icon_exch"><mat-icon id="exch_icon">compare_arrows</mat-icon></div>
         </div>
         <div class="card" id="cardGive">
           <div class="Name">{{e.card1?.name}}</div>
-          <div class="serial_number" id="sn_get">{{e.card1?.serialNumber}}</div>
-          <div class="card_collection"><img class="img_collection" src={{e.card1?.collection_img}}></div>
+          <!-- <div class="serial_number" id="sn_get">{{e.card1?.serialNumber}}</div>
+          <div class="card_collection"><img class="img_collection" src={{e.card1?.collection_img}}></div> -->
+          <div class="card_img"><img class="img_card" src="{{e.card1?.picture}}"></div>
         </div>
       </div>
       <div class="row" id="row2">
@@ -95,24 +111,26 @@
         <div class="row" id="row1">
           <div class="card" id="cardGet">
             <div class="Name">{{e.card1?.name}}</div>
-            <div class="serial_number" id="sn_get">{{e.card1?.serialNumber}}</div>
-            <div class="card_collection"><img class="img_collection" src={{e.card1?.collection_img}}></div>
+            <!-- <div class="serial_number" id="sn_get">{{e.card1?.serialNumber}}</div>
+            <div class="card_collection"><img class="img_collection" src={{e.card1?.collection_img}}></div> -->
+            <div class="card_img"><img class="img_card" src="{{e.card1?.picture}}"></div>
           </div>
           <div class="exch_icon_container">
             <div class="icon_exch"><mat-icon id="exch_icon">compare_arrows</mat-icon></div>
           </div>
           <div class="card" id="cardGive">
             <div class="Name">{{e.card2?.name}}</div>
-            <div class="serial_number" id="sn_get">{{e.card2?.serialNumber}}</div>
-            <div class="card_collection"><img class="img_collection" src={{e.card2?.collection_img}}></div>
+            <!-- <div class="serial_number" id="sn_get">{{e.card2?.serialNumber}}</div>
+            <div class="card_collection"><img class="img_collection" src={{e.card2?.collection_img}}></div> -->
+            <div class="card_img"><img class="img_card" src="{{e.card2?.picture}}"></div>
           </div>
         </div>
-        <div class="row" id="row2">
+        <!-- <div class="row" id="row2">
           <div class="row_container" id="row2_container">
             <div class="friend_name_icon"><mat-icon>person_outline</mat-icon></div>
             <div class="friend_name_text"><span>{{e?.user2?.login}}</span></div>
           </div>
-        </div>
+        </div> -->
         </div>
       </div>
 </div>
@@ -129,16 +147,18 @@
       <div class="row" id="row1">
         <div class="card" id="cardGet">
           <div class="Name">{{e.card1?.name}}</div>
-          <div class="serial_number" id="sn_get">{{e.card1?.serialNumber}}</div>
-          <div class="card_collection"><img class="img_collection" src={{e.card1?.collection_img}}></div>
+          <!-- <div class="serial_number" id="sn_get">{{e.card1?.serialNumber}}</div>
+          <div class="card_collection"><img class="img_collection" src={{e.card1?.collection_img}}></div> -->
+          <div class="card_img"><img class="img_card" src="{{e.card1?.picture}}"></div>
         </div>
         <div class="exch_icon_container">
           <div class="icon_exch"><mat-icon id="exch_icon">compare_arrows</mat-icon></div>
         </div>
         <div class="card" id="cardGive">
           <div class="Name">{{e.card2?.name}}</div>
-          <div class="serial_number" id="sn_get">{{e.card2?.serialNumber}}</div>
-          <div class="card_collection"><img class="img_collection" src={{e.card2?.collection_img}}></div>
+          <!-- <div class="serial_number" id="sn_get">{{e.card2?.serialNumber}}</div>
+          <div class="card_collection"><img class="img_collection" src={{e.card2?.collection_img}}></div> -->
+          <div class="card_img"><img class="img_card" src="{{e.card2?.picture}}"></div>
         </div>
       </div>
       <div class="row" id="row2">
@@ -163,16 +183,18 @@
         <div class="row" id="row1">
           <div class="card" id="cardGet">
             <div class="Name">{{e.card1?.name}}</div>
-            <div class="serial_number" id="sn_get">{{e.card1?.serialNumber}}</div>
-            <div class="card_collection"><img class="img_collection" src={{e.card1?.collection_img}}></div>
+            <!-- <div class="serial_number" id="sn_get">{{e.card1?.serialNumber}}</div>
+            <div class="card_collection"><img class="img_collection" src={{e.card1?.collection_img}}></div> -->
+            <div class="card_img"><img class="img_card" src="{{e.card1?.picture}}"></div>
           </div>
           <div class="exch_icon_container">
             <div class="icon_exch"><mat-icon id="exch_icon">compare_arrows</mat-icon></div>
           </div>
           <div class="card" id="cardGive">
             <div class="Name">{{e.card2?.name}}</div>
-            <div class="serial_number" id="sn_get">{{e.card2?.serialNumber}}</div>
-            <div class="card_collection"><img class="img_collection" src={{e.card2?.collection_img}}></div>
+            <!-- <div class="serial_number" id="sn_get">{{e.card2?.serialNumber}}</div>
+            <div class="card_collection"><img class="img_collection" src={{e.card2?.collection_img}}></div> -->
+            <div class="card_img"><img class="img_card" src="{{e.card2?.picture}}"></div>
           </div>
         </div>
         <div class="row" id="row2">
@@ -186,6 +208,6 @@
     </div>
 </div>
 
-    <div *ngIf="isLoading" class="loading-container">
-      <mat-spinner></mat-spinner>
-    </div>
+<div *ngIf="isLoading" class="loading-container">
+  <mat-spinner></mat-spinner>
+</div>

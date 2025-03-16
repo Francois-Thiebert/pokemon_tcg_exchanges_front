@@ -44,6 +44,18 @@ export class UserService {
     );
   }
 
+  public isBlocked(userID: number): Observable<boolean> {
+    return this.http.get<boolean>(`${userRest}/isBlocked/${userID}`);
+  }
+
+  public hasAskedUnblocking(userID: number): Observable<boolean> {
+    return this.http.get<boolean>(`${userRest}/hasAskedUnblocking/${userID}`);
+  }
+
+  public askUnblocking(userID: number): Observable<void> {
+    return this.http.get<void>(`${userRest}/askUnblocking/${userID}`);
+  }
+
   public login(login: string, password: string): Observable<User> {
     let headers: HttpHeaders = new HttpHeaders({
       Authorization: 'Basic ' + window.btoa(login + ':' + password),

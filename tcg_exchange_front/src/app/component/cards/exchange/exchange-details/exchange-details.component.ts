@@ -17,6 +17,7 @@ export class ExchangeDetailsComponent implements OnInit{
   // exchange?: Exchange;
   copy_code?: boolean = false;
   display_button_cancel?: boolean = false;
+  display_button_reject?: boolean = false;
   display_button_accept?: boolean = false;
   display_button_finish?: boolean = false;
   is_user2?: boolean = false;
@@ -49,9 +50,11 @@ export class ExchangeDetailsComponent implements OnInit{
 
   displayButton(){
     if (this.exchange.state === State.ASKED){
-      this.display_button_cancel = true;
       if(this.exchange.user2?.id === JSON.parse(sessionStorage.getItem('user')!)?.id){
         this.display_button_accept = true;
+        this.display_button_reject = true;
+      }else{
+        this.display_button_cancel = true;
       }
     }
     if (this.exchange.state === State.CONFIRMED){
