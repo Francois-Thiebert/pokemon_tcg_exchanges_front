@@ -45,6 +45,8 @@ export class ExchangeComponent implements OnInit{
   nb_exch_cancel?: number;
   isNewDemand?: boolean;
   isLoading?: boolean = true;
+  isBlocked?: boolean;
+  hasAskedUnblocking?: boolean;
 
   constructor(
     private userSrv: UserService,
@@ -61,7 +63,12 @@ ngOnInit(): void {
   this.intercoSrv.setPageTitle('Échanges')
   this.userSrv.getById(this.userID!).subscribe((user: User) => {
     this.user=user;
-    this.getExchanges(user);
+    this.userSrv.hasAskedUnblocking(this.userID!).subscribe((hasAskedUnblocking: boolean) => {
+      this.hasAskedUnblocking = hasAskedUnblocking;
+      this.userSrv.isBlocked(this.userID!).subscribe((isBlocked: boolean) => {
+        this.isBlocked=isBlocked;
+        this.getExchanges(user);});
+    });
   });
 
 }
@@ -73,9 +80,9 @@ findExchange(){
 displayDetails(exchange: Exchange){
   this.screenWidth = window.innerWidth;
   if(this.screenWidth < 500){
-    this.dialog.open(ExchangeDetailsComponent, {width:'80%', height:'40%', data: exchange})
+    this.dialog.open(ExchangeDetailsComponent, {width:'80%', height:'70%', data: exchange})
   }else{
-    this.dialog.open(ExchangeDetailsComponent, {width:'40%', height:'50%', data: exchange})
+    this.dialog.open(ExchangeDetailsComponent, {width:'40%', height:'100%', data: exchange})
   }
 }
 
@@ -130,6 +137,7 @@ getExchanges(user: User){
         this.exchangeSrv.getCollectionImgByExchange(exch);
         this.exchanges_new=this.exchanges_new?.concat(exch);
         this.nb_exch_new = this.exchanges_new?.length;
+        this.isLoading = false;
         if(this.nb_exch_new! > 0){
           this.isNewDemand = true
         }
@@ -177,11 +185,10 @@ getExchanges(user: User){
         this.exchangeSrv.getCollectionImgByExchange(exch);
         this.exchanges_cancel=this.exchanges_cancel?.concat(exch);
         this.nb_exch_cancel = this.exchanges_cancel?.length;
-        this.isLoading = false;
-        console.log("loading ? "+this.isLoading)
       });
     }
   }
+  this.isLoading = false;
 }
 
 getDisplay(){
@@ -252,6 +259,12 @@ copyToClipboard(friendCode: String): void {
 help(){
     this.dialog.open(HelpExchangeComponent, {width:'80%', height:'50%'})
   }
+
+ask_unblock(){
+  this.userSrv.askUnblocking(this.userID!).subscribe(() => {
+    window.location.reload();
+  })
+}
 
 
 }

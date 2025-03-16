@@ -3,13 +3,20 @@
   <div class="container">
 
     <div class="row" id="row0">
+      <div class="modality">
+        <div id="modalidyGet">obtenir</div>
+      </div>
       <div class="rarity"><p [innerHTML]="exchange?.card1?.rarity_string" id="rarity"></p></div>
+      <div class="modality">
+        <div id="modalidyGive">contre</div>
+      </div>
     </div>
 
     <div class="row" id="row1" *ngIf="!is_user2">
       <div class="card" id="cardGet">
         <div class="Name">{{exchange?.card1?.name}}</div>
         <div class="serial_number" id="sn_get">{{exchange?.card1?.serialNumber}}</div>
+        <div class="card_img"><img class="img_card" src="{{exchange.card1?.picture}}"></div>
         <div class="card_collection"><img class="img_collection" src={{exchange?.card1?.collection_img}}></div>
       </div>
       <div class="exch_icon_container">
@@ -18,6 +25,7 @@
       <div class="card" id="cardGive">
         <div class="Name">{{exchange?.card2?.name}}</div>
         <div class="serial_number" id="sn_get">{{exchange?.card2?.serialNumber}}</div>
+        <div class="card_img"><img class="img_card" src="{{exchange.card2?.picture}}"></div>
         <div class="card_collection"><img class="img_collection" src={{exchange?.card2?.collection_img}}></div>
       </div>
     </div>
@@ -26,6 +34,7 @@
       <div class="card" id="cardGet">
         <div class="Name">{{exchange?.card2?.name}}</div>
         <div class="serial_number" id="sn_get">{{exchange?.card2?.serialNumber}}</div>
+        <div class="card_img"><img class="img_card" src="{{exchange.card2?.picture}}"></div>
         <div class="card_collection"><img class="img_collection" src={{exchange?.card2?.collection_img}}></div>
       </div>
       <div class="exch_icon_container">
@@ -34,6 +43,7 @@
       <div class="card" id="cardGive">
         <div class="Name">{{exchange?.card1?.name}}</div>
         <div class="serial_number" id="sn_get">{{exchange?.card1?.serialNumber}}</div>
+        <div class="card_img"><img class="img_card" src="{{exchange.card1?.picture}}"></div>
         <div class="card_collection"><img class="img_collection" src={{exchange?.card1?.collection_img}}></div>
       </div>
     </div>
@@ -58,6 +68,7 @@
         <button mat-button class="exch_button" id="confirm_button" (click)="finishExchange(exchange)" *ngIf="display_button_finish"><mat-icon>outlined_flag</mat-icon>Terminer</button>
         <button mat-button class="exch_button" id="confirm_button" (click)="confirmExchange(exchange)" *ngIf="display_button_accept"><mat-icon>check_circle</mat-icon>Accepter</button>
         <button mat-button matButtonColor="accent" class="exch_button" id="cancel_button" (click)="cancelExchange(exchange)" *ngIf="display_button_cancel"><mat-icon id="cancel_icon">cancel</mat-icon>Annuler</button>
+        <button mat-button matButtonColor="accent" class="exch_button" id="cancel_button" (click)="cancelExchange(exchange)" *ngIf="display_button_reject"><mat-icon id="cancel_icon">cancel</mat-icon>Refuser</button>
       </div>
     </div>
 

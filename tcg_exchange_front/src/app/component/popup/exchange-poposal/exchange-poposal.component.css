@@ -51,12 +51,13 @@
   background-color: #922b21 ;
 }
 
-.Name{
-  font-size: 1.1rem;
-  margin-left: 5px;
-  margin-right: 5px;
+.Name {
+  font-size: 5vw;
   margin: 3px;
   font-family: Arial, Helvetica, sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .serial_number{
@@ -188,4 +189,31 @@ button#choose {
   justify-content: center;
   align-items: center;
   height: 50%;
+}
+.img_card{
+  width: 100%;
+}
+#row0 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.modality {
+  flex: 0 1 auto;
+}
+
+#modalidyGet{
+  text-align: center;
+  margin-left: 50px;
+  font-weight: bold;
+  color: #196f3d;
+}
+
+#modalidyGive {
+  text-align: center;
+  margin-right: 50px;
+  font-weight: bold;
+  color: #922b21;
 }
