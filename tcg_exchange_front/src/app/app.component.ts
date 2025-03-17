@@ -23,6 +23,8 @@ export class AppComponent implements OnInit{
   isExchangePage: boolean = false;
   isOther: boolean = false;
   isAuth: boolean = false;
+  screenWidth?: number;
+  isSmartphone?: boolean;
 
   constructor(
     private router: Router,
@@ -33,6 +35,7 @@ export class AppComponent implements OnInit{
   currentPageTitle?: String;
 
   ngOnInit(): void {
+    this.getDevice();
     this.intercoSrv.pageTitle$.subscribe((pageTitle: string) => {
       this.currentPageTitle = pageTitle;
         if (this.currentPageTitle === "Échanges") {
@@ -90,6 +93,16 @@ export class AppComponent implements OnInit{
       return user.role == Role.ROLE_USER;
     }
     return false;
+  }
+
+  getDevice(){
+    this.screenWidth = window.innerWidth;
+    if(this.screenWidth < 500){
+      this.isSmartphone=true;
+    }
+    else{
+      this.isSmartphone=false;
+    }
   }
 
 }
