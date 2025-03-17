@@ -1,5 +1,35 @@
 
-<mat-toolbar>
+<header *ngIf="isSmartphone">
+  <mat-toolbar class="header">
+    <div class="section" id="disco2" *ngIf="adherent || admin">
+      <div class="section_button_container">
+        <button class="section_button" id="abra_button" mat-mini-fab (click)="logout()">
+          <img class="img_button" id="abra_img" src="assets/images/abra.png">
+        </button>
+      </div>
+      <div class="section_text_container">
+        <div class="section_text">Déconnexion</div>
+      </div>
+    </div>
+    <div class="header_container">
+      <div [ngClass]="{'title-home-page': isOther, 'title_container': !isOther}">
+        <div class="title">{{currentPageTitle}}</div>
+      </div>
+      <div class="section" id="disco" *ngIf="adherent || admin">
+        <div class="section_button_container">
+          <button class="section_button" id="abra_button" mat-mini-fab (click)="logout()">
+            <img class="img_button" id="abra_img" src="assets/images/abra.png">
+          </button>
+        </div>
+        <div class="section_text_container">
+          <div class="section_text">Déconnexion</div>
+        </div>
+      </div>
+    </div>
+  </mat-toolbar>
+</header>
+
+<mat-toolbar *ngIf="!isSmartphone">
   <div class="toolbar_container">
 
     <div [ngClass]="{'links-home-page': isOther, 'links_container': !isOther}">
@@ -59,4 +89,49 @@
   </div>
 </mat-toolbar>
 
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>
+
+
+<footer *ngIf="isSmartphone">
+  <mat-toolbar class="footer" *ngIf="adherent || admin">
+
+      <div [ngClass]="{'links-home-page': isOther, 'links_container': !isOther}">
+
+        <div class="section" id="wish" *ngIf="adherent || admin">
+          <div class="section_button_container">
+            <button class="section_button" id="sulfu_button" mat-mini-fab routerLink="/wish-cards" [ngClass]="{'active-page': isWhishPage}">
+              <img class="img_button" id="sulfu_img" src="assets/images/sulfura.png">
+            </button>
+          </div>
+          <div class="section_text_container">
+            <div class="section_text">Cartes recherchées</div>
+          </div>
+        </div>
+
+        <div class="section" id="give" *ngIf="adherent || admin">
+          <div class="section_button_container">
+            <button class="section_button" id="denti_button" mat-mini-fab routerLink="/to-give-cards" [ngClass]="{'active-page': isGivePage}">
+              <img class="img_button" id="denti_img" src="assets/images/denticriss.png">
+            </button>
+          </div>
+          <div class="section_text_container">
+            <div class="section_text">Cartes à céder</div>
+          </div>
+        </div>
+
+        <div class="section" id="exchanges" *ngIf="adherent || admin">
+          <div class="section_button_container">
+            <button class="section_button" id="exch_button" mat-mini-fab routerLink="/exchange" [ngClass]="{'active-page': isExchangePage}">
+              <img class="img_button" id="exch_img" src="assets/images/exchange.png">
+            </button>
+          </div>
+          <div class="section_text_container">
+            <div class="section_text">Échanges</div>
+          </div>
+        </div>
+
+
+    </div>
+  </mat-toolbar>
+
+</footer>
