@@ -39,14 +39,32 @@ export class ExchangeDetailsComponent implements OnInit{
   copyToClipboard(friendCode: String): void {
     let friendCodePrimitive: string = friendCode.toString();
     this.copy_code = true;
-    if (friendCodePrimitive) {
+
+    // Vérifier si l'API Clipboard est disponible
+    if (navigator.clipboard) {
       navigator.clipboard.writeText(friendCodePrimitive).then(() => {
         console.log('Friend code copied to clipboard!');
       }).catch((err) => {
         console.error('Failed to copy text: ', err);
+        alert("Oops! Failed to copy to clipboard.");
       });
+    } else {
+      // Utiliser un fallback pour les anciens navigateurs ou les navigateurs qui ne supportent pas Clipboard API
+      let textArea = document.createElement('textarea');
+      textArea.value = friendCodePrimitive;
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        console.log('Friend code copied to clipboard (fallback method)');
+      } catch (err) {
+        console.error('Fallback failed to copy text: ', err);
+        alert("Oops! Failed to copy to clipboard (fallback).");
+      }
+      document.body.removeChild(textArea);
     }
   }
+
 
   displayButton(){
     if (this.exchange.state === State.ASKED){

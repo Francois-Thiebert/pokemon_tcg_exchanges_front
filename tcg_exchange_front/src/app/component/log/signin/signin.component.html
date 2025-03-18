@@ -39,14 +39,17 @@
         </mat-form-field>
       </div>
     </ng-container>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline"
+      hintLabel="Les 16 chiffres, sans tirets">
+        <mat-label>Code ami pokemon TCG</mat-label>
+        <input matInput placeholder="" id="friendCode"
+      class="form-control" formControlName="friendCode">
+      </mat-form-field>
+    </div>
+
   </ng-container>
-  <div class="form-group">
-    <mat-form-field appearance="outline" >
-      <mat-label>Code ami pokemon TCG</mat-label>
-      <input matInput placeholder="" id="friendCode"
-    class="form-control" formControlName="friendCode">
-    </mat-form-field>
-  </div>
 <br>
   <div>
     <a routerLink="/home" routerLinkActive="active" mat-button color="warn"
