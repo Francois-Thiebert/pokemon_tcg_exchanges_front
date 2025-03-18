@@ -32,11 +32,13 @@ export class SigninComponent {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      friendCode: new FormControl('', Validators.required),
 
       compteGroup: new FormGroup({
         login: new FormControl(
           '', Validators.pattern(/^[a-z0-9]+$/), this.loginFree(this.userSrv)
+        ),
+        friendCode: new FormControl(
+          '', [Validators.required, Validators.pattern(/^\d{16}$/)]
         ),
         passwordGroup: new FormGroup({
           password: new FormControl(
@@ -88,7 +90,7 @@ export class SigninComponent {
   submit(){
     this.login=this.form.get('compteGroup.login')?.value,
     this.password=this.form.get('compteGroup.passwordGroup.password')?.value,
-    this.friend_code=this.form.get('friendCode')?.value,
+    this.friend_code=this.form.get('compteGroup.friendCode')?.value,
     this.user.login = this.login;
     this.user.password = this.password;
     this.user.friendCode = this.friend_code;
