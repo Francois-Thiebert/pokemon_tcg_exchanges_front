@@ -67,7 +67,13 @@
               "browserTarget": "tcg_exchange_front:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "allowedHosts": [
+              "echanges-pokemon-tcg.duckdns.org"
+            ],
+            "port": 4200
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
