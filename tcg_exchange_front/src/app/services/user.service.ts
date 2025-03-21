@@ -16,6 +16,16 @@ export class UserService {
     return this.http.get<User[]>(userRest);
   }
 
+  public userNumberTotal(): Observable<number>{
+    return this.http.get<number>(`${userRest}/adm/number`);
+  }
+  public userNumberActive(): Observable<number>{
+    return this.http.get<number>(`${userRest}/adm/numberActive`);
+  }
+  public userNumberBlocked(): Observable<number>{
+    return this.http.get<number>(`${userRest}/adm/numberBlocked`);
+  }
+
   public getById(id: number): Observable<User> {
     return this.http.get<User>(`${userRest}/all/${id}`);
   }

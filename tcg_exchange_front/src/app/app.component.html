@@ -130,6 +130,17 @@
           </div>
         </div>
 
+        <div class="section" id="exchanges" *ngIf="admin">
+          <div class="section_button_container">
+            <button class="section_button" id="admin_button" mat-mini-fab routerLink="/admin-overview" [ngClass]="{'active-page': isAdminPage}">
+              <img class="img_button" id="admin_img" src="assets/images/chen.png">
+            </button>
+          </div>
+          <div class="section_text_container">
+            <div class="section_text">Échanges</div>
+          </div>
+        </div>
+
 
     </div>
   </mat-toolbar>
