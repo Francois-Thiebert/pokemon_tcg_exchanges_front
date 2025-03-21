@@ -63,12 +63,14 @@ ngOnInit(): void {
   this.intercoSrv.setPageTitle('Échanges')
   this.userSrv.getById(this.userID!).subscribe((user: User) => {
     this.user=user;
-    this.userSrv.hasAskedUnblocking(this.userID!).subscribe((hasAskedUnblocking: boolean) => {
-      this.hasAskedUnblocking = hasAskedUnblocking;
       this.userSrv.isBlocked(this.userID!).subscribe((isBlocked: boolean) => {
         this.isBlocked=isBlocked;
+        if(this.isBlocked){
+        this.userSrv.hasAskedUnblocking(this.userID!).subscribe((hasAskedUnblocking: boolean) => {
+          this.hasAskedUnblocking = hasAskedUnblocking
+          });
+        }
         this.getExchanges(user);});
-    });
   });
 
 }
