@@ -20,6 +20,12 @@ export class ExchangeService {
       public getById(id: number): Observable<Exchange> {
         return this.http.get<Exchange>(`${exchangeRest}/${id}`);
       }
+      public exchangeNumberCurrent(): Observable<number>{
+          return this.http.get<number>(`${exchangeRest}/adm/numberCurrent`);
+      }
+      public exchangeNumberFinished(): Observable<number>{
+        return this.http.get<number>(`${exchangeRest}/adm/numberFinished`);
+      }
 
       public getNew(id: number): Observable<Exchange[]> {
         return this.http.get<Exchange[]>(`${exchangeRest}/new/${id}`);

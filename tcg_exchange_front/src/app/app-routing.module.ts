@@ -16,6 +16,8 @@ import { AnonymousGuardService } from './services/guardServ/anonymous-guard-serv
 import { UserGuardService } from './services/guardServ/user-guard-service';
 import { NewExchangeValidationComponent } from './component/popup/new-exchange-validation/new-exchange-validation.component';
 import { ExchangeDetailsComponent } from './component/cards/exchange/exchange-details/exchange-details.component';
+import { AdminOverviewComponent } from './component/admin/admin-overview/admin-overview.component';
+import { AdminGuardService } from './services/guardServ/admin-guard-service';
 
 const routes: Routes = [
   {path: '',
@@ -52,6 +54,9 @@ const routes: Routes = [
   {path: 'exchange-details',
     component: ExchangeDetailsComponent,
     canActivate: [UserGuardService],},
+  {path: 'admin-overview',
+    component: AdminOverviewComponent,
+    canActivate: [AdminGuardService],},
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];

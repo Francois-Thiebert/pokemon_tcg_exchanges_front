@@ -21,6 +21,7 @@ export class AppComponent implements OnInit{
   isWhishPage: boolean = false;
   isGivePage: boolean = false;
   isExchangePage: boolean = false;
+  isAdminPage: boolean = false;
   isOther: boolean = false;
   isAuth: boolean = false;
   screenWidth?: number;
@@ -42,14 +43,23 @@ export class AppComponent implements OnInit{
           this.isExchangePage = true;
           this.isWhishPage = false;
           this.isGivePage = false;
+          this.isAdminPage = false;
           this.isOther = false;
         } else if (this.currentPageTitle === "Cartes Recherchées") {
           this.isWhishPage = true;
           this.isExchangePage = false;
           this.isGivePage = false;
+          this.isAdminPage = false;
           this.isOther = false;
         } else if (this.currentPageTitle === "Cartes à Céder") {
           this.isGivePage = true;
+          this.isExchangePage = false;
+          this.isWhishPage = false;
+          this.isAdminPage = false;
+          this.isOther = false;
+        } else if (this.currentPageTitle === "Modération") {
+          this.isAdminPage = true;
+          this.isGivePage = false;
           this.isExchangePage = false;
           this.isWhishPage = false;
           this.isOther = false;
