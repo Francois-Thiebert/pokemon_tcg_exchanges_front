@@ -60,7 +60,7 @@
       <div class="friend_code_icon"><button id="copy_button" mat-icon-button (click)=copyToClipboard(exchange?.user2?.friendCode!)><mat-icon id="copy_icon">content_copy</mat-icon></button></div>
       <div class="friend_code_text" *ngIf="!copy_code && !is_user2"><span>{{exchange?.user2?.friendCode}}</span></div>
       <div class="friend_code_text" *ngIf="!copy_code && is_user2"><span>{{exchange?.user1?.friendCode}}</span></div>
-      <div class="friend_code_text" *ngIf="copy_code"><span>code copié</span></div>
+      <div class="friend_code_text" *ngIf="copy_code"><span>code ami copié</span></div>
     </div>
 
     <div class="row" id="row4">
