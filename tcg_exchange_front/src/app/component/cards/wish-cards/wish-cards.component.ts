@@ -79,7 +79,7 @@ export class WishCardsComponent implements OnInit{
     if (this.filterCollection != null && this.filterCollection != "*") {
       cards = cards.filter(c => c.collection == this.filterCollection);
     }
-    if (this.filterSelected !== null && this.filterSelected !== "*") {
+    if (this.filterSelected != null && this.filterSelected != "*") {
       if (this.filterSelected === 'true') {
         cards = cards.filter(c => this.wish_cards_new.includes(c));
       } else {
