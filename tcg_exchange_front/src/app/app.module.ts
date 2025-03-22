@@ -51,12 +51,14 @@ import { HelpToGiveComponent } from './component/popup/help-to-give/help-to-give
 import { HelpWishComponent } from './component/popup/help-wish/help-wish.component';
 import { HelpExchangeComponent } from './component/popup/help-exchange/help-exchange.component';
 import { AdminOverviewComponent } from './component/admin/admin-overview/admin-overview.component';
+import { UserModerationComponent } from './component/admin/user-moderation/user-moderation.component';
+import { ExchangeModerationComponent } from './component/admin/exchange-moderation/exchange-moderation.component';
 
 
 
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, ConnectionComponent, SigninComponent, WishCardsComponent, WelcomeComponent, NavBarComponent, MajWishListComponent, ToGiveCardsComponent, ExchangeComponent, RatioComponent, ExchangePoposalComponent, NewExchangeConfirmComponent, NewExchangeValidationComponent, CancelExchangeComponent, ValidationExchangeComponent, FinishExchangeComponent, CancelExchangeValidationComponent, ExchangeDetailsComponent, HelpToGiveComponent, HelpWishComponent, HelpExchangeComponent, AdminOverviewComponent,],
+  declarations: [AppComponent, HomeComponent, ConnectionComponent, SigninComponent, WishCardsComponent, WelcomeComponent, NavBarComponent, MajWishListComponent, ToGiveCardsComponent, ExchangeComponent, RatioComponent, ExchangePoposalComponent, NewExchangeConfirmComponent, NewExchangeValidationComponent, CancelExchangeComponent, ValidationExchangeComponent, FinishExchangeComponent, CancelExchangeValidationComponent, ExchangeDetailsComponent, HelpToGiveComponent, HelpWishComponent, HelpExchangeComponent, AdminOverviewComponent, UserModerationComponent, ExchangeModerationComponent,],
   imports: [
     AppRoutingModule,
     BrowserModule,

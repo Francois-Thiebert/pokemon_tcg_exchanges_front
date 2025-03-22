@@ -16,6 +16,8 @@ export class AdminOverviewComponent implements OnInit{
   numberUserBlocked?: number;
   numberExchangeCurrent?: number;
   numberExchangeFinished?: number;
+  selectUserModeration?: boolean = false;
+  selectExchangeModeration?: boolean = false;
 
   constructor(
       private userSrv: UserService,
@@ -57,6 +59,14 @@ export class AdminOverviewComponent implements OnInit{
     this.exchangeSrv.exchangeNumberFinished().subscribe((nb: number) => {
       this.numberExchangeFinished=nb;
     });
+  }
+  displayUserModeration(){
+    this.selectUserModeration=true;
+    this.selectExchangeModeration=false;
+  }
+  displayExchangeModeration(){
+    this.selectExchangeModeration=true;
+    this.selectUserModeration=false;
   }
 
 }

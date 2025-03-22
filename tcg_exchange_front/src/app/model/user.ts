@@ -3,6 +3,12 @@ import { Exchange } from "./exchange";
 import { Role } from "./role";
 
 export class User {
+  public get lastLogging(): Date | undefined {
+    return this._lastLogging;
+  }
+  public set lastLogging(value: Date | undefined) {
+    this._lastLogging = value;
+  }
   public get token(): string | undefined{
     return this._token;
   }
@@ -74,5 +80,6 @@ export class User {
     private _exchanges1?: Exchange[],
     private _exchanges2?: Exchange[],
     private _token?: string,
+    private _lastLogging?: Date,
 ){}
 }

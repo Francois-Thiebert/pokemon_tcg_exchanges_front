@@ -20,7 +20,7 @@ export class ObjectToJsonService {
       toGiveList : user.toGiveList,
       exchanges1: user.exchanges1,
       exchanges2: user.exchanges2,
-
+      lastLogging: user.lastLogging,
   }
   if (user.id) {
     Object.assign(obj, { id: user.id });

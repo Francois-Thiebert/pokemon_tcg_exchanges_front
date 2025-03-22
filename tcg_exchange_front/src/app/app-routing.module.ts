@@ -18,6 +18,8 @@ import { NewExchangeValidationComponent } from './component/popup/new-exchange-v
 import { ExchangeDetailsComponent } from './component/cards/exchange/exchange-details/exchange-details.component';
 import { AdminOverviewComponent } from './component/admin/admin-overview/admin-overview.component';
 import { AdminGuardService } from './services/guardServ/admin-guard-service';
+import { UserModerationComponent } from './component/admin/user-moderation/user-moderation.component';
+import { ExchangeModerationComponent } from './component/admin/exchange-moderation/exchange-moderation.component';
 
 const routes: Routes = [
   {path: '',
@@ -56,6 +58,12 @@ const routes: Routes = [
     canActivate: [UserGuardService],},
   {path: 'admin-overview',
     component: AdminOverviewComponent,
+    canActivate: [AdminGuardService],},
+  {path: 'user-moderation',
+    component: UserModerationComponent,
+    canActivate: [AdminGuardService],},
+  {path: 'exchange-moderation',
+    component: ExchangeModerationComponent,
     canActivate: [AdminGuardService],},
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home', pathMatch: 'full' },

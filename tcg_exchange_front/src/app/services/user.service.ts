@@ -13,7 +13,7 @@ export class UserService {
   constructor(private http: HttpClient, private convert: ObjectToJsonService) { }
 
   public allUser(): Observable<User[]> {
-    return this.http.get<User[]>(userRest);
+    return this.http.get<User[]>(`${userRest}/adm/all`);
   }
 
   public userNumberTotal(): Observable<number>{
