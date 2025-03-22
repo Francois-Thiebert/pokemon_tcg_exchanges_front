@@ -1,0 +1,33 @@
+<!-- <div id="filters">
+  <div class="filter">
+    <mat-form-field class="inputs" (change)="filterSelect()">
+      <mat-label>Voir</mat-label>
+      <select matNativeControl [(ngModel)]="filterSelected">
+        <option value='*'>Tout</option>
+        <option value=true>Cartes sélectionnées</option>
+        <option value=false>Cartes non-sélectionnées</option>
+      </select>
+    </mat-form-field>
+  </div>
+</div> -->
+
+<div id="user_table">
+  <div id="header_container">
+    <div class="row" id="header">
+      <div class="info" id="login">Pseudo</div>
+      <div class="info" id="nb_wish_cards">Cartes recherchées</div>
+      <div class="info" id="nb_give_cards">Cartes à céder</div>
+      <div class="info" id="nb_exchanges">Total d'échanges</div>
+      <div class="info" id="last_login">Dernière connexion</div>
+    </div>
+  </div>
+  <div id="rows_container">
+    <div class="row" id="user_list" *ngFor="let u of users">
+      <div class="info" id="login">{{u.login}}</div>
+      <div class="info" id="nb_wish_cards">{{u.nb_wish_cards}}</div>
+      <div class="info" id="nb_give_cards">{{u.toGiveList?.length}}</div>
+      <div class="info" id="nb_exchanges">{{u.exchanges?.length}}</div>
+      <div class="info" id="last_login">{{u.lastLogging}}</div>
+    </div>
+  </div>
+</div>

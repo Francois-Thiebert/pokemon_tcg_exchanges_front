@@ -14,7 +14,7 @@ export class ExchangeService {
   constructor(private http: HttpClient, private convert: ObjectToJsonService) { }
 
       public allExchange(): Observable<Exchange[]> {
-        return this.http.get<Exchange[]>(exchangeRest);
+        return this.http.get<Exchange[]>(`${exchangeRest}/adm/all`);
       }
 
       public getById(id: number): Observable<Exchange> {

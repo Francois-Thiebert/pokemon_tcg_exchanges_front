@@ -1,0 +1,20 @@
+<div id="exchange_table">
+  <div id="header_container">
+    <div class="row" id="header">
+      <div class="info" id="user1">Utilisateur 1</div>
+      <div class="info" id="user2">Utilisateur 2</div>
+      <div class="info" id="card1">Carte 1</div>
+      <div class="info" id="card2">Carte 2</div>
+      <div class="info" id="state">Statut</div>
+    </div>
+  </div>
+  <div id="rows_container">
+    <div class="row" id="exchange_list" *ngFor="let e of exchanges">
+      <div class="info" id="user1">{{e.user1?.login}}</div>
+      <div class="info" id="user2">{{e.user2?.login}}</div>
+      <div class="info" id="card1">{{e.card1?.name}}</div>
+      <div class="info" id="card2">{{e.card2?.name}}</div>
+      <div class="info" id="state">{{e.state}}</div>
+    </div>
+  </div>
+</div>
