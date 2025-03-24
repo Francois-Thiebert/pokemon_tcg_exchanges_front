@@ -71,9 +71,11 @@ export class AppComponent implements OnInit{
       console.log("isWish page : "+this.isWhishPage);
     });
     const userId = JSON.parse(sessionStorage.getItem('user')!)?.id;
-    this.userSrv.getById(userId).subscribe((user: User) => {
-      this.user = user;
-    });
+    if(userId > 0){
+      this.userSrv.getById(userId).subscribe((user: User) => {
+        this.user = user;
+      });
+    }
   }
 
   get logged(): boolean {

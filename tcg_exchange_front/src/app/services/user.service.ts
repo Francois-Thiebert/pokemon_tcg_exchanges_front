@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ObjectToJsonService } from './object-to-json.service';
 import { Observable } from 'rxjs';
 import { User } from '../model/user';
-import { loginCheckRest, loginRest, userRest } from '../env';
+import { loginCheckRest, loginRest, srvRest, userRest } from '../env';
 
 @Injectable({
   providedIn: 'root'
@@ -71,5 +71,9 @@ export class UserService {
       Authorization: 'Basic ' + window.btoa(login + ':' + password),
     });
     return this.http.get<User>(loginRest, { headers: headers });
+  }
+
+  public traceVisit(): Observable<void> {
+    return this.http.get<void>(`${srvRest}/auth/trace`);
   }
 }

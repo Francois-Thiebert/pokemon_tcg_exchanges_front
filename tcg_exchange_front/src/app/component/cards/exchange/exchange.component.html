@@ -1,7 +1,7 @@
 <div id="header">
   <div id="header_container">
     <div id="button_container">
-      <button mat-fab extended (click)="findExchange()" id="findMatch" [disabled]="isNewDemand || isBlocked">
+      <button mat-fab extended (click)="findExchange()" id="findMatch" [disabled]="isNewDemand || isBlocked || toGiveListNull || wishListNull">
         <mat-icon>search</mat-icon>Trouver un échange
       </button>
     </div>
@@ -26,7 +26,7 @@
   <div id="message_asked_unblock">Votre demande de débloquage sera rapidement traitée par nos modérateurs. Revenez dans quelques temps pour vérifier votre débloquage.</div>
 </div>
 
-<div id="all_exchanges_container" *ngIf="!isLoading && !isBlocked">
+<div id="all_exchanges_container" *ngIf="!isLoading && !isBlocked && !wishListNull && !toGiveListNull">
   <!-- échanges en cours -->
 <div class="exchanges_list_container" id="current_exchanges">
   <div class="title_list" (click)="click_current_exchanges()">
@@ -210,4 +210,18 @@
 
 <div *ngIf="isLoading" class="loading-container">
   <mat-spinner></mat-spinner>
+</div>
+
+<div class="listWarning" id="noWishList" *ngIf="wishListNull">
+  <div class="warningtext">Tu ne peux pas trouver d'échange temps que tu n'as pas créé ta liste de cartes recherchées !</div>
+  <div class="warningbutton">
+    <button mat-fab extended [routerLink]="'/wish-cards'"><mat-icon>directions_run</mat-icon>Faire ma liste</button>
+  </div>
+</div>
+
+<div class="listWarning" id="noWishList" *ngIf="toGiveListNull && !wishListNull">
+  <div class="warningtext">Tu ne peux pas trouver d'échange temps que tu n'as pas créé ta liste de cartes à céder !</div>
+  <div class="warningbutton">
+    <button mat-fab extended [routerLink]="'/to-give-cards'"><mat-icon>directions_run</mat-icon>Faire ma liste</button>
+  </div>
 </div>
