@@ -12,6 +12,7 @@ import { ValidationExchangeComponent } from '../../popup/validation-exchange/val
 import { FinishExchangeComponent } from '../../popup/finish-exchange/finish-exchange.component';
 import { ExchangeDetailsComponent } from './exchange-details/exchange-details.component';
 import { HelpExchangeComponent } from '../../popup/help-exchange/help-exchange.component';
+import { isEmpty } from 'rxjs';
 
 @Component({
   selector: 'app-exchange',
@@ -47,6 +48,8 @@ export class ExchangeComponent implements OnInit{
   isLoading?: boolean = true;
   isBlocked?: boolean;
   hasAskedUnblocking?: boolean;
+  toGiveListNull?: boolean = false;
+  wishListNull?: boolean = false;
 
   constructor(
     private userSrv: UserService,
@@ -63,6 +66,7 @@ ngOnInit(): void {
   this.intercoSrv.setPageTitle('Échanges')
   this.userSrv.getById(this.userID!).subscribe((user: User) => {
     this.user=user;
+    this.checkLists(this.user);
       this.userSrv.isBlocked(this.userID!).subscribe((isBlocked: boolean) => {
         this.isBlocked=isBlocked;
         if(this.isBlocked){
@@ -74,6 +78,18 @@ ngOnInit(): void {
   });
 
 }
+
+checkLists(user: User) {
+  if(user.toGiveList === null || user.toGiveList?.length === 0) {
+    this.toGiveListNull = true;
+  }
+  if(user.wishList === null || user.wishList?.length === 0) {
+    this.wishListNull = true;
+  }
+  console.log("togivelist null ? " + this.toGiveListNull);
+  console.log("wishlist null ? " + this.wishListNull);
+}
+
 
 findExchange(){
   this.dialog.open(ExchangePoposalComponent, {width:'90%', height:'90%'})

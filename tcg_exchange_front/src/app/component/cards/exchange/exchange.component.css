@@ -216,6 +216,26 @@
 .img_card{
   width: 100%;
 }
+.listWarning{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  margin: 10px;
+}
+.warningtext{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  color: #1f618d;
+  margin: 10px;
+}
+.warningbutton button{
+  background-color: #1f618d;
+}
 
 @media screen and (max-width: 768px) {
 
