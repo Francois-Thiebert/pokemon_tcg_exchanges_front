@@ -10,6 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 import { MajWishListComponent } from '../../popup/maj-wish-list/maj-wish-list.component';
 import { HelpToGiveComponent } from '../../popup/help-to-give/help-to-give.component';
 import { HelpWishComponent } from '../../popup/help-wish/help-wish.component';
+import { NewsComponent } from '../../popup/news/news.component';
 
 // interface CardExtended extends Card {
 // rarity_string?: string;
@@ -40,6 +41,7 @@ export class WishCardsComponent implements OnInit{
   filterRarity?: any;
   filterCollection?: any;
   filterSelected?: any;
+  isFirstLoginSinceUpdate?: boolean = false;
 
 
   constructor(
@@ -62,9 +64,13 @@ export class WishCardsComponent implements OnInit{
       // this.getCardRarityString(this.card_list);
       this.userSrv.getById(userId).subscribe((user: User) => {
         this.user=user;
+        this.isFirstLoginSinceUpdate = !user.connectedSinceUpdate;
+        if(this.isFirstLoginSinceUpdate){
+          this.dialog.open(NewsComponent, {width:'80%', height:'90%'})
+        }
         this.wish_cards_init = this.wish_cards_init.concat(this.user.wishList!);
         this.getWishedCards();
-        console.log(this.filterType)
+        console.log("première co ? ", this.isFirstLoginSinceUpdate)
       })
     })
   }

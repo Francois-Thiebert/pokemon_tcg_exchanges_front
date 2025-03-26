@@ -58,6 +58,10 @@ export class UserService {
     return this.http.get<boolean>(`${userRest}/isBlocked/${userID}`);
   }
 
+  public connectionsSinceUpdate(userID: number): Observable<void> {
+    return this.http.get<void>(`${userRest}/connectionSinceUpdate/${userID}`);
+  }
+
   public hasAskedUnblocking(userID: number): Observable<boolean> {
     return this.http.get<boolean>(`${userRest}/hasAskedUnblocking/${userID}`);
   }

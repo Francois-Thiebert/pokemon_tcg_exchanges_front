@@ -3,5 +3,7 @@ export enum Cause {
   UserNotTrust = 'UserNotTrust',
   NotToGive = 'NotToGive',
   NotSearched = 'NotSearched',
-  Other = 'Other'
+  Other = 'Other',
+  ToManyExchanges = 'ToManyExchanges',
+  TokenLake = 'TokenLake',
 }

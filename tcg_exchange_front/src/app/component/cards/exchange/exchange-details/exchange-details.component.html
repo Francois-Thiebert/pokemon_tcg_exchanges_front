@@ -72,6 +72,30 @@
       </div>
     </div>
 
+    <div class="row" id="row5" *ngIf="isCanceld">
+      <div class="row_container">
+        <div id="cause" *ngIf="cancel?.cause==='UserToManyExchanges'">Échange annulé pour cause d'un trop grand nombre d'échanges entre vous</div>
+      </div>
+      <div class="row_container">
+        <div id="cause" *ngIf="cancel?.cause==='UserNotTrust'">Échange annulé pour cause d'inactivié</div>
+      </div>
+      <div class="row_container">
+        <div id="cause" *ngIf="cancel?.cause==='NotToGive'">Échange annulé car l'un des utilisateur ne donnait pas la carte concernée</div>
+      </div>
+      <div class="row_container">
+        <div id="cause" *ngIf="cancel?.cause==='NotSearched'">Échange annulé car l'un des utilisateur ne recherchait pas la carte concernée</div>
+      </div>
+      <div class="row_container">
+        <div id="cause" *ngIf="cancel?.cause==='Other'">Échange annulé pour raison diverse</div>
+      </div>
+      <div class="row_container">
+        <div id="cause" *ngIf="cancel?.cause==='ToManyExchanges'">Échange annulé car l'un des utilisateurs avait trop d'échanges en cours</div>
+      </div>
+      <div class="row_container">
+        <div id="cause" *ngIf="cancel?.cause==='TokenLake'">Échange annulé car l'un des utilisateurs n'avait plus de jetons d'échange</div>
+      </div>
+    </div>
+
   </div>
 
   </body>
