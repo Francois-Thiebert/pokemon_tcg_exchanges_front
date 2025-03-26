@@ -13,8 +13,9 @@
           <option value=NotSearched>Je ne recherche pas cette carte</option>
           <option value=NotToGive>Je ne donne pas cette carte</option>
           <option value=UserToManyExchanges>J'ai fait beaucoup d'échanges avec cet utilisateur</option>
-          <option value=Other>Je n'ai plus de jetons d'échange</option>
           <option *ngIf="!isDemand" value=UserNotTrust>L'autre utilisateur semble inactif</option>
+          <option value=ToManyExchanges>J'ai trop d'échanges en cours</option>
+          <option value=TokenLake>Je n'ai plus de jetons d'échange</option>
           <option value=Other>Autre</option>
         </select>
       </mat-form-field>

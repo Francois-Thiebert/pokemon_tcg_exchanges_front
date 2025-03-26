@@ -6,6 +6,7 @@ import { Exchange } from '../model/exchange';
 import { exchangeRest } from '../env';
 import { Card } from '../model/card';
 import { Cause } from '../model/cause';
+import { CanceldExchange } from '../model/canceld-exchange';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,9 @@ export class ExchangeService {
 
       public getById(id: number): Observable<Exchange> {
         return this.http.get<Exchange>(`${exchangeRest}/${id}`);
+      }
+      public getCancelByExchangeID(id: number): Observable<CanceldExchange> {
+        return this.http.get<CanceldExchange>(`${exchangeRest}/cancel/${id}`);
       }
       public exchangeNumberCurrent(): Observable<number>{
           return this.http.get<number>(`${exchangeRest}/adm/numberCurrent`);

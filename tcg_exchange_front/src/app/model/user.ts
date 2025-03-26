@@ -3,6 +3,12 @@ import { Exchange } from "./exchange";
 import { Role } from "./role";
 
 export class User {
+  public get connectedSinceUpdate(): boolean | undefined {
+    return this._connectedSinceUpdate;
+  }
+  public set connectedSinceUpdate(value: boolean | undefined) {
+    this._connectedSinceUpdate = value;
+  }
   public get lastLogging(): Date | undefined {
     return this._lastLogging;
   }
@@ -81,5 +87,6 @@ export class User {
     private _exchanges2?: Exchange[],
     private _token?: string,
     private _lastLogging?: Date,
+    private _connectedSinceUpdate?: boolean,
 ){}
 }

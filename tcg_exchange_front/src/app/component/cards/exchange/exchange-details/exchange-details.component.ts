@@ -7,6 +7,7 @@ import { Exchange } from 'src/app/model/exchange';
 import { State } from 'src/app/model/state';
 import { ExchangeService } from 'src/app/services/exchange.service';
 import { formatDistanceToNow } from 'date-fns';
+import { CanceldExchange } from 'src/app/model/canceld-exchange';
 
 @Component({
   selector: 'app-exchange-details',
@@ -22,6 +23,8 @@ export class ExchangeDetailsComponent implements OnInit{
   display_button_finish?: boolean = false;
   is_user2?: boolean = false;
   timeAgo: string = this.exchange.date!.toString();
+  cancel?: CanceldExchange;
+  isCanceld?: boolean = false;
 
   constructor(
         private exchangeSrv: ExchangeService,
@@ -34,6 +37,12 @@ export class ExchangeDetailsComponent implements OnInit{
   ngOnInit(): void {
     this.displayButton();
     this.setIsUser2();
+    if(this.exchange.state===State.CANCELED){
+      this.isCanceld = true;
+      this.exchangeSrv.getCancelByExchangeID(this.exchange.id!).subscribe((cancel: CanceldExchange) => {
+        this.cancel = cancel;
+      });
+    }
   }
 
   copyToClipboard(friendCode: String): void {
