@@ -44,6 +44,7 @@ export class ExchangeComponent implements OnInit{
   nb_exch_current?: number;
   nb_exch_old?: number;
   nb_exch_cancel?: number;
+  nb_exch_inprog: number = 0;
   isNewDemand?: boolean;
   isLoading?: boolean = true;
   isBlocked?: boolean;
@@ -66,6 +67,9 @@ ngOnInit(): void {
   this.intercoSrv.setPageTitle('Échanges')
   this.userSrv.getById(this.userID!).subscribe((user: User) => {
     this.user=user;
+    this.exchangeSrv.currentExchangeNumberByUser(this.user.id!).subscribe((nb: number) => {
+      this.nb_exch_inprog = nb;
+    });
     this.checkLists(this.user);
       this.userSrv.isBlocked(this.userID!).subscribe((isBlocked: boolean) => {
         this.isBlocked=isBlocked;

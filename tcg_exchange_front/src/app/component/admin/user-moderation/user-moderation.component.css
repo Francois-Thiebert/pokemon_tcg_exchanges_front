@@ -19,11 +19,14 @@
 }
 .info{
   margin: 4px;
-  width: 20%;
+  width: 10%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+#user_list #login, #user_list  #last_login{
+  width: 30%;
 }
 #header .info{
   font-weight: bold;

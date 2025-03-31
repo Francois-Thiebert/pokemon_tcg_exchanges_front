@@ -123,6 +123,8 @@ mat-grid-tile {
 #card_list{
   max-height: 100%;
   overflow-y: auto;
+  height: 100%;
+  padding-bottom: 60px !important;
 }
 
 #filters {

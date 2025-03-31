@@ -25,8 +25,8 @@
     <div class="row" id="user_list" *ngFor="let u of users">
       <div class="info" id="login">{{u.login}}</div>
       <div class="info" id="nb_wish_cards">{{u.nb_wish_cards}}</div>
-      <div class="info" id="nb_give_cards">{{u.toGiveList?.length}}</div>
-      <div class="info" id="nb_exchanges">{{u.exchanges?.length}}</div>
+      <div class="info" id="nb_give_cards">{{u.nb_give_cards}}</div>
+      <div class="info" id="nb_exchanges">{{u.nb_exchanges}}</div>
       <div class="info" id="last_login">{{u.lastLogging}}</div>
     </div>
   </div>
