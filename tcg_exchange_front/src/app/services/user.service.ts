@@ -25,6 +25,12 @@ export class UserService {
   public userNumberBlocked(): Observable<number>{
     return this.http.get<number>(`${userRest}/adm/numberBlocked`);
   }
+  public wishCardNumberByUser(id: number): Observable<number>{
+    return this.http.get<number>(`${userRest}/NumberWishedCards/${id}`);
+  }
+  public toGiveCardNumberByUser(id: number): Observable<number>{
+    return this.http.get<number>(`${userRest}/NumberToGiveCards/${id}`);
+  }
 
   public getById(id: number): Observable<User> {
     return this.http.get<User>(`${userRest}/all/${id}`);

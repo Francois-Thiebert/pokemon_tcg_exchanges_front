@@ -31,6 +31,13 @@ export class ExchangeService {
         return this.http.get<number>(`${exchangeRest}/adm/numberFinished`);
       }
 
+      public exchangeNumberByUser(id: number): Observable<number>{
+        return this.http.get<number>(`${exchangeRest}/numberExchangeUser/${id}`);
+      }
+      public currentExchangeNumberByUser(id: number): Observable<number>{
+        return this.http.get<number>(`${exchangeRest}/numberCurrentExchangeUser/${id}`);
+      }
+
       public getNew(id: number): Observable<Exchange[]> {
         return this.http.get<Exchange[]>(`${exchangeRest}/new/${id}`);
       }

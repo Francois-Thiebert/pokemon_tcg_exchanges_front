@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Exchange } from 'src/app/model/exchange';
 import { User } from 'src/app/model/user';
+import { ExchangeService } from 'src/app/services/exchange.service';
 import { UserService } from 'src/app/services/user.service';
 
 interface UserExteded extends User {
@@ -22,6 +23,7 @@ export class UserModerationComponent implements OnInit {
 
   constructor(
       private userSrv: UserService,
+      private exchangeSrv: ExchangeService,
       private dialog: MatDialog,
     ){}
 
@@ -29,13 +31,14 @@ export class UserModerationComponent implements OnInit {
       this.userSrv.allUser().subscribe((users: User[]) => {
         this.users = users;
         for (let u of this.users) {
-          this.userSrv.getById(u.id!).subscribe((user: User) => {
-            u.exchanges = user.exchanges1!;
-            u.exchanges = u.exchanges?.concat(user.exchanges2!);
-            u.wishList = user.wishList;
-            u.nb_wish_cards = u.wishList?.length;
-            u.toGiveList = user.toGiveList;
-            u.nb_give_cards = u.toGiveList?.length;
+          this.exchangeSrv.exchangeNumberByUser(u.id!).subscribe((nb: number) => {
+            u.nb_exchanges = nb;
+          });
+          this.userSrv.wishCardNumberByUser(u.id!).subscribe((nb: number) => {
+            u.nb_wish_cards = nb;
+          });
+          this.userSrv.toGiveCardNumberByUser(u.id!).subscribe((nb: number) => {
+            u.nb_give_cards = nb;
           });
         }
       });
