@@ -80,6 +80,8 @@ export class ExchangeService {
           card.collection_img = "assets/images/choc-spatio-temporel.png";
         } else if (card.collection === 3) {
           card.collection_img = "assets/images/lumiere-triomphale.png";
+        }else if (card.collection === 4) {
+          card.collection_img = "assets/images/rejouissances-rayonnantes.png";
         }else {
           card.collection_img = undefined;
         }
